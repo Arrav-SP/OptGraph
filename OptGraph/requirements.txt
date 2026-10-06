@@ -1,0 +1,9 @@
+# Versions used for the reported results (Python 3.14, Ubuntu 26.04 under WSL2).
+numpy==2.5.3
+pandas==3.0.6
+scipy==1.18.1
+scikit-learn==1.9.1
+matplotlib==3.11.2
+networkx==3.7
+PyYAML==6.0.3
+joblib==1.6.0

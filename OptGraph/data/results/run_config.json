@@ -1,0 +1,205 @@
+{
+  "tag": "full",
+  "timestamp": "2026-10-06T16:00:48+00:00",
+  "elapsed_s": 91.7,
+  "programs": [
+    "arith_01_polynomial",
+    "arith_02_redundant",
+    "arith_03_integer_mix",
+    "arith_04_float_series",
+    "arith_05_reassoc",
+    "cf_01_if_else",
+    "cf_02_nested_cond",
+    "cf_03_switch",
+    "cf_04_const_branch",
+    "cf_05_early_exit",
+    "loop_01_array_sum",
+    "loop_02_nested",
+    "loop_03_accumulate",
+    "loop_04_invariant",
+    "loop_05_small_trip",
+    "mem_01_array_copy",
+    "mem_02_array_init",
+    "mem_03_traversal",
+    "mem_04_struct_fields",
+    "mix_01_matrix_mul",
+    "mix_02_func_calls",
+    "mix_03_combined",
+    "mix_04_bubble_sort",
+    "mix_05_prime_sieve"
+  ],
+  "passes": [
+    {
+      "name": "mem2reg",
+      "pipeline": "mem2reg",
+      "kind": "memory"
+    },
+    {
+      "name": "sroa",
+      "pipeline": "sroa",
+      "kind": "memory"
+    },
+    {
+      "name": "instcombine",
+      "pipeline": "instcombine<no-verify-fixpoint>",
+      "kind": "scalar"
+    },
+    {
+      "name": "simplifycfg",
+      "pipeline": "simplifycfg",
+      "kind": "cfg"
+    },
+    {
+      "name": "early-cse",
+      "pipeline": "early-cse",
+      "kind": "scalar"
+    },
+    {
+      "name": "gvn",
+      "pipeline": "gvn",
+      "kind": "scalar"
+    },
+    {
+      "name": "dce",
+      "pipeline": "dce",
+      "kind": "scalar"
+    },
+    {
+      "name": "adce",
+      "pipeline": "adce",
+      "kind": "scalar"
+    },
+    {
+      "name": "reassociate",
+      "pipeline": "reassociate",
+      "kind": "scalar"
+    },
+    {
+      "name": "licm",
+      "pipeline": "loop-mssa(licm)",
+      "kind": "loop"
+    },
+    {
+      "name": "loop-rotate",
+      "pipeline": "loop(loop-rotate)",
+      "kind": "loop"
+    },
+    {
+      "name": "loop-unroll",
+      "pipeline": "loop-unroll",
+      "kind": "loop"
+    }
+  ],
+  "settings": {
+    "seed": 42,
+    "primary_metric": "instruction_count",
+    "interaction_threshold": 0.005,
+    "opt_timeout_s": 60
+  },
+  "verify_outputs": true,
+  "experiments_total": 3480,
+  "experiments_success": 3480,
+  "experiments_failed": 0,
+  "interaction_rows": 25344,
+  "undefined_rows": 2640,
+  "environment": {
+    "os": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+    "system": "Linux",
+    "kernel": "6.18.33.2-microsoft-standard-WSL2",
+    "is_wsl": true,
+    "wsl_distro": "Ubuntu",
+    "distribution": "Ubuntu 26.04 LTS",
+    "ubuntu_version": "26.04",
+    "python_version": "3.14.4",
+    "python_executable": "/root/.venvs/optgraph/bin/python",
+    "clang_version": "21.1.8",
+    "llvm_version": "21.1.8",
+    "opt_version": "21.1.8",
+    "llvm_config_version": "21.1.8",
+    "llc_version": "21.1.8",
+    "tool_paths": {
+      "clang": "/usr/bin/clang",
+      "opt": "/usr/bin/opt",
+      "llc": "/usr/bin/llc",
+      "llvm-config": "/usr/bin/llvm-config"
+    },
+    "timestamp": "2026-10-06T15:59:15+00:00",
+    "seed": 42,
+    "smoke_test": {
+      "compiled": true,
+      "pass_ran": true,
+      "ir_changed": true,
+      "error": ""
+    },
+    "rejected_passes": {},
+    "pass_configuration": [
+      {
+        "name": "mem2reg",
+        "pipeline": "mem2reg",
+        "kind": "memory"
+      },
+      {
+        "name": "sroa",
+        "pipeline": "sroa",
+        "kind": "memory"
+      },
+      {
+        "name": "instcombine",
+        "pipeline": "instcombine<no-verify-fixpoint>",
+        "kind": "scalar"
+      },
+      {
+        "name": "simplifycfg",
+        "pipeline": "simplifycfg",
+        "kind": "cfg"
+      },
+      {
+        "name": "early-cse",
+        "pipeline": "early-cse",
+        "kind": "scalar"
+      },
+      {
+        "name": "gvn",
+        "pipeline": "gvn",
+        "kind": "scalar"
+      },
+      {
+        "name": "dce",
+        "pipeline": "dce",
+        "kind": "scalar"
+      },
+      {
+        "name": "adce",
+        "pipeline": "adce",
+        "kind": "scalar"
+      },
+      {
+        "name": "reassociate",
+        "pipeline": "reassociate",
+        "kind": "scalar"
+      },
+      {
+        "name": "licm",
+        "pipeline": "loop-mssa(licm)",
+        "kind": "loop"
+      },
+      {
+        "name": "loop-rotate",
+        "pipeline": "loop(loop-rotate)",
+        "kind": "loop"
+      },
+      {
+        "name": "loop-unroll",
+        "pipeline": "loop-unroll",
+        "kind": "loop"
+      }
+    ],
+    "settings": {
+      "seed": 42,
+      "primary_metric": "instruction_count",
+      "interaction_threshold": 0.005,
+      "opt_timeout_s": 60
+    },
+    "environment_ok": true
+  }
+}

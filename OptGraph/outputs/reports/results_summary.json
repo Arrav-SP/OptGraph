@@ -1,0 +1,33 @@
+{
+  "metric": "instruction_count",
+  "threshold": 0.005,
+  "programs": 24,
+  "passes": 12,
+  "experiments_total": 3480,
+  "experiments_success": 3480,
+  "experiments_failed": 0,
+  "outputs_verified": true,
+  "interaction_rows_all_metrics": 25344,
+  "undefined_rows_all_metrics": 2640,
+  "undefined_by_metric": {
+    "phis": 2640
+  },
+  "rows_primary_metric": 3168,
+  "class_counts": {
+    "WEAK": 1938,
+    "ANTAGONISM": 769,
+    "SYNERGY": 461
+  },
+  "score_min": -2.0121951219512195,
+  "score_max": 0.4074074074074074,
+  "score_mean": -0.02352475827977856,
+  "score_std": 0.11832444612728706,
+  "variance_explained_by_pair_identity": 0.5671232134834321,
+  "variance_not_explained_by_pair_identity": 0.4328767865165679,
+  "ordered_pairs": 132,
+  "pairs_sign_flip_across_programs": 27,
+  "pairs_always_weak": 38,
+  "unordered_program_pairs": 1584,
+  "order_matters_count": 542,
+  "order_matters_fraction": 0.3421717171717172
+}

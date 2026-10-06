@@ -1,0 +1,46 @@
+# OptGraph experiment configuration.
+#
+# Every pass is given as:
+#   name      short identifier used in file names, CSV columns and graph nodes
+#   pipeline  the exact text handed to `opt -passes=<pipeline>` (new pass manager)
+#   kind      scalar | cfg | memory | loop   (documentation only)
+#
+# All pipelines below were verified against LLVM 21.1.8. Loop passes are written
+# with their explicit loop adaptor so the invocation does not depend on opt's
+# implicit wrapping rules. scripts/check_environment.py re-validates every entry
+# against whichever LLVM is installed.
+
+settings:
+  seed: 42
+  primary_metric: instruction_count
+  # |I| <= threshold is classified WEAK. 0.005 = 0.5% of the baseline metric.
+  interaction_threshold: 0.005
+  opt_timeout_s: 60
+
+passes:
+  - {name: mem2reg,     pipeline: "mem2reg",            kind: memory}
+  - {name: sroa,        pipeline: "sroa",               kind: memory}
+  # Standalone `instcombine` aborts with "did not reach a fixpoint after 1
+  # iterations" on some inputs (seen on arith_03_integer_mix after licm). That is
+  # a self-check, not a miscompile; LLVM's own -O pipelines disable it the same way.
+  - {name: instcombine, pipeline: "instcombine<no-verify-fixpoint>", kind: scalar}
+  - {name: simplifycfg, pipeline: "simplifycfg",        kind: cfg}
+  - {name: early-cse,   pipeline: "early-cse",          kind: scalar}
+  - {name: gvn,         pipeline: "gvn",                kind: scalar}
+  - {name: dce,         pipeline: "dce",                kind: scalar}
+  - {name: adce,        pipeline: "adce",               kind: scalar}
+  - {name: reassociate, pipeline: "reassociate",        kind: scalar}
+  - {name: licm,        pipeline: "loop-mssa(licm)",    kind: loop}
+  - {name: loop-rotate, pipeline: "loop(loop-rotate)",  kind: loop}
+  - {name: loop-unroll, pipeline: "loop-unroll",        kind: loop}
+
+# Subset used by `run_experiments.py --quick` and by run_demo.py.
+quick:
+  passes: [mem2reg, instcombine, simplifycfg, gvn, licm]
+  programs:
+    - arith_02_redundant
+    - loop_04_invariant
+    - mem_04_struct_fields
+    - cf_04_const_branch
+    - mix_01_matrix_mul
+    - mix_02_func_calls

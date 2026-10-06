@@ -1,0 +1,1085 @@
+{
+  "timestamp": "2026-10-06T16:05:03+00:00",
+  "metric": "instruction_count",
+  "seed": 42,
+  "threshold": 0.005,
+  "rows": 3168,
+  "rows_dropped_undefined": 0,
+  "programs": 24,
+  "passes": [
+    "mem2reg",
+    "sroa",
+    "instcombine",
+    "simplifycfg",
+    "early-cse",
+    "gvn",
+    "dce",
+    "adce",
+    "reassociate",
+    "licm",
+    "loop-rotate",
+    "loop-unroll"
+  ],
+  "n_features": 30,
+  "split": {
+    "test": [
+      "mem_01_array_copy",
+      "mem_02_array_init",
+      "mem_04_struct_fields",
+      "mix_01_matrix_mul"
+    ],
+    "val": [
+      "cf_03_switch",
+      "cf_05_early_exit",
+      "mem_03_traversal",
+      "mix_05_prime_sieve"
+    ],
+    "train": [
+      "arith_01_polynomial",
+      "arith_02_redundant",
+      "arith_03_integer_mix",
+      "arith_04_float_series",
+      "arith_05_reassoc",
+      "cf_01_if_else",
+      "cf_02_nested_cond",
+      "cf_04_const_branch",
+      "loop_01_array_sum",
+      "loop_02_nested",
+      "loop_03_accumulate",
+      "loop_04_invariant",
+      "loop_05_small_trip",
+      "mix_02_func_calls",
+      "mix_03_combined",
+      "mix_04_bubble_sort"
+    ]
+  },
+  "best_by_validation_mae": "RandomForest",
+  "main_model": "RandomForest",
+  "holdout": {
+    "val": {
+      "MeanBaseline": {
+        "n": 528,
+        "mae": 0.04876048731388302,
+        "rmse": 0.07853419684889827,
+        "r2": -0.02348946939922758,
+        "pearson": NaN,
+        "spearman": NaN,
+        "classification": {
+          "accuracy": 0.23674242424242425,
+          "macro_precision": 0.07891414141414142,
+          "macro_recall": 0.3333333333333333,
+          "macro_f1": 0.12761613067891783,
+          "per_class": {
+            "ANTAGONISM": {
+              "precision": 0.23674242424242425,
+              "recall": 1.0,
+              "f1": 0.38284839203675347,
+              "support": 125
+            },
+            "WEAK": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 319
+            },
+            "SYNERGY": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 84
+            }
+          },
+          "confusion_matrix": [
+            [
+              125,
+              0,
+              0
+            ],
+            [
+              319,
+              0,
+              0
+            ],
+            [
+              84,
+              0,
+              0
+            ]
+          ],
+          "labels": [
+            "ANTAGONISM",
+            "WEAK",
+            "SYNERGY"
+          ]
+        }
+      },
+      "PairMeanBaseline": {
+        "n": 528,
+        "mae": 0.021411958633760848,
+        "rmse": 0.05877533477882957,
+        "r2": 0.4267342594631546,
+        "pearson": 0.8199814113942863,
+        "spearman": 0.7958231167616087,
+        "classification": {
+          "accuracy": 0.8731060606060606,
+          "macro_precision": 0.8347222222222223,
+          "macro_recall": 0.846215654077723,
+          "macro_f1": 0.8392784971005481,
+          "per_class": {
+            "ANTAGONISM": {
+              "precision": 0.9416666666666667,
+              "recall": 0.904,
+              "f1": 0.9224489795918367,
+              "support": 125
+            },
+            "WEAK": {
+              "precision": 0.9166666666666666,
+              "recall": 0.896551724137931,
+              "f1": 0.9064976228209192,
+              "support": 319
+            },
+            "SYNERGY": {
+              "precision": 0.6458333333333334,
+              "recall": 0.7380952380952381,
+              "f1": 0.6888888888888889,
+              "support": 84
+            }
+          },
+          "confusion_matrix": [
+            [
+              113,
+              8,
+              4
+            ],
+            [
+              3,
+              286,
+              30
+            ],
+            [
+              4,
+              18,
+              62
+            ]
+          ],
+          "labels": [
+            "ANTAGONISM",
+            "WEAK",
+            "SYNERGY"
+          ]
+        }
+      },
+      "LinearRidge": {
+        "n": 528,
+        "mae": 0.027202234948433754,
+        "rmse": 0.05923545061819198,
+        "r2": 0.41772363997808526,
+        "pearson": 0.8167217783083903,
+        "spearman": 0.7665458505886958,
+        "classification": {
+          "accuracy": 0.5549242424242424,
+          "macro_precision": 0.5913139329805998,
+          "macro_recall": 0.6927520525451559,
+          "macro_f1": 0.5600050554915277,
+          "per_class": {
+            "ANTAGONISM": {
+              "precision": 0.475,
+              "recall": 0.912,
+              "f1": 0.6246575342465753,
+              "support": 125
+            },
+            "WEAK": {
+              "precision": 0.873015873015873,
+              "recall": 0.3448275862068966,
+              "f1": 0.4943820224719101,
+              "support": 319
+            },
+            "SYNERGY": {
+              "precision": 0.42592592592592593,
+              "recall": 0.8214285714285714,
+              "f1": 0.5609756097560976,
+              "support": 84
+            }
+          },
+          "confusion_matrix": [
+            [
+              114,
+              3,
+              8
+            ],
+            [
+              124,
+              110,
+              85
+            ],
+            [
+              2,
+              13,
+              69
+            ]
+          ],
+          "labels": [
+            "ANTAGONISM",
+            "WEAK",
+            "SYNERGY"
+          ]
+        }
+      },
+      "RandomForest": {
+        "n": 528,
+        "mae": 0.019843643842260773,
+        "rmse": 0.07497075270374699,
+        "r2": 0.0672838264623653,
+        "pearson": 0.7338412976072508,
+        "spearman": 0.7926628078155854,
+        "classification": {
+          "accuracy": 0.9128787878787878,
+          "macro_precision": 0.8811870626386756,
+          "macro_recall": 0.8915458028561477,
+          "macro_f1": 0.8855423657281266,
+          "per_class": {
+            "ANTAGONISM": {
+              "precision": 0.9416666666666667,
+              "recall": 0.904,
+              "f1": 0.9224489795918367,
+              "support": 125
+            },
+            "WEAK": {
+              "precision": 0.9492063492063492,
+              "recall": 0.9373040752351097,
+              "f1": 0.943217665615142,
+              "support": 319
+            },
+            "SYNERGY": {
+              "precision": 0.7526881720430108,
+              "recall": 0.8333333333333334,
+              "f1": 0.7909604519774012,
+              "support": 84
+            }
+          },
+          "confusion_matrix": [
+            [
+              113,
+              6,
+              6
+            ],
+            [
+              3,
+              299,
+              17
+            ],
+            [
+              4,
+              10,
+              70
+            ]
+          ],
+          "labels": [
+            "ANTAGONISM",
+            "WEAK",
+            "SYNERGY"
+          ]
+        }
+      },
+      "GradientBoosting": {
+        "n": 528,
+        "mae": 0.021508905756677445,
+        "rmse": 0.07865197352864493,
+        "r2": -0.02656159809740144,
+        "pearson": 0.7094390192769424,
+        "spearman": 0.7701541591148306,
+        "classification": {
+          "accuracy": 0.7878787878787878,
+          "macro_precision": 0.7406058700758865,
+          "macro_recall": 0.7982122704881326,
+          "macro_f1": 0.7608738819811484,
+          "per_class": {
+            "ANTAGONISM": {
+              "precision": 0.7073170731707317,
+              "recall": 0.928,
+              "f1": 0.8027681660899654,
+              "support": 125
+            },
+            "WEAK": {
+              "precision": 0.9022556390977443,
+              "recall": 0.7523510971786834,
+              "f1": 0.8205128205128205,
+              "support": 319
+            },
+            "SYNERGY": {
+              "precision": 0.6122448979591837,
+              "recall": 0.7142857142857143,
+              "f1": 0.6593406593406593,
+              "support": 84
+            }
+          },
+          "confusion_matrix": [
+            [
+              116,
+              6,
+              3
+            ],
+            [
+              44,
+              240,
+              35
+            ],
+            [
+              4,
+              20,
+              60
+            ]
+          ],
+          "labels": [
+            "ANTAGONISM",
+            "WEAK",
+            "SYNERGY"
+          ]
+        }
+      }
+    },
+    "test": {
+      "MeanBaseline": {
+        "n": 528,
+        "mae": 0.05171261711562905,
+        "rmse": 0.08407267670546215,
+        "r2": -0.00775326350616079,
+        "pearson": NaN,
+        "spearman": NaN,
+        "classification": {
+          "accuracy": 0.23674242424242425,
+          "macro_precision": 0.07891414141414142,
+          "macro_recall": 0.3333333333333333,
+          "macro_f1": 0.12761613067891783,
+          "per_class": {
+            "ANTAGONISM": {
+              "precision": 0.23674242424242425,
+              "recall": 1.0,
+              "f1": 0.38284839203675347,
+              "support": 125
+            },
+            "WEAK": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 330
+            },
+            "SYNERGY": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 73
+            }
+          },
+          "confusion_matrix": [
+            [
+              125,
+              0,
+              0
+            ],
+            [
+              330,
+              0,
+              0
+            ],
+            [
+              73,
+              0,
+              0
+            ]
+          ],
+          "labels": [
+            "ANTAGONISM",
+            "WEAK",
+            "SYNERGY"
+          ]
+        }
+      },
+      "PairMeanBaseline": {
+        "n": 528,
+        "mae": 0.023914841655508806,
+        "rmse": 0.05872035188246616,
+        "r2": 0.5083888065905056,
+        "pearson": 0.8140752536129447,
+        "spearman": 0.7565045721113915,
+        "classification": {
+          "accuracy": 0.875,
+          "macro_precision": 0.8220619658119658,
+          "macro_recall": 0.8549002352290024,
+          "macro_f1": 0.8338715043244158,
+          "per_class": {
+            "ANTAGONISM": {
+              "precision": 0.9333333333333333,
+              "recall": 0.896,
+              "f1": 0.9142857142857143,
+              "support": 125
+            },
+            "WEAK": {
+              "precision": 0.9391025641025641,
+              "recall": 0.8878787878787879,
+              "f1": 0.9127725856697819,
+              "support": 330
+            },
+            "SYNERGY": {
+              "precision": 0.59375,
+              "recall": 0.7808219178082192,
+              "f1": 0.6745562130177515,
+              "support": 73
+            }
+          },
+          "confusion_matrix": [
+            [
+              112,
+              5,
+              8
+            ],
+            [
+              6,
+              293,
+              31
+            ],
+            [
+              2,
+              14,
+              57
+            ]
+          ],
+          "labels": [
+            "ANTAGONISM",
+            "WEAK",
+            "SYNERGY"
+          ]
+        }
+      },
+      "LinearRidge": {
+        "n": 528,
+        "mae": 0.06465998469565831,
+        "rmse": 0.10655275850554259,
+        "r2": -0.6187279247474167,
+        "pearson": 0.6468513273045857,
+        "spearman": 0.5562745724672531,
+        "classification": {
+          "accuracy": 0.3068181818181818,
+          "macro_precision": 0.4074775891911442,
+          "macro_recall": 0.5087106683271067,
+          "macro_f1": 0.2956783486613068,
+          "per_class": {
+            "ANTAGONISM": {
+              "precision": 0.2966751918158568,
+              "recall": 0.928,
+              "f1": 0.4496124031007752,
+              "support": 125
+            },
+            "WEAK": {
+              "precision": 0.6,
+              "recall": 0.00909090909090909,
+              "f1": 0.01791044776119403,
+              "support": 330
+            },
+            "SYNERGY": {
+              "precision": 0.32575757575757575,
+              "recall": 0.589041095890411,
+              "f1": 0.4195121951219512,
+              "support": 73
+            }
+          },
+          "confusion_matrix": [
+            [
+              116,
+              0,
+              9
+            ],
+            [
+              247,
+              3,
+              80
+            ],
+            [
+              28,
+              2,
+              43
+            ]
+          ],
+          "labels": [
+            "ANTAGONISM",
+            "WEAK",
+            "SYNERGY"
+          ]
+        }
+      },
+      "RandomForest": {
+        "n": 528,
+        "mae": 0.024954473322519488,
+        "rmse": 0.07520579079134347,
+        "r2": 0.19360648167566208,
+        "pearson": 0.7799434592855856,
+        "spearman": 0.7756390213988946,
+        "classification": {
+          "accuracy": 0.9128787878787878,
+          "macro_precision": 0.8638724097007575,
+          "macro_recall": 0.9227452608274526,
+          "macro_f1": 0.8848494128710543,
+          "per_class": {
+            "ANTAGONISM": {
+              "precision": 0.9349593495934959,
+              "recall": 0.92,
+              "f1": 0.9274193548387096,
+              "support": 125
+            },
+            "WEAK": {
+              "precision": 0.9867549668874173,
+              "recall": 0.9030303030303031,
+              "f1": 0.9430379746835443,
+              "support": 330
+            },
+            "SYNERGY": {
+              "precision": 0.6699029126213593,
+              "recall": 0.9452054794520548,
+              "f1": 0.7840909090909091,
+              "support": 73
+            }
+          },
+          "confusion_matrix": [
+            [
+              115,
+              2,
+              8
+            ],
+            [
+              6,
+              298,
+              26
+            ],
+            [
+              2,
+              2,
+              69
+            ]
+          ],
+          "labels": [
+            "ANTAGONISM",
+            "WEAK",
+            "SYNERGY"
+          ]
+        }
+      },
+      "GradientBoosting": {
+        "n": 528,
+        "mae": 0.02957827815855673,
+        "rmse": 0.09647512824729632,
+        "r2": -0.327013047499193,
+        "pearson": 0.6953126073766127,
+        "spearman": 0.7380447546191935,
+        "classification": {
+          "accuracy": 0.7935606060606061,
+          "macro_precision": 0.7390648567119156,
+          "macro_recall": 0.8005545869655458,
+          "macro_f1": 0.7598627758013196,
+          "per_class": {
+            "ANTAGONISM": {
+              "precision": 0.6705882352941176,
+              "recall": 0.912,
+              "f1": 0.7728813559322034,
+              "support": 125
+            },
+            "WEAK": {
+              "precision": 0.9230769230769231,
+              "recall": 0.7636363636363637,
+              "f1": 0.835820895522388,
+              "support": 330
+            },
+            "SYNERGY": {
+              "precision": 0.6235294117647059,
+              "recall": 0.726027397260274,
+              "f1": 0.6708860759493671,
+              "support": 73
+            }
+          },
+          "confusion_matrix": [
+            [
+              114,
+              4,
+              7
+            ],
+            [
+              53,
+              252,
+              25
+            ],
+            [
+              3,
+              17,
+              53
+            ]
+          ],
+          "labels": [
+            "ANTAGONISM",
+            "WEAK",
+            "SYNERGY"
+          ]
+        }
+      }
+    }
+  },
+  "lopo": {
+    "MeanBaseline": {
+      "n": 3168,
+      "mae": 0.05511992187927076,
+      "rmse": 0.11834403847980493,
+      "r2": -0.0006470514527823212,
+      "pearson": -0.08533915049288582,
+      "spearman": -0.026459976820140254,
+      "classification": {
+        "accuracy": 0.24273989898989898,
+        "macro_precision": 0.08091329966329966,
+        "macro_recall": 0.3333333333333333,
+        "macro_f1": 0.13021759376852088,
+        "per_class": {
+          "ANTAGONISM": {
+            "precision": 0.24273989898989898,
+            "recall": 1.0,
+            "f1": 0.39065278130556264,
+            "support": 769
+          },
+          "WEAK": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 1938
+          },
+          "SYNERGY": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 461
+          }
+        },
+        "confusion_matrix": [
+          [
+            769,
+            0,
+            0
+          ],
+          [
+            1938,
+            0,
+            0
+          ],
+          [
+            461,
+            0,
+            0
+          ]
+        ],
+        "labels": [
+          "ANTAGONISM",
+          "WEAK",
+          "SYNERGY"
+        ]
+      }
+    },
+    "PairMeanBaseline": {
+      "n": 3168,
+      "mae": 0.024344190711508902,
+      "rmse": 0.08122158861488714,
+      "r2": 0.5286634611842285,
+      "pearson": 0.7275593205558112,
+      "spearman": 0.7682456818032078,
+      "classification": {
+        "accuracy": 0.8819444444444444,
+        "macro_precision": 0.8401273020503273,
+        "macro_recall": 0.8688959828733038,
+        "macro_f1": 0.8501347019322276,
+        "per_class": {
+          "ANTAGONISM": {
+            "precision": 0.9403606102635229,
+            "recall": 0.881664499349805,
+            "f1": 0.9100671140939597,
+            "support": 769
+          },
+          "WEAK": {
+            "precision": 0.9352401511063141,
+            "recall": 0.8942208462332302,
+            "f1": 0.9142706409918228,
+            "support": 1938
+          },
+          "SYNERGY": {
+            "precision": 0.6447811447811448,
+            "recall": 0.8308026030368764,
+            "f1": 0.7260663507109004,
+            "support": 461
+          }
+        },
+        "confusion_matrix": [
+          [
+            678,
+            59,
+            32
+          ],
+          [
+            26,
+            1733,
+            179
+          ],
+          [
+            17,
+            61,
+            383
+          ]
+        ],
+        "labels": [
+          "ANTAGONISM",
+          "WEAK",
+          "SYNERGY"
+        ]
+      }
+    },
+    "LinearRidge": {
+      "n": 3168,
+      "mae": 0.03670997878394261,
+      "rmse": 0.08430596385685765,
+      "r2": 0.49218591205666096,
+      "pearson": 0.7073738318965541,
+      "spearman": 0.6770351229084435,
+      "classification": {
+        "accuracy": 0.473800505050505,
+        "macro_precision": 0.5525048533037885,
+        "macro_recall": 0.6370972567306018,
+        "macro_f1": 0.4765940826442625,
+        "per_class": {
+          "ANTAGONISM": {
+            "precision": 0.49254843517138597,
+            "recall": 0.8595578673602081,
+            "f1": 0.6262434864992894,
+            "support": 769
+          },
+          "WEAK": {
+            "precision": 0.8759398496240601,
+            "recall": 0.24045407636738905,
+            "f1": 0.37732793522267205,
+            "support": 1938
+          },
+          "SYNERGY": {
+            "precision": 0.2890262751159196,
+            "recall": 0.8112798264642083,
+            "f1": 0.42621082621082623,
+            "support": 461
+          }
+        },
+        "confusion_matrix": [
+          [
+            661,
+            26,
+            82
+          ],
+          [
+            634,
+            466,
+            838
+          ],
+          [
+            47,
+            40,
+            374
+          ]
+        ],
+        "labels": [
+          "ANTAGONISM",
+          "WEAK",
+          "SYNERGY"
+        ]
+      }
+    },
+    "RandomForest": {
+      "n": 3168,
+      "mae": 0.021117675263200172,
+      "rmse": 0.07788634794194607,
+      "r2": 0.5665781216300554,
+      "pearson": 0.7570550137608454,
+      "spearman": 0.7789767352319573,
+      "classification": {
+        "accuracy": 0.9049873737373737,
+        "macro_precision": 0.8665818289254602,
+        "macro_recall": 0.8878677247776673,
+        "macro_f1": 0.8756162774621975,
+        "per_class": {
+          "ANTAGONISM": {
+            "precision": 0.9288590604026845,
+            "recall": 0.8998699609882965,
+            "f1": 0.9141347424042272,
+            "support": 769
+          },
+          "WEAK": {
+            "precision": 0.9470058293587705,
+            "recall": 0.9220846233230134,
+            "f1": 0.9343790849673203,
+            "support": 1938
+          },
+          "SYNERGY": {
+            "precision": 0.7238805970149254,
+            "recall": 0.841648590021692,
+            "f1": 0.7783350050150452,
+            "support": 461
+          }
+        },
+        "confusion_matrix": [
+          [
+            692,
+            50,
+            27
+          ],
+          [
+            30,
+            1787,
+            121
+          ],
+          [
+            23,
+            50,
+            388
+          ]
+        ],
+        "labels": [
+          "ANTAGONISM",
+          "WEAK",
+          "SYNERGY"
+        ]
+      }
+    },
+    "GradientBoosting": {
+      "n": 3168,
+      "mae": 0.02289656636341046,
+      "rmse": 0.07794623105908882,
+      "r2": 0.56591139038764,
+      "pearson": 0.7564884922212997,
+      "spearman": 0.7426108715564009,
+      "classification": {
+        "accuracy": 0.73989898989899,
+        "macro_precision": 0.6913341370074169,
+        "macro_recall": 0.7737217640775526,
+        "macro_f1": 0.7128970441410379,
+        "per_class": {
+          "ANTAGONISM": {
+            "precision": 0.6640926640926641,
+            "recall": 0.8946684005201561,
+            "f1": 0.7623268698060942,
+            "support": 769
+          },
+          "WEAK": {
+            "precision": 0.9084604715672677,
+            "recall": 0.675954592363261,
+            "f1": 0.7751479289940828,
+            "support": 1938
+          },
+          "SYNERGY": {
+            "precision": 0.5014492753623189,
+            "recall": 0.7505422993492408,
+            "f1": 0.6012163336229366,
+            "support": 461
+          }
+        },
+        "confusion_matrix": [
+          [
+            688,
+            48,
+            33
+          ],
+          [
+            317,
+            1310,
+            311
+          ],
+          [
+            31,
+            84,
+            346
+          ]
+        ],
+        "labels": [
+          "ANTAGONISM",
+          "WEAK",
+          "SYNERGY"
+        ]
+      }
+    }
+  },
+  "ablation_lopo": {
+    "A: pass identities only": {
+      "n": 3168,
+      "mae": 0.024332475797411292,
+      "rmse": 0.08121802617884526,
+      "r2": 0.5287048065821449,
+      "pearson": 0.7275310674185265,
+      "spearman": 0.767621975077629,
+      "classification": {
+        "accuracy": 0.8819444444444444,
+        "macro_precision": 0.8401273020503273,
+        "macro_recall": 0.8688959828733038,
+        "macro_f1": 0.8501347019322276,
+        "per_class": {
+          "ANTAGONISM": {
+            "precision": 0.9403606102635229,
+            "recall": 0.881664499349805,
+            "f1": 0.9100671140939597,
+            "support": 769
+          },
+          "WEAK": {
+            "precision": 0.9352401511063141,
+            "recall": 0.8942208462332302,
+            "f1": 0.9142706409918228,
+            "support": 1938
+          },
+          "SYNERGY": {
+            "precision": 0.6447811447811448,
+            "recall": 0.8308026030368764,
+            "f1": 0.7260663507109004,
+            "support": 461
+          }
+        },
+        "confusion_matrix": [
+          [
+            678,
+            59,
+            32
+          ],
+          [
+            26,
+            1733,
+            179
+          ],
+          [
+            17,
+            61,
+            383
+          ]
+        ],
+        "labels": [
+          "ANTAGONISM",
+          "WEAK",
+          "SYNERGY"
+        ]
+      }
+    },
+    "B: program features only": {
+      "n": 3168,
+      "mae": 0.05650576046049711,
+      "rmse": 0.11855371610209828,
+      "r2": -0.004196012041704167,
+      "pearson": -0.010402935804020314,
+      "spearman": 0.009335057539844554,
+      "classification": {
+        "accuracy": 0.24273989898989898,
+        "macro_precision": 0.08091329966329966,
+        "macro_recall": 0.3333333333333333,
+        "macro_f1": 0.13021759376852088,
+        "per_class": {
+          "ANTAGONISM": {
+            "precision": 0.24273989898989898,
+            "recall": 1.0,
+            "f1": 0.39065278130556264,
+            "support": 769
+          },
+          "WEAK": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 1938
+          },
+          "SYNERGY": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 461
+          }
+        },
+        "confusion_matrix": [
+          [
+            769,
+            0,
+            0
+          ],
+          [
+            1938,
+            0,
+            0
+          ],
+          [
+            461,
+            0,
+            0
+          ]
+        ],
+        "labels": [
+          "ANTAGONISM",
+          "WEAK",
+          "SYNERGY"
+        ]
+      }
+    },
+    "C: passes + features": {
+      "n": 3168,
+      "mae": 0.021117675263200172,
+      "rmse": 0.07788634794194607,
+      "r2": 0.5665781216300554,
+      "pearson": 0.7570550137608454,
+      "spearman": 0.7789767352319573,
+      "classification": {
+        "accuracy": 0.9049873737373737,
+        "macro_precision": 0.8665818289254602,
+        "macro_recall": 0.8878677247776673,
+        "macro_f1": 0.8756162774621975,
+        "per_class": {
+          "ANTAGONISM": {
+            "precision": 0.9288590604026845,
+            "recall": 0.8998699609882965,
+            "f1": 0.9141347424042272,
+            "support": 769
+          },
+          "WEAK": {
+            "precision": 0.9470058293587705,
+            "recall": 0.9220846233230134,
+            "f1": 0.9343790849673203,
+            "support": 1938
+          },
+          "SYNERGY": {
+            "precision": 0.7238805970149254,
+            "recall": 0.841648590021692,
+            "f1": 0.7783350050150452,
+            "support": 461
+          }
+        },
+        "confusion_matrix": [
+          [
+            692,
+            50,
+            27
+          ],
+          [
+            30,
+            1787,
+            121
+          ],
+          [
+            23,
+            50,
+            388
+          ]
+        ],
+        "labels": [
+          "ANTAGONISM",
+          "WEAK",
+          "SYNERGY"
+        ]
+      }
+    }
+  },
+  "main_beats_pair_baseline_programs": [
+    20,
+    24
+  ],
+  "class_counts": {
+    "WEAK": 1938,
+    "ANTAGONISM": 769,
+    "SYNERGY": 461
+  }
+}
