@@ -50,8 +50,11 @@ def run_cmd(cmd: list[str], timeout: float = 60, cwd: Path | None = None) -> Com
     stamp = now_iso()
     start = time.perf_counter()
     try:
+        # stdin is closed so a benchmark that tries to read input gets EOF instead of
+        # blocking on the terminal.
         p = subprocess.run([str(c) for c in cmd], capture_output=True, text=True,
-                           timeout=timeout, cwd=cwd, errors="replace")
+                           timeout=timeout, cwd=cwd, errors="replace",
+                           stdin=subprocess.DEVNULL)
         return CommandResult(text, p.returncode, p.stdout, p.stderr,
                              time.perf_counter() - start, stamp,
                              "" if p.returncode == 0 else f"exit code {p.returncode}")

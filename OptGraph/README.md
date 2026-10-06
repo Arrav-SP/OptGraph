@@ -60,6 +60,9 @@ Developed with Ubuntu 26.04 (WSL2), Clang/LLVM 21.1.8, Python 3.14.
 ```bash
 python run_demo.py                                   # ~10 s end-to-end demo, one program, one pair
 python run_demo.py --program mix_01_matrix_mul --pass-a licm --pass-b instcombine
+python run_demo.py --list                            # built-in programs and passes
+python run_demo.py --file examples/custom_example.c  # any C/C++ program of your own
+python run_demo.py --file my.c --pass-a mem2reg --pass-b gvn
 
 python scripts/run_experiments.py --quick            # 6 programs x 5 passes  -> data/quick/
 python scripts/run_experiments.py --full --verify-outputs   # 24 programs x 12 passes (~95 s)
@@ -69,6 +72,11 @@ python scripts/analyze_similarity.py                 # hypothesis check
 python scripts/summarize_results.py                  # descriptive statistics
 bash scripts/run_all.sh                              # all of the above, in order
 ```
+
+A file passed with `--file` must be a complete program (with `main`) that
+compiles with clang, needs no keyboard input and finishes within 10 seconds.
+It is not added to the dataset; the demo's ML step then reports a prediction
+for a program the model has never seen.
 
 `run_experiments.py` also accepts `--programs`, `--program`, `--passes`,
 `--pass-a/--pass-b`, `--tag` and `--workers`. `--verify-outputs` links and runs
