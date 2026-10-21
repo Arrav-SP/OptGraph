@@ -70,7 +70,10 @@ def compute_interactions(meas: pd.DataFrame, threshold: float,
     """One row per (program, ordered pair, metric) where all four runs succeeded."""
     rows = []
     ok = meas[meas["status"] == "SUCCESS"]
-    for pid, g in ok.groupby("program_id", sort=True):
+    # v3 measurements carry a `context` column: each (program, context) has its own baseline.
+    keys = [k for k in ("program_id", "context") if k in ok.columns]
+    for key, g in ok.groupby(keys, sort=True):
+        ident = dict(zip(keys, key))
         by_variant = g.set_index("variant")
         if "baseline" not in by_variant.index:
             continue
@@ -80,18 +83,21 @@ def compute_interactions(meas: pd.DataFrame, threshold: float,
             if a not in by_variant.index or b not in by_variant.index:
                 continue
             for m in metrics:
+                vals = [base[m], by_variant.loc[a, m], by_variant.loc[b, m], pair[m]]
+                if any(pd.isna(v) for v in vals):
+                    continue  # metric not measured for this program (e.g. dynamic count subset)
                 rows.append({
-                    "program_id": pid, "category": base["category"],
+                    **ident, "category": base["category"],
                     "pass_a": a, "pass_b": b, "metric": m,
-                    **interaction_row(float(base[m]), float(by_variant.loc[a, m]),
-                                      float(by_variant.loc[b, m]), float(pair[m]), threshold),
+                    **interaction_row(*map(float, vals), threshold),
                 })
     return pd.DataFrame(rows)
 
 
-def build_dataset(meas: pd.DataFrame, features: pd.DataFrame, threshold: float) -> pd.DataFrame:
+def build_dataset(meas: pd.DataFrame, features: pd.DataFrame, threshold: float,
+                  metrics: list[str] = METRICS) -> pd.DataFrame:
     """Interaction rows joined with the ORIGINAL-program features (prefixed f_)."""
-    inter = compute_interactions(meas, threshold)
+    inter = compute_interactions(meas, threshold, metrics)
     if inter.empty:
         return inter
     numeric = features.drop(columns=["category", "loop_method"], errors="ignore")

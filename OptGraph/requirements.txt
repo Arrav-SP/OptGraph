@@ -7,3 +7,5 @@ matplotlib==3.11.2
 networkx==3.7
 PyYAML==6.0.3
 joblib==1.6.0
+# v3 additions
+pytest==9.1.1

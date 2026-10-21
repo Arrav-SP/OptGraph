@@ -137,3 +137,22 @@ def improvement(baseline: float, optimized: float) -> float | None:
     if baseline == 0:
         return None
     return (baseline - optimized) / baseline
+
+
+# ---- v3: object, dynamic and runtime metrics ---------------------------------------
+
+def parse_text_size(llvm_size_sysv: str) -> int:
+    """Size of the `.text` section from `llvm-size -A` (SysV format) output."""
+    for line in llvm_size_sysv.splitlines():
+        parts = line.split()
+        if parts and parts[0] == ".text":
+            return int(parts[1])
+    raise ValueError("no .text section in llvm-size output")
+
+
+def parse_cachegrind(out_text: str) -> int:
+    """Total executed instructions (Ir) from a cachegrind output file's `summary:` line."""
+    for line in out_text.splitlines():
+        if line.startswith("summary:"):
+            return int(line.split()[1])
+    raise ValueError("no summary line in cachegrind output")

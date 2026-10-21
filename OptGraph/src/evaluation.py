@@ -259,3 +259,37 @@ def plot_similarity(res: dict, categories: dict[str, str], path: Path) -> None:
         ax.set_title(title, fontsize=10)
         fig.colorbar(im, ax=ax, fraction=0.046)
     _save(fig, path)
+
+
+# ---- v3 -------------------------------------------------------------------------------
+
+def per_program_scores(pred: pd.DataFrame, model: str, k: int = 10) -> pd.DataFrame:
+    """Per held-out program: MAE, Spearman and NDCG@k of the predicted pair ranking."""
+    from .stats import ndcg_at_k
+    rows = []
+    for pid, g in pred.groupby("program_id"):
+        y, p = g["interaction_score"].to_numpy(), g[model].to_numpy()
+        rho = _corr(stats.spearmanr, y, p)
+        rows.append({"program_id": pid, "mae": float(np.abs(y - p).mean()),
+                     "spearman": rho, "ndcg10": ndcg_at_k(y, p, k)})
+    return pd.DataFrame(rows)
+
+
+def evaluate_v3(pred: pd.DataFrame, model: str, threshold: float) -> dict:
+    """Pooled regression/classification metrics, residual R² and per-program ranking quality.
+
+    residual_r2 = 1 - SSE(model) / SSE(training pair mean): the share of what the
+    program-agnostic pair mean gets wrong that the model recovers (> 0: program information helps).
+    """
+    y, p, pm = (pred[c].to_numpy(float) for c in ("interaction_score", model, "pair_mean_train"))
+    reg = regression_metrics(y, p)
+    cls = classification_metrics(y, p, threshold)
+    sse_pm = ((y - pm) ** 2).sum()
+    pp = per_program_scores(pred, model)
+    return {**reg, "macro_f1": cls["macro_f1"], "accuracy": cls["accuracy"],
+            "residual_r2": float(1 - ((y - p) ** 2).sum() / sse_pm) if sse_pm else None,
+            "programs": int(pp.shape[0]),
+            "per_program_spearman_median": float(pp["spearman"].median()),
+            "per_program_spearman_mean": float(pp["spearman"].mean()),
+            "per_program_ndcg10_mean": float(pp["ndcg10"].mean()),
+            "per_program_mae_mean": float(pp["mae"].mean())}

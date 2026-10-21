@@ -20,6 +20,12 @@ _VERSION_SUFFIXES = [""] + [f"-{v}" for v in range(22, 13, -1)]
 
 INSTALL_HINT = "sudo apt update && sudo apt install -y clang llvm libc6-dev"
 
+# v3: every IR variant is lowered by this one command, so code size, dynamic count and
+# runtime differences come from the IR alone. -disable-llvm-passes stops clang from
+# running its IR pipeline again; -O2 only selects the codegen level.
+BACKEND_FLAGS = ["-O2", "-c", "-Xclang", "-disable-llvm-passes", "-Wno-override-module"]
+SANITIZER_FLAGS = ["-O0", "-g", "-fsanitize=address,undefined", "-fno-sanitize-recover=all"]
+
 SMOKE_SOURCE = "int main() {\n    int x = 10;\n    int y = x + 0;\n    return y;\n}\n"
 
 
@@ -49,6 +55,8 @@ class Toolchain:
         self.opt = _find("opt")
         self.llc = _find("llc")
         self.llvm_config = _find("llvm-config")
+        self.llvm_size = _find("llvm-size")
+        self.valgrind = shutil.which("valgrind")
 
     def missing(self) -> list[str]:
         return [n for n, p in (("clang", self.clang), ("opt", self.opt)) if not p]
@@ -78,12 +86,32 @@ class Toolchain:
 
     # ---- command construction ------------------------------------------------
 
-    def emit_ir_cmd(self, src: Path, out_ll: Path) -> list[str]:
+    def emit_ir_cmd(self, src: Path, out_ll: Path, cflags=()) -> list[str]:
         # -O0 keeps the IR close to the source. Clang normally tags -O0 functions
         # `optnone`, which makes every later opt pass skip them, so that is disabled.
         driver = self.clang if src.suffix == ".c" else (self.clangxx or self.clang)
-        return [driver, "-O0", "-Xclang", "-disable-O0-optnone", "-S", "-emit-llvm",
+        return [driver, "-O0", "-Xclang", "-disable-O0-optnone", *cflags, "-S", "-emit-llvm",
                 str(src), "-o", str(out_ll)]
+
+    def object_cmd(self, ll: Path, obj: Path) -> list[str]:
+        return [self.clang, *BACKEND_FLAGS, str(ll), "-o", str(obj)]
+
+    def link_objects_cmd(self, objs, exe: Path) -> list[str]:
+        return [self.clang, *map(str, objs), "-o", str(exe), "-lm"]
+
+    def support_cmd(self, src: Path, obj: Path, cflags=()) -> list[str]:
+        """Support code (e.g. polybench.c) is compiled once with fixed flags, never optimised by us."""
+        return [self.clang, "-O2", *cflags, "-c", str(src), "-o", str(obj)]
+
+    def sanitizer_cmd(self, srcs, exe: Path, cflags=()) -> list[str]:
+        return [self.clang, *SANITIZER_FLAGS, *cflags, *map(str, srcs), "-o", str(exe), "-lm"]
+
+    def size_cmd(self, obj: Path) -> list[str]:
+        return [self.llvm_size, "-A", str(obj)]
+
+    def cachegrind_cmd(self, exe: Path, out: Path, log: Path) -> list[str]:
+        return [self.valgrind, "--tool=cachegrind", "--cache-sim=no",
+                f"--cachegrind-out-file={out}", f"--log-file={log}", str(exe)]
 
     def opt_cmd(self, in_ll: Path, out_ll: Path, pipeline: str) -> list[str]:
         # New pass manager syntax (LLVM >= 13; the only syntax since LLVM 17).
@@ -101,9 +129,10 @@ class Toolchain:
 
 # ---- operations ----------------------------------------------------------------
 
-def compile_to_ir(tc: Toolchain, src: Path, out_ll: Path, timeout: float = 60) -> CommandResult:
+def compile_to_ir(tc: Toolchain, src: Path, out_ll: Path, timeout: float = 60,
+                  cflags=()) -> CommandResult:
     out_ll.parent.mkdir(parents=True, exist_ok=True)
-    return run_cmd(tc.emit_ir_cmd(src, out_ll), timeout)
+    return run_cmd(tc.emit_ir_cmd(src, out_ll, cflags), timeout)
 
 
 def verify_ir(tc: Toolchain, ll: Path, timeout: float = 60) -> CommandResult:
@@ -188,7 +217,8 @@ def collect_environment(tc: Toolchain | None = None) -> dict:
         "llvm_config_version": v["llvm_config_version"],
         "llc_version": v["llc_version"],
         "tool_paths": {"clang": tc.clang, "opt": tc.opt, "llc": tc.llc,
-                       "llvm-config": tc.llvm_config},
+                       "llvm-config": tc.llvm_config, "llvm-size": tc.llvm_size,
+                       "valgrind": tc.valgrind},
         "timestamp": now_iso(),
     }
 

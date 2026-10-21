@@ -14,6 +14,7 @@ import yaml
 ROOT = Path(__file__).resolve().parent.parent
 BENCH_DIR = ROOT / "benchmarks"
 CONFIG_PATH = ROOT / "config" / "passes.yaml"
+V3_CONFIG_PATH = ROOT / "config" / "v3.yaml"
 DATA_DIR = ROOT / "data"
 OUTPUT_DIR = ROOT / "outputs"
 EXPERIMENT_DIR = ROOT / "experiments"
@@ -79,6 +80,10 @@ class Benchmark:
     program_id: str
     category: str
     path: Path
+    # v3: per-program compile flags and support objects linked unchanged (e.g. polybench.o).
+    suite: str = "optgraph"
+    cflags: tuple[str, ...] = ()
+    support: tuple[Path, ...] = ()
 
 
 def load_config(path: Path = CONFIG_PATH) -> dict:
@@ -89,10 +94,23 @@ def load_config(path: Path = CONFIG_PATH) -> dict:
     return cfg
 
 
-def load_passes(cfg: dict | None = None, names: list[str] | None = None) -> list[PassSpec]:
+def load_v3_config(path: Path = V3_CONFIG_PATH) -> dict:
+    with open(path) as f:
+        return yaml.safe_load(f)
+
+
+def work_dir(cfg: dict | None = None) -> Path:
+    """Heavy v3 workspace (IR, objects, suites), outside the OneDrive repo."""
+    return Path((cfg or load_v3_config())["work_dir"]).expanduser()
+
+
+def load_passes(cfg: dict | None = None, names: list[str] | None = None,
+                v3: bool = False) -> list[PassSpec]:
+    """Configured passes; `v3=True` adds the `v3_passes` list (22 passes in total)."""
     cfg = cfg or load_config()
+    entries = cfg["passes"] + (cfg.get("v3_passes", []) if v3 else [])
     specs = [PassSpec(p["name"], p.get("pipeline", p["name"]), p.get("kind", ""))
-             for p in cfg["passes"]]
+             for p in entries]
     if names is None:
         return specs
     by_name = {s.name: s for s in specs}

@@ -34,6 +34,21 @@ passes:
   - {name: loop-rotate, pipeline: "loop(loop-rotate)",  kind: loop}
   - {name: loop-unroll, pipeline: "loop-unroll",        kind: loop}
 
+# v3 pass set = `passes` above + these 10 (22 in total). v2 scripts read only `passes`.
+# Validated against opt 21.1.8. Also accepted but not used (outputs/v3/PROGRESS.md, Phase 3):
+# ipsccp, tailcallelim, loop-simplify, lcssa, loop-instsimplify, mldst-motion, globalopt.
+v3_passes:
+  - {name: sccp,                   pipeline: "sccp",                   kind: scalar}
+  - {name: jump-threading,         pipeline: "jump-threading",         kind: cfg}
+  - {name: correlated-propagation, pipeline: "correlated-propagation", kind: scalar}
+  - {name: dse,                    pipeline: "dse",                    kind: memory}
+  - {name: memcpyopt,              pipeline: "memcpyopt",              kind: memory}
+  - {name: indvars,                pipeline: "loop(indvars)",          kind: loop}
+  - {name: loop-deletion,          pipeline: "loop(loop-deletion)",    kind: loop}
+  - {name: loop-vectorize,         pipeline: "loop-vectorize",         kind: loop}
+  - {name: slp-vectorizer,         pipeline: "slp-vectorizer",         kind: scalar}
+  - {name: inline,                 pipeline: "cgscc(inline)",          kind: ipo}
+
 # Subset used by `run_experiments.py --quick` and by run_demo.py.
 quick:
   passes: [mem2reg, instcombine, simplifycfg, gvn, licm]

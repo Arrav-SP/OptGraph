@@ -8,3 +8,8 @@ data/custom/
 outputs/demo/
 outputs/quick/
 outputs/custom/
+.pytest_cache/
+# Code graph (graphify) and v3 quick-mode runs, regenerated:
+graphify-out/
+data/v3/quick/
+outputs/v3/quick/

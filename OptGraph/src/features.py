@@ -103,3 +103,47 @@ def extract_features(ll: Path, tc: Toolchain | None = None) -> dict:
     out = {k: f[k] for k in FEATURES}
     out["loop_method"] = method
     return out
+
+
+# ---- v3 representations (all from the ORIGINAL -O0 IR) ------------------------------
+
+def func_properties(ll: Path, tc: Toolchain) -> dict:
+    """LLVM FunctionPropertiesAnalysis (detailed), summed over the module's functions.
+
+    Fields named Max* are maxima instead of sums. Prefix fp_.
+    """
+    r = run_cmd([tc.opt, "-passes=print<func-properties>", "-enable-detailed-function-properties",
+                 "-disable-output", str(ll)], timeout=120)
+    if not r.ok:
+        raise RuntimeError(f"func-properties failed: {r.stderr.strip()[:300]}")
+    out: dict[str, float] = {}
+    for line in (r.stdout + r.stderr).splitlines():
+        m = re.match(r"^(\w+): (-?\d+)$", line.strip())
+        if not m:
+            continue
+        key, val = "fp_" + m.group(1), int(m.group(2))
+        out[key] = max(out.get(key, val), val) if m.group(1).startswith("Max") else out.get(key, 0) + val
+    return out
+
+
+def opcode_histogram(ll: Path) -> dict:
+    """Bag of instructions: fraction of all instructions per opcode. Prefix op_."""
+    op = parse_ir(Path(ll).read_text()).opcodes
+    n = max(sum(op.values()), 1)
+    return {f"op_{k}": v / n for k, v in sorted(op.items())}
+
+
+def ir2vec_embedding(ll: Path, tc: Toolchain, vocab: Path) -> dict:
+    """LLVM's in-tree IR2Vec: sum of the function vectors of the module. Prefix iv_."""
+    r = run_cmd([tc.opt, "-passes=print<ir2vec>", f"-ir2vec-vocab-path={vocab}",
+                 "-disable-output", str(ll)], timeout=300)
+    if not r.ok:
+        raise RuntimeError(f"ir2vec failed: {r.stderr.strip()[:300]}")
+    total = None
+    for line in (r.stdout + r.stderr).splitlines():
+        if line.startswith("Function vector:"):
+            vec = [float(x) for x in line.split("[", 1)[1].rstrip(" ]").split()]
+            total = vec if total is None else [a + b for a, b in zip(total, vec)]
+    if total is None:
+        raise RuntimeError("ir2vec printed no function vectors")
+    return {f"iv_{i:02d}": v for i, v in enumerate(total)}

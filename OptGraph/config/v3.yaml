@@ -1,0 +1,80 @@
+# OptGraph v3 configuration. v2 settings stay in passes.yaml (the v3 pass set is
+# its `v3_passes` key). Paths under `benchmarks` are relative to work_dir.
+
+# Heavy workspace: IR, objects, binaries, downloaded suites. Kept off the OneDrive repo.
+work_dir: ~/optgraph_work
+seed: 42
+workers: 8
+
+# Starting points for the interaction experiments: the pipeline that turns the raw
+# -O0 IR into the context's baseline P ("" = raw -O0 IR).
+contexts:
+  C0: ""
+  C1: "mem2reg,sroa"
+  # LLVM's module simplification pipeline at O1 (default<O1> without its optimisation half).
+  C2: "thinlto-pre-link<O1>"
+
+benchmarks:
+  polybench_dir: polybench-c-4.2.1-beta
+  # Smallest dataset whose -O0 runtime reaches min_runtime_s is used.
+  polybench_datasets: [MINI, SMALL, MEDIUM, LARGE, EXTRALARGE]
+  polybench_max_runtime_s: 2.0
+  test_suite_dir: llvm-test-suite/SingleSource/Benchmarks
+  test_suite_subdirs: [BenchmarkGame, BenchmarkGame/Large, CoyoteBench, Dhrystone, Linpack,
+                       McGill, Misc, Shootout, Stanford]
+  test_suite_max_runtime_s: 5.0
+  min_runtime_s: 0.05
+  run_timeout_s: 60
+  # Flags copied from the CMakeLists.txt of each test-suite directory / file.
+  # (C_STANDARD 17 with CMake's default extensions is -std=gnu17.)
+  test_suite_flags:
+    Dhrystone: [-Wno-implicit-int, -std=gnu17]
+    Linpack: [-ffp-contract=off, -DFMA_DISABLED=1]
+    Misc: [-Wno-implicit-int]
+    Misc/flops.c: [-std=gnu17]
+    Shootout: [-Wno-error=incompatible-pointer-types]
+    Shootout/methcall.c: [-std=gnu17]
+    Shootout/objinst.c: [-std=gnu17]
+  # FP_TOLERANCE of each directory (relative, as fpcmp -r) for the reference-output check.
+  test_suite_fp_tolerance: {Linpack: 0.0001, McGill: 0.001, Misc: 0.001, Stanford: 0.001}
+  # Only built for AArch64 by the test-suite.
+  test_suite_exclude: [Misc/aarch64-init-cpu-features.c]
+
+# LLVM 21.1.8 in-tree IR2Vec vocabulary (llvm/lib/Analysis/models/seedEmbeddingVocab75D.json at
+# tag llvmorg-21.1.8, sha256 2f057ba5...0140), relative to work_dir.
+ir2vec_vocab: downloads/ir2vec/seedEmbeddingVocab75D.json
+
+# Programs measured with cachegrind in the pair experiments (Phase 3). Every program gets
+# dynamic counts in Phase 5. For pairs, a program costs ~250 unique-IR cachegrind runs
+# (~8.4x its runtime + 0.4 s each), so only programs with -O0 runtime <= max_runtime_s are used;
+# subset_size: null = all of them, otherwise a seeded sample stratified by suite.
+# Chosen from the Phase 2 pilot (outputs/v3/PROGRESS.md).
+dynamic_pairs:
+  subset_size: null
+  max_runtime_s: 1.0
+
+# `--quick`: the tiny end-to-end subset (also used by the integration test).
+quick:
+  programs: [arith_02_redundant, pb_gemm, ts_stanford_treesort]
+  passes: [mem2reg, instcombine, gvn, licm]
+  contexts: [C0]
+  ordering: {budgets: [4], random_per_budget: 5, runtime_runs: 3}
+
+# Phase 5: graph-guided pass ordering. Programs: those with pair-level dynamic counts
+# (dynamic_pairs above), so the oracle graph exists for both objectives.
+ordering:
+  objectives: [text_size, dyn_instructions]
+  budgets: [8, 12, 16]
+  random_per_budget: 50
+  beam_width: 4
+  predictor: HistGradientBoosting
+  runtime_runs: 10
+  runtime_warmup: 1
+  # One timed run per physical core (SMT siblings are n, n+1 on this machine).
+  runtime_cores: [0, 2, 4, 6, 8, 10]
+  # Coefficient of variation above which a runtime measurement is flagged noisy.
+  runtime_cv_flag: 0.05
+  # LLVM-like fixed order of the 22 passes; budget k uses its first k entries.
+  canonical: [sroa, mem2reg, early-cse, inline, instcombine, simplifycfg, sccp, jump-threading,
+              correlated-propagation, reassociate, loop-rotate, licm, indvars, loop-deletion,
+              loop-unroll, gvn, memcpyopt, dse, adce, loop-vectorize, slp-vectorizer, dce]
