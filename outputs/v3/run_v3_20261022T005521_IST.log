@@ -1,0 +1,187 @@
+=== environment and tests [00:55:21 IST]
++ python scripts/check_environment.py --no-write
+Operating system :  Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.43
+WSL              :  yes (Ubuntu)
+Distribution     :  Ubuntu 26.04.1 LTS
+Ubuntu version   :  26.04
+Python           :  3.14.4
+Clang            :  21.1.8
+LLVM             :  21.1.8
+opt              :  21.1.8
+llvm-config      :  21.1.8
+llc              :  21.1.8
+C -> LLVM IR     :  ok
+opt pass run     :  ok
+IR changed       :  yes
+Configured passes:  12/12 accepted by opt
+Environment OK.
++ python -m pytest tests -q
+...................................                                      [100%]
+35 passed in 17.66s
+=== Phase 1: benchmarks [00:55:40 IST]
++ python scripts/v3_benchmarks.py --workers 1 --if-stale
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/data/v3/benchmarks.csv is up to date
+=== Phases 2-3: pair experiments in every context [00:55:41 IST]
++ python scripts/v3_experiments.py
+v3 experiments: 101 programs x 22 passes x 3 contexts = 146955 opt runs; dynamic counts for 78 programs; 8 workers
+  ts_misc_richards_benchmark          1455/1455 ok      0.0s  (dyn)
+  ts_misc_mandel_2                    1455/1455 ok      0.1s  (dyn)
+  ts_stanford_floatmm                 1455/1455 ok      0.1s  (dyn)
+  ts_misc_reedsolomon                 1455/1455 ok      0.1s
+  ts_misc_flops_5                     1455/1455 ok      0.1s  (dyn)
+  ts_misc_flops_7                     1455/1455 ok      0.1s  (dyn)
+  ts_coyotebench_almabench            1455/1455 ok      0.1s
+  ts_shootout_sieve                   1455/1455 ok      0.2s
+  ts_dhrystone_fldry                  1455/1455 ok      0.1s
+  ts_misc_ffbench                     1455/1455 ok      0.2s  (dyn)
+  ts_misc_flops_8                     1455/1455 ok      0.1s  (dyn)
+  ts_shootout_heapsort                1455/1455 ok      0.1s
+  ts_misc_flops_6                     1455/1455 ok      0.1s  (dyn)
+  ts_misc_fbench                      1455/1455 ok      0.2s  (dyn)
+  ts_mcgill_chomp                     1455/1455 ok      0.2s  (dyn)
+  ts_misc_flops_4                     1455/1455 ok      0.1s  (dyn)
+  ts_misc_perlin                      1455/1455 ok      0.1s
+  ts_misc_pi                          1455/1455 ok      0.2s  (dyn)
+  ts_benchmarkgame_fannkuch           1455/1455 ok      0.2s
+  ts_dhrystone_dry                    1455/1455 ok      0.2s
+  ts_shootout_nestedloop              1455/1455 ok      0.2s  (dyn)
+  ts_benchmarkgame_n_body             1455/1455 ok      0.2s  (dyn)
+  pb_floyd_warshall                   1455/1455 ok      0.2s  (dyn)
+  ts_benchmarkgame_spectral_norm      1455/1455 ok      0.2s  (dyn)
+  ts_shootout_hash                    1455/1455 ok      0.2s
+  ts_shootout_random                  1455/1455 ok      0.2s
+  ts_shootout_fib2                    1455/1455 ok      0.1s
+  ts_misc_evalloop                    1455/1455 ok      0.1s  (dyn)
+  pb_deriche                          1455/1455 ok      0.1s  (dyn)
+  ts_misc_matmul_f64_4x4              1455/1455 ok      0.2s
+  ts_misc_dt                          1455/1455 ok      0.1s  (dyn)
+  pb_seidel_2d                        1455/1455 ok      0.1s  (dyn)
+  ts_mcgill_queens                    1455/1455 ok      0.2s
+  pb_lu                               1455/1455 ok      0.1s  (dyn)
+  ts_misc_mandel                      1455/1455 ok      0.2s  (dyn)
+  ts_shootout_ary3                    1455/1455 ok      0.1s
+  ts_misc_himenobmtxpa                1455/1455 ok      0.2s
+  ts_misc_whetstone                   1455/1455 ok      0.2s
+  ts_misc_fp_convert                  1455/1455 ok      0.1s
+  ts_benchmarkgame_puzzle             1455/1455 ok      0.2s
+  pb_cholesky                         1455/1455 ok      0.2s  (dyn)
+  ts_misc_flops_3                     1455/1455 ok      0.1s
+  ts_benchmarkgame_recursive          1455/1455 ok      0.1s
+  ts_benchmarkgame_large_fasta        1455/1455 ok      0.1s
+  ts_misc_flops_1                     1455/1455 ok      0.1s
+  ts_misc_flops_2                     1455/1455 ok      0.1s
+  pb_fdtd_2d                          1455/1455 ok      0.2s  (dyn)
+  pb_ludcmp                           1455/1455 ok      0.1s  (dyn)
+  ts_shootout_strcat                  1455/1455 ok      0.2s  (dyn)
+  pb_nussinov                         1455/1455 ok      0.1s  (dyn)
+  pb_doitgen                          1455/1455 ok      0.2s  (dyn)
+  pb_gesummv                          1455/1455 ok      0.1s  (dyn)
+  ts_mcgill_misr                      1455/1455 ok      0.2s  (dyn)
+  pb_gramschmidt                      1455/1455 ok      0.1s  (dyn)
+  ts_misc_revertbits                  1455/1455 ok      0.2s  (dyn)
+  pb_adi                              1455/1455 ok      0.2s  (dyn)
+  pb_3mm                              1455/1455 ok      0.2s  (dyn)
+  ts_benchmarkgame_partialsums        1455/1455 ok      0.1s  (dyn)
+  pb_covariance                       1455/1455 ok      0.2s  (dyn)
+  pb_heat_3d                          1455/1455 ok      0.1s  (dyn)
+  pb_2mm                              1455/1455 ok      0.1s  (dyn)
+  pb_jacobi_2d                        1455/1455 ok      0.2s  (dyn)
+  ts_stanford_puzzle                  1455/1455 ok      0.1s  (dyn)
+  pb_trisolv                          1455/1455 ok      0.1s  (dyn)
+  pb_correlation                      1455/1455 ok      0.1s  (dyn)
+  pb_syr2k                            1455/1455 ok      0.1s  (dyn)
+  pb_gemver                           1455/1455 ok      0.1s  (dyn)
+  pb_syrk                             1455/1455 ok      0.1s  (dyn)
+  pb_symm                             1455/1455 ok      0.1s  (dyn)
+  pb_trmm                             1455/1455 ok      0.2s  (dyn)
+  pb_gemm                             1455/1455 ok      0.2s  (dyn)
+  ts_stanford_treesort                1455/1455 ok      0.1s  (dyn)
+  pb_mvt                              1455/1455 ok      0.2s  (dyn)
+  pb_durbin                           1455/1455 ok      0.2s  (dyn)
+  pb_atax                             1455/1455 ok      0.2s  (dyn)
+  pb_bicg                             1455/1455 ok      0.2s  (dyn)
+  pb_jacobi_1d                        1455/1455 ok      0.1s  (dyn)
+  arith_05_reassoc                    1455/1455 ok      0.2s  (dyn)
+  arith_03_integer_mix                1455/1455 ok      0.2s  (dyn)
+  loop_04_invariant                   1455/1455 ok      0.1s  (dyn)
+  mem_02_array_init                   1455/1455 ok      0.2s  (dyn)
+  loop_01_array_sum                   1455/1455 ok      0.2s  (dyn)
+  loop_02_nested                      1455/1455 ok      0.2s  (dyn)
+  mem_04_struct_fields                1455/1455 ok      0.2s  (dyn)
+  mix_03_combined                     1455/1455 ok      0.1s  (dyn)
+  cf_01_if_else                       1455/1455 ok      0.2s  (dyn)
+  mem_01_array_copy                   1455/1455 ok      0.1s  (dyn)
+  mix_01_matrix_mul                   1455/1455 ok      0.1s  (dyn)
+  arith_02_redundant                  1455/1455 ok      0.1s  (dyn)
+  arith_04_float_series               1455/1455 ok      0.2s  (dyn)
+  cf_05_early_exit                    1455/1455 ok      0.2s  (dyn)
+  loop_03_accumulate                  1455/1455 ok      0.2s  (dyn)
+  loop_05_small_trip                  1455/1455 ok      0.2s  (dyn)
+  mem_03_traversal                    1455/1455 ok      0.1s  (dyn)
+  mix_05_prime_sieve                  1455/1455 ok      0.1s  (dyn)
+  cf_02_nested_cond                   1455/1455 ok      0.1s  (dyn)
+  cf_03_switch                        1455/1455 ok      0.1s  (dyn)
+  mix_02_func_calls                   1455/1455 ok      0.1s  (dyn)
+  arith_01_polynomial                 1455/1455 ok      0.1s  (dyn)
+  cf_04_const_branch                  1455/1455 ok      0.1s  (dyn)
+  mix_04_bubble_sort                  1455/1455 ok      0.1s  (dyn)
+
+experiments: 146955  success: 146955  failed: 0  (2s)
+interaction rows: 1367982  -> /mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/data/v3
+=== Phase 3: RQ1 analysis [00:56:38 IST]
++ python scripts/v3_analysis.py
+           metric contexts  programs  per_program_spearman_median  per_program_spearman_q1  per_program_spearman_q3  pooled_spearman  pair_mean_spearman
+instruction_count C0 vs C1       101                        0.244                    0.216                    0.322            0.280               0.410
+instruction_count C0 vs C2        93                        0.141                    0.086                    0.178            0.147               0.281
+instruction_count C1 vs C2        93                        0.554                    0.271                    0.682            0.513               0.397
+        text_size C0 vs C1        98                        0.011                   -0.030                    0.096            0.036              -0.002
+        text_size C0 vs C2        72                        0.001                   -0.013                    0.013            0.010               0.030
+        text_size C1 vs C2        72                        0.000                   -0.043                    0.053           -0.013               0.067
+ dyn_instructions C0 vs C1        78                       -0.012                   -0.111                    0.134           -0.009              -0.127
+ dyn_instructions C0 vs C2        76                       -0.012                   -0.062                    0.044            0.053               0.069
+ dyn_instructions C1 vs C2        76                       -0.009                   -0.104                    0.115           -0.140              -0.035
+           metric contexts  cells  sign_flips  sign_flip_frac  sign_flip_frac_of_nonweak  class_changed_frac  pairs_with_any_flip
+instruction_count C0 vs C1  46662         429          0.0092                     0.0336              0.2239                   63
+instruction_count C0 vs C2  46662         257          0.0055                     0.0207              0.2478                   44
+instruction_count C1 vs C2  46662         341          0.0073                     0.0391              0.1165                   67
+        text_size C0 vs C1  46662         367          0.0079                     0.0453              0.1624                   60
+        text_size C0 vs C2  46662          42          0.0009                     0.0063              0.1425                   27
+        text_size C1 vs C2  46662         135          0.0029                     0.0397              0.0704                   88
+ dyn_instructions C0 vs C1  36036          90          0.0025                     0.0286              0.0845                   23
+ dyn_instructions C0 vs C2  36036           4          0.0001                     0.0014              0.0808                    4
+ dyn_instructions C1 vs C2  36036           1          0.0000                     0.0017              0.0162                    1
+           metric context  unordered_cells  final_metric_differs_frac  order_matters_frac  median_abs_asymmetry
+instruction_count      C0            23331                      0.194               0.171                   0.0
+instruction_count      C1            23331                      0.142               0.127                   0.0
+instruction_count      C2            23331                      0.121               0.115                   0.0
+        text_size      C0            23331                      0.104               0.092                   0.0
+        text_size      C1            23331                      0.042               0.040                   0.0
+        text_size      C2            23331                      0.020               0.018                   0.0
+ dyn_instructions      C0            18018                      0.241               0.043                   0.0
+ dyn_instructions      C1            18018                      0.094               0.011                   0.0
+ dyn_instructions      C2            18018                      0.259               0.004                   0.0
+metric                       dyn_instructions  instruction_count  text_size
+term                                                                       
+context                                 0.001              0.008      0.000
+pair                                    0.115              0.098      0.057
+pair x context                          0.227              0.144      0.111
+pair x program_id                       0.216              0.262      0.276
+pair x program_id x context             0.422              0.481      0.547
+program_id                              0.004              0.003      0.003
+program_id x context                    0.013              0.004      0.007
+-> /mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/outputs/v3/tables, /mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/outputs/v3/figures, /mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/outputs/v3/reports
+=== Phase 4: representations and prediction (RQ2) [00:56:58 IST]
++ python scripts/v3_features.py
+  hand       101 programs x 30 features
+  funcprops  101 programs x 44 features
+  opcodes    101 programs x 43 features
+  ir2vec     101 programs x 75 features
++ python scripts/v3_train.py
+52 configurations, 22 passes, contexts ['C0', 'C1', 'C2'], metrics ['text_size', 'dyn_instructions', 'instruction_count']
+[1/52] main__text_size__C0__lopo__residual__both__hand
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/joblib/externals/loky/backend/resource_tracker.py:444: UserWarning: resource_tracker: There appear to be 1 leaked file objects to clean up at shutdown: {'/dev/shm/joblib_memmapping_folder_253776_8ea8088842984ddcb8d58bcd0d942292_188f7c60dfa447efa0e94a6eb5948071/253776-127903573882400-0ad6fe1c86ab4221b5cd4e945c8f8934.pkl': 8}
+  warnings.warn(
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/joblib/externals/loky/backend/resource_tracker.py:444: UserWarning: resource_tracker: There appear to be 12 leaked semlock objects to clean up at shutdown: {'/loky-253776-yrgjrrn4': 1, '/loky-253776-xqjs3c44': 1, '/loky-253776-jr6mdtta': 1, '/loky-253776-i4jujf5s': 1, '/loky-253776-m9m74cft': 1, '/loky-253776-ejl6kn3p': 1, '/loky-253776-typ_kmdp': 1, '/loky-253776-8l2svhef': 1, '/loky-253776-m3fmxzc7': 1, '/loky-253776-wj36zb2c': 1, '/loky-253776-aco_v1_w': 1, '/loky-253776-h0swlumz': 1}
+  warnings.warn(
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/joblib/externals/loky/backend/resource_tracker.py:444: UserWarning: resource_tracker: There appear to be 2 leaked folder objects to clean up at shutdown: {'/dev/shm/joblib_memmapping_folder_253776_8ea8088842984ddcb8d58bcd0d942292_def60d05b2cb419db18cc007d09bddb8': 1, '/dev/shm/joblib_memmapping_folder_253776_8ea8088842984ddcb8d58bcd0d942292_188f7c60dfa447efa0e94a6eb5948071': 1}
+  warnings.warn(

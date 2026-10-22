@@ -1,0 +1,20 @@
+\begin{table}[t]
+\centering
+\caption{Synergy/antagonism sign flips between contexts}
+\label{tab:rq1-sign-flips}
+\begin{tabular}{llrrrrrr}
+\toprule
+metric & contexts & cells & sign\_flips & sign\_flip\_frac & sign\_flip\_frac\_of\_nonweak & class\_changed\_frac & pairs\_with\_any\_flip \\
+\midrule
+instruction\_count & C0 vs C1 & 46662 & 429 & 0.0092 & 0.0336 & 0.2239 & 63 \\
+instruction\_count & C0 vs C2 & 46662 & 257 & 0.0055 & 0.0207 & 0.2478 & 44 \\
+instruction\_count & C1 vs C2 & 46662 & 341 & 0.0073 & 0.0391 & 0.1165 & 67 \\
+text\_size & C0 vs C1 & 46662 & 367 & 0.0079 & 0.0453 & 0.1624 & 60 \\
+text\_size & C0 vs C2 & 46662 & 42 & 0.0009 & 0.0063 & 0.1425 & 27 \\
+text\_size & C1 vs C2 & 46662 & 135 & 0.0029 & 0.0397 & 0.0704 & 88 \\
+dyn\_instructions & C0 vs C1 & 36036 & 90 & 0.0025 & 0.0286 & 0.0845 & 23 \\
+dyn\_instructions & C0 vs C2 & 36036 & 4 & 0.0001 & 0.0014 & 0.0808 & 4 \\
+dyn\_instructions & C1 vs C2 & 36036 & 1 & 0.0000 & 0.0017 & 0.0162 & 1 \\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -1,0 +1,410 @@
+{
+  "threshold": 0.005,
+  "contexts": [
+    "C0",
+    "C1",
+    "C2"
+  ],
+  "metrics": {
+    "instruction_count": {
+      "programs": 101,
+      "rows": 139986,
+      "variance_shares": {
+        "pair": 0.09808569634304624,
+        "program_id": 0.0033416742802102194,
+        "context": 0.007687686091256769,
+        "pair x program_id": 0.2620298060844236,
+        "pair x context": 0.14416349209510868,
+        "program_id x context": 0.003694946019207763,
+        "pair x program_id x context": 0.48099669908674664
+      },
+      "pair_eta2_by_context": {
+        "C0": 0.5800351209960093,
+        "C1": 0.12802801750950144,
+        "C2": 0.053501391340181725
+      }
+    },
+    "text_size": {
+      "programs": 101,
+      "rows": 139986,
+      "variance_shares": {
+        "pair": 0.05650642946761517,
+        "program_id": 0.0025287900286700992,
+        "context": 0.0004658838486721749,
+        "pair x program_id": 0.2763168176715579,
+        "pair x context": 0.11074288665374349,
+        "program_id x context": 0.006885349109645536,
+        "pair x program_id x context": 0.5465538432200958
+      },
+      "pair_eta2_by_context": {
+        "C0": 0.3081859911152742,
+        "C1": 0.037744991894084756,
+        "C2": 0.029798621625804045
+      }
+    },
+    "dyn_instructions": {
+      "programs": 78,
+      "rows": 108108,
+      "variance_shares": {
+        "pair": 0.11489327165097164,
+        "program_id": 0.004451204482218846,
+        "context": 0.0013341147627555768,
+        "pair x program_id": 0.2162531031140732,
+        "pair x context": 0.22733769098428935,
+        "program_id x context": 0.013485428883779946,
+        "pair x program_id x context": 0.4222451861219111
+      },
+      "pair_eta2_by_context": {
+        "C0": 0.38118048545901106,
+        "C1": 0.026441370199483782,
+        "C2": 0.12476629828048136
+      }
+    }
+  },
+  "stability": [
+    {
+      "metric": "instruction_count",
+      "contexts": "C0 vs C1",
+      "programs": 101,
+      "per_program_spearman_median": 0.2439032756953613,
+      "per_program_spearman_q1": 0.2160678723125182,
+      "per_program_spearman_q3": 0.32216619299116905,
+      "pooled_spearman": 0.27958917630538493,
+      "pair_mean_spearman": 0.4095799483951471
+    },
+    {
+      "metric": "instruction_count",
+      "contexts": "C0 vs C2",
+      "programs": 93,
+      "per_program_spearman_median": 0.14078814781222326,
+      "per_program_spearman_q1": 0.08570550542562642,
+      "per_program_spearman_q3": 0.17825559544368552,
+      "pooled_spearman": 0.14669405545846506,
+      "pair_mean_spearman": 0.2811038046400596
+    },
+    {
+      "metric": "instruction_count",
+      "contexts": "C1 vs C2",
+      "programs": 93,
+      "per_program_spearman_median": 0.5540530730398522,
+      "per_program_spearman_q1": 0.2707047142472677,
+      "per_program_spearman_q3": 0.682322330010433,
+      "pooled_spearman": 0.5132370870068259,
+      "pair_mean_spearman": 0.3973365339261623
+    },
+    {
+      "metric": "text_size",
+      "contexts": "C0 vs C1",
+      "programs": 98,
+      "per_program_spearman_median": 0.010685182329246243,
+      "per_program_spearman_q1": -0.030221755588719163,
+      "per_program_spearman_q3": 0.09640484670592638,
+      "pooled_spearman": 0.035908381724117304,
+      "pair_mean_spearman": -0.0016864832597022809
+    },
+    {
+      "metric": "text_size",
+      "contexts": "C0 vs C2",
+      "programs": 72,
+      "per_program_spearman_median": 0.000708718716393978,
+      "per_program_spearman_q1": -0.013407979285535582,
+      "per_program_spearman_q3": 0.01266340978174954,
+      "pooled_spearman": 0.009884584608426535,
+      "pair_mean_spearman": 0.030098027654687953
+    },
+    {
+      "metric": "text_size",
+      "contexts": "C1 vs C2",
+      "programs": 72,
+      "per_program_spearman_median": 0.0,
+      "per_program_spearman_q1": -0.04304830837918965,
+      "per_program_spearman_q3": 0.05296913982559806,
+      "pooled_spearman": -0.013183884583433513,
+      "pair_mean_spearman": 0.06727736692193131
+    },
+    {
+      "metric": "dyn_instructions",
+      "contexts": "C0 vs C1",
+      "programs": 78,
+      "per_program_spearman_median": -0.011784018889486887,
+      "per_program_spearman_q1": -0.1113166052161633,
+      "per_program_spearman_q3": 0.13385653842952874,
+      "pooled_spearman": -0.009370225789399198,
+      "pair_mean_spearman": -0.1269307044466702
+    },
+    {
+      "metric": "dyn_instructions",
+      "contexts": "C0 vs C2",
+      "programs": 76,
+      "per_program_spearman_median": -0.011938680979644012,
+      "per_program_spearman_q1": -0.06205751742584439,
+      "per_program_spearman_q3": 0.04414961574602147,
+      "pooled_spearman": 0.053256167408606093,
+      "pair_mean_spearman": 0.06942466947126265
+    },
+    {
+      "metric": "dyn_instructions",
+      "contexts": "C1 vs C2",
+      "programs": 76,
+      "per_program_spearman_median": -0.009425397004075813,
+      "per_program_spearman_q1": -0.10409918341537162,
+      "per_program_spearman_q3": 0.11466097586803323,
+      "pooled_spearman": -0.13964657156734409,
+      "pair_mean_spearman": -0.0350248601233199
+    }
+  ],
+  "sign_flips": [
+    {
+      "metric": "instruction_count",
+      "contexts": "C0 vs C1",
+      "cells": 46662,
+      "sign_flips": 429,
+      "sign_flip_frac": 0.009193776520509194,
+      "sign_flip_frac_of_nonweak": 0.03363914373088685,
+      "class_changed_frac": 0.22388667438172388,
+      "pairs_with_any_flip": 63
+    },
+    {
+      "metric": "instruction_count",
+      "contexts": "C0 vs C2",
+      "cells": 46662,
+      "sign_flips": 257,
+      "sign_flip_frac": 0.005507693626505507,
+      "sign_flip_frac_of_nonweak": 0.020677447904095262,
+      "class_changed_frac": 0.24776049033474776,
+      "pairs_with_any_flip": 44
+    },
+    {
+      "metric": "instruction_count",
+      "contexts": "C1 vs C2",
+      "cells": 46662,
+      "sign_flips": 341,
+      "sign_flip_frac": 0.007307873644507308,
+      "sign_flip_frac_of_nonweak": 0.03910102052516913,
+      "class_changed_frac": 0.11651879473661651,
+      "pairs_with_any_flip": 67
+    },
+    {
+      "metric": "text_size",
+      "contexts": "C0 vs C1",
+      "cells": 46662,
+      "sign_flips": 367,
+      "sign_flip_frac": 0.007865072221507865,
+      "sign_flip_frac_of_nonweak": 0.04530304900629552,
+      "class_changed_frac": 0.1624019544811624,
+      "pairs_with_any_flip": 60
+    },
+    {
+      "metric": "text_size",
+      "contexts": "C0 vs C2",
+      "cells": 46662,
+      "sign_flips": 42,
+      "sign_flip_frac": 0.0009000900090009,
+      "sign_flip_frac_of_nonweak": 0.006256517205422315,
+      "class_changed_frac": 0.1425142514251425,
+      "pairs_with_any_flip": 27
+    },
+    {
+      "metric": "text_size",
+      "contexts": "C1 vs C2",
+      "cells": 46662,
+      "sign_flips": 135,
+      "sign_flip_frac": 0.0028931464575028933,
+      "sign_flip_frac_of_nonweak": 0.039694207586004115,
+      "class_changed_frac": 0.07037846641807038,
+      "pairs_with_any_flip": 88
+    },
+    {
+      "metric": "dyn_instructions",
+      "contexts": "C0 vs C1",
+      "cells": 36036,
+      "sign_flips": 90,
+      "sign_flip_frac": 0.0024975024975024975,
+      "sign_flip_frac_of_nonweak": 0.02857142857142857,
+      "class_changed_frac": 0.0844988344988345,
+      "pairs_with_any_flip": 23
+    },
+    {
+      "metric": "dyn_instructions",
+      "contexts": "C0 vs C2",
+      "cells": 36036,
+      "sign_flips": 4,
+      "sign_flip_frac": 0.000111000111000111,
+      "sign_flip_frac_of_nonweak": 0.0013698630136986301,
+      "class_changed_frac": 0.08080808080808081,
+      "pairs_with_any_flip": 4
+    },
+    {
+      "metric": "dyn_instructions",
+      "contexts": "C1 vs C2",
+      "cells": 36036,
+      "sign_flips": 1,
+      "sign_flip_frac": 2.775002775002775e-05,
+      "sign_flip_frac_of_nonweak": 0.001652892561983471,
+      "class_changed_frac": 0.016150516150516152,
+      "pairs_with_any_flip": 1
+    }
+  ],
+  "order": [
+    {
+      "metric": "instruction_count",
+      "context": "C0",
+      "unordered_cells": 23331,
+      "final_metric_differs_frac": 0.19433371908619435,
+      "order_matters_frac": 0.17148857742917148,
+      "median_abs_asymmetry": 0.0
+    },
+    {
+      "metric": "instruction_count",
+      "context": "C1",
+      "unordered_cells": 23331,
+      "final_metric_differs_frac": 0.14225708285114225,
+      "order_matters_frac": 0.1272127212721272,
+      "median_abs_asymmetry": 0.0
+    },
+    {
+      "metric": "instruction_count",
+      "context": "C2",
+      "unordered_cells": 23331,
+      "final_metric_differs_frac": 0.1206977840641207,
+      "order_matters_frac": 0.1146971840041147,
+      "median_abs_asymmetry": 0.0
+    },
+    {
+      "metric": "text_size",
+      "context": "C0",
+      "unordered_cells": 23331,
+      "final_metric_differs_frac": 0.10428185675710429,
+      "order_matters_frac": 0.09155201234409155,
+      "median_abs_asymmetry": 0.0
+    },
+    {
+      "metric": "text_size",
+      "context": "C1",
+      "unordered_cells": 23331,
+      "final_metric_differs_frac": 0.04157558613004157,
+      "order_matters_frac": 0.03968968325403969,
+      "median_abs_asymmetry": 0.0
+    },
+    {
+      "metric": "text_size",
+      "context": "C2",
+      "unordered_cells": 23331,
+      "final_metric_differs_frac": 0.019544811624019543,
+      "order_matters_frac": 0.018130384467018132,
+      "median_abs_asymmetry": 0.0
+    },
+    {
+      "metric": "dyn_instructions",
+      "context": "C0",
+      "unordered_cells": 18018,
+      "final_metric_differs_frac": 0.24114774114774115,
+      "order_matters_frac": 0.04256854256854257,
+      "median_abs_asymmetry": 0.0
+    },
+    {
+      "metric": "dyn_instructions",
+      "context": "C1",
+      "unordered_cells": 18018,
+      "final_metric_differs_frac": 0.09418359418359418,
+      "order_matters_frac": 0.010933510933510934,
+      "median_abs_asymmetry": 0.0
+    },
+    {
+      "metric": "dyn_instructions",
+      "context": "C2",
+      "unordered_cells": 18018,
+      "final_metric_differs_frac": 0.2592962592962593,
+      "order_matters_frac": 0.004384504384504385,
+      "median_abs_asymmetry": 0.0
+    }
+  ],
+  "classes": [
+    {
+      "metric": "instruction_count",
+      "context": "C0",
+      "rows": 46662,
+      "SYNERGY": 2907,
+      "WEAK": 38314,
+      "ANTAGONISM": 5441,
+      "nonweak_frac": 0.1789036046461789
+    },
+    {
+      "metric": "instruction_count",
+      "context": "C1",
+      "rows": 46662,
+      "SYNERGY": 4295,
+      "WEAK": 39522,
+      "ANTAGONISM": 2845,
+      "nonweak_frac": 0.15301530153015303
+    },
+    {
+      "metric": "instruction_count",
+      "context": "C2",
+      "rows": 46662,
+      "SYNERGY": 4845,
+      "WEAK": 41456,
+      "ANTAGONISM": 361,
+      "nonweak_frac": 0.11156829968711157
+    },
+    {
+      "metric": "text_size",
+      "context": "C0",
+      "rows": 46662,
+      "SYNERGY": 2587,
+      "WEAK": 40584,
+      "ANTAGONISM": 3491,
+      "nonweak_frac": 0.13025588273113026
+    },
+    {
+      "metric": "text_size",
+      "context": "C1",
+      "rows": 46662,
+      "SYNERGY": 1430,
+      "WEAK": 43749,
+      "ANTAGONISM": 1483,
+      "nonweak_frac": 0.062427671338562425
+    },
+    {
+      "metric": "text_size",
+      "context": "C2",
+      "rows": 46662,
+      "SYNERGY": 338,
+      "WEAK": 45922,
+      "ANTAGONISM": 402,
+      "nonweak_frac": 0.01585872873001586
+    },
+    {
+      "metric": "dyn_instructions",
+      "context": "C0",
+      "rows": 36036,
+      "SYNERGY": 1620,
+      "WEAK": 33212,
+      "ANTAGONISM": 1204,
+      "nonweak_frac": 0.07836607836607837
+    },
+    {
+      "metric": "dyn_instructions",
+      "context": "C1",
+      "rows": 36036,
+      "SYNERGY": 299,
+      "WEAK": 35515,
+      "ANTAGONISM": 222,
+      "nonweak_frac": 0.014457764457764458
+    },
+    {
+      "metric": "dyn_instructions",
+      "context": "C2",
+      "rows": 36036,
+      "SYNERGY": 53,
+      "WEAK": 35928,
+      "ANTAGONISM": 55,
+      "nonweak_frac": 0.002997002997002997
+    }
+  ],
+  "example_graphs": [
+    "pb_gemm",
+    "ts_misc_dt",
+    "mix_01_matrix_mul"
+  ]
+}

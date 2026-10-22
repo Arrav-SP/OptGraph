@@ -1,0 +1,20 @@
+\begin{table}[t]
+\centering
+\caption{How often the order of a pass pair matters, per context}
+\label{tab:rq1-order-dependence}
+\begin{tabular}{llrrrr}
+\toprule
+metric & context & unordered\_cells & final\_metric\_differs\_frac & order\_matters\_frac & median\_abs\_asymmetry \\
+\midrule
+instruction\_count & C0 & 23331 & 0.1943 & 0.1715 & 0.0000 \\
+instruction\_count & C1 & 23331 & 0.1423 & 0.1272 & 0.0000 \\
+instruction\_count & C2 & 23331 & 0.1207 & 0.1147 & 0.0000 \\
+text\_size & C0 & 23331 & 0.1043 & 0.0916 & 0.0000 \\
+text\_size & C1 & 23331 & 0.0416 & 0.0397 & 0.0000 \\
+text\_size & C2 & 23331 & 0.0195 & 0.0181 & 0.0000 \\
+dyn\_instructions & C0 & 18018 & 0.2411 & 0.0426 & 0.0000 \\
+dyn\_instructions & C1 & 18018 & 0.0942 & 0.0109 & 0.0000 \\
+dyn\_instructions & C2 & 18018 & 0.2593 & 0.0044 & 0.0000 \\
+\bottomrule
+\end{tabular}
+\end{table}

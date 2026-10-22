@@ -1,0 +1,40 @@
+Generalisation to unseen suites
+
+| metric | context | protocol | model | mae | rmse | r2 | spearman | macro_f1 | residual_r2 | per_program_spearman_median | per_program_ndcg10_mean | mae_diff_vs_pairmean | mae_diff_ci_lo | mae_diff_ci_hi | wilcoxon_p_holm | programs_better | programs_worse |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| text_size | C0 | loso | MeanBaseline | 0.0122 | 0.0505 | -0.0020 | -0.0098 | 0.3101 | -0.2002 | -- | 0.6317 | -- | -- | -- | -- | -- | -- |
+| text_size | C0 | loso | PairMeanBaseline | 0.0106 | 0.0461 | 0.1651 | 0.3292 | 0.7053 | 0.0000 | 0.3472 | 0.8953 | -- | -- | -- | -- | -- | -- |
+| text_size | C0 | loso | LinearRidge | 0.0179 | 0.0503 | 0.0089 | 0.2603 | 0.4026 | -0.1871 | 0.3022 | 0.8953 | 0.0074 | 0.0047 | 0.0115 | 0.0000 | 0.0000 | 101.0000 |
+| text_size | C0 | loso | HistGradientBoosting | 0.0119 | 0.0495 | 0.0390 | 0.2811 | 0.6381 | -0.1511 | 0.2889 | 0.8942 | 0.0014 | 0.0009 | 0.0019 | 0.0000 | 30.0000 | 71.0000 |
+| text_size | C0 | transfer:polybench:testsuite | MeanBaseline | 0.0104 | 0.0360 | -0.0069 | -- | 0.3096 | 0.3422 | -- | 0.5537 | -- | -- | -- | -- | -- | -- |
+| text_size | C0 | transfer:polybench:testsuite | PairMeanBaseline | 0.0094 | 0.0444 | -0.5306 | 0.3311 | 0.6824 | 0.0000 | 0.3356 | 0.8827 | -- | -- | -- | -- | -- | -- |
+| text_size | C0 | transfer:polybench:testsuite | LinearRidge | 0.0168 | 0.0462 | -0.6551 | 0.2148 | 0.3839 | -0.0813 | 0.2533 | 0.8832 | 0.0074 | 0.0055 | 0.0095 | 0.0000 | 0.0000 | 47.0000 |
+| text_size | C0 | transfer:polybench:testsuite | HistGradientBoosting | 0.0126 | 0.0544 | -1.2970 | 0.1760 | 0.5819 | -0.5008 | 0.2025 | 0.8635 | 0.0031 | 0.0020 | 0.0044 | 0.0000 | 4.0000 | 43.0000 |
+| text_size | C0 | transfer:testsuite:polybench | MeanBaseline | 0.0102 | 0.0590 | -0.0025 | -- | 0.3122 | -0.2882 | -- | 0.7614 | -- | -- | -- | -- | -- | -- |
+| text_size | C0 | transfer:testsuite:polybench | PairMeanBaseline | 0.0089 | 0.0520 | 0.2218 | 0.3308 | 0.6975 | 0.0000 | 0.3505 | 0.9401 | -- | -- | -- | -- | -- | -- |
+| text_size | C0 | transfer:testsuite:polybench | LinearRidge | 0.0099 | 0.0519 | 0.2229 | 0.2949 | 0.7008 | 0.0015 | 0.3109 | 0.9401 | 0.0010 | 0.0007 | 0.0012 | 0.0000 | 0.0000 | 30.0000 |
+| text_size | C0 | transfer:testsuite:polybench | HistGradientBoosting | 0.0095 | 0.0527 | 0.2007 | 0.2908 | 0.6662 | -0.0270 | 0.2952 | 0.9410 | 0.0006 | 0.0004 | 0.0008 | 0.0000 | 4.0000 | 26.0000 |
+| text_size | C1 | loso | MeanBaseline | 0.0043 | 0.0336 | -0.0009 | -0.0159 | 0.3226 | 0.0222 | -- | 0.6297 | -- | -- | -- | -- | -- | -- |
+| text_size | C1 | loso | PairMeanBaseline | 0.0053 | 0.0339 | -0.0236 | 0.0272 | 0.4266 | 0.0000 | 0.0279 | 0.6604 | -- | -- | -- | -- | -- | -- |
+| text_size | C1 | loso | LinearRidge | 0.0123 | 0.0380 | -0.2796 | -0.0347 | 0.3204 | -0.2501 | 0.0292 | 0.6604 | 0.0069 | 0.0044 | 0.0099 | 0.0000 | 0.0000 | 101.0000 |
+| text_size | C1 | loso | HistGradientBoosting | 0.0095 | 0.0514 | -1.3507 | 0.0289 | 0.4066 | -1.2965 | 0.0515 | 0.6681 | 0.0041 | 0.0026 | 0.0059 | 0.0000 | 31.0000 | 70.0000 |
+| text_size | C1 | transfer:polybench:testsuite | MeanBaseline | 0.0032 | 0.0187 | -0.0020 | -- | 0.3200 | 0.2141 | -- | 0.6291 | -- | -- | -- | -- | -- | -- |
+| text_size | C1 | transfer:polybench:testsuite | PairMeanBaseline | 0.0041 | 0.0211 | -0.2749 | 0.0372 | 0.4301 | 0.0000 | 0.0487 | 0.6563 | -- | -- | -- | -- | -- | -- |
+| text_size | C1 | transfer:polybench:testsuite | LinearRidge | 0.0110 | 0.0238 | -0.6195 | -0.0734 | 0.2837 | -0.2703 | 0.0310 | 0.6563 | 0.0069 | 0.0048 | 0.0092 | 0.0000 | 0.0000 | 47.0000 |
+| text_size | C1 | transfer:polybench:testsuite | HistGradientBoosting | 0.0062 | 0.0253 | -0.8439 | -0.0153 | 0.3835 | -0.4463 | -0.0032 | 0.6369 | 0.0022 | 0.0017 | 0.0026 | 0.0000 | 3.0000 | 44.0000 |
+| text_size | C1 | transfer:testsuite:polybench | MeanBaseline | 0.0031 | 0.0243 | -0.0012 | -- | 0.3247 | -0.0056 | -- | 0.5914 | -- | -- | -- | -- | -- | -- |
+| text_size | C1 | transfer:testsuite:polybench | PairMeanBaseline | 0.0037 | 0.0242 | 0.0044 | 0.0560 | 0.4477 | 0.0000 | 0.0487 | 0.6005 | -- | -- | -- | -- | -- | -- |
+| text_size | C1 | transfer:testsuite:polybench | LinearRidge | 0.0045 | 0.0243 | 0.0009 | 0.0313 | 0.4421 | -0.0035 | 0.0462 | 0.6005 | 0.0008 | 0.0006 | 0.0011 | 0.0000 | 0.0000 | 30.0000 |
+| text_size | C1 | transfer:testsuite:polybench | HistGradientBoosting | 0.0042 | 0.0241 | 0.0121 | 0.0269 | 0.4351 | 0.0078 | 0.0189 | 0.6676 | 0.0006 | 0.0004 | 0.0008 | 0.0000 | 3.0000 | 27.0000 |
+| text_size | C2 | loso | MeanBaseline | 0.0017 | 0.0394 | -0.0000 | 0.0087 | 0.3307 | 0.0218 | -- | 0.6810 | -- | -- | -- | -- | -- | -- |
+| text_size | C2 | loso | PairMeanBaseline | 0.0021 | 0.0398 | -0.0223 | -0.0008 | 0.3820 | 0.0000 | -0.0037 | 0.6695 | -- | -- | -- | -- | -- | -- |
+| text_size | C2 | loso | LinearRidge | 0.0041 | 0.0400 | -0.0320 | -0.0222 | 0.3386 | -0.0095 | -0.0023 | 0.6695 | 0.0020 | 0.0014 | 0.0027 | 0.0000 | 0.0000 | 101.0000 |
+| text_size | C2 | loso | HistGradientBoosting | 0.0028 | 0.0442 | -0.2596 | -0.0032 | 0.3722 | -0.2321 | 0.0067 | 0.7073 | 0.0007 | 0.0004 | 0.0011 | 0.0000 | 18.0000 | 83.0000 |
+| text_size | C2 | transfer:polybench:testsuite | MeanBaseline | 0.0008 | 0.0110 | -0.0002 | -- | 0.3303 | 0.5561 | -- | 0.5443 | -- | -- | -- | -- | -- | -- |
+| text_size | C2 | transfer:polybench:testsuite | PairMeanBaseline | 0.0018 | 0.0165 | -1.2533 | 0.0113 | 0.3825 | 0.0000 | 0.0003 | 0.5968 | -- | -- | -- | -- | -- | -- |
+| text_size | C2 | transfer:polybench:testsuite | LinearRidge | 0.0093 | 0.0192 | -2.0508 | 0.0369 | 0.2038 | -0.3539 | 0.0053 | 0.5968 | 0.0076 | 0.0061 | 0.0091 | 0.0000 | 0.0000 | 47.0000 |
+| text_size | C2 | transfer:polybench:testsuite | HistGradientBoosting | 0.0043 | 0.0335 | -8.2952 | -0.0333 | 0.3374 | -3.1250 | -0.0063 | 0.5890 | 0.0026 | 0.0021 | 0.0030 | 0.0000 | 1.0000 | 46.0000 |
+| text_size | C2 | transfer:testsuite:polybench | MeanBaseline | 0.0021 | 0.0290 | -0.0000 | -- | 0.3301 | -0.0133 | -- | 0.7450 | -- | -- | -- | -- | -- | -- |
+| text_size | C2 | transfer:testsuite:polybench | PairMeanBaseline | 0.0022 | 0.0288 | 0.0131 | 0.0007 | 0.4926 | 0.0000 | -0.0156 | 0.7925 | -- | -- | -- | -- | -- | -- |
+| text_size | C2 | transfer:testsuite:polybench | LinearRidge | 0.0025 | 0.0288 | 0.0127 | -0.0018 | 0.4868 | -0.0004 | -0.0133 | 0.7925 | 0.0003 | 0.0002 | 0.0004 | 0.0000 | 0.0000 | 30.0000 |
+| text_size | C2 | transfer:testsuite:polybench | HistGradientBoosting | 0.0025 | 0.0288 | 0.0107 | -0.0055 | 0.4358 | -0.0024 | -0.0270 | 0.7752 | 0.0002 | 0.0002 | 0.0003 | 0.0000 | 1.0000 | 29.0000 |

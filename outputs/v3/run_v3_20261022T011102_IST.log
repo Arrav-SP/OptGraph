@@ -1,0 +1,620 @@
+=== environment and tests [01:11:02 IST]
++ python scripts/check_environment.py --no-write
+Operating system :  Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.43
+WSL              :  yes (Ubuntu)
+Distribution     :  Ubuntu 26.04.1 LTS
+Ubuntu version   :  26.04
+Python           :  3.14.4
+Clang            :  21.1.8
+LLVM             :  21.1.8
+opt              :  21.1.8
+llvm-config      :  21.1.8
+llc              :  21.1.8
+C -> LLVM IR     :  ok
+opt pass run     :  ok
+IR changed       :  yes
+Configured passes:  12/12 accepted by opt
+Environment OK.
++ python -m pytest tests -q
+...................................                                      [100%]
+35 passed in 32.54s
+=== Phase 1: benchmarks [01:11:38 IST]
++ python scripts/v3_benchmarks.py --workers 1 --if-stale
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/data/v3/benchmarks.csv is up to date
+=== Phases 2-3: pair experiments in every context [01:11:39 IST]
++ python scripts/v3_experiments.py
+v3 experiments: 101 programs x 22 passes x 3 contexts = 146955 opt runs; dynamic counts for 78 programs; 8 workers
+  ts_misc_richards_benchmark          1455/1455 ok      0.1s  (dyn)
+  ts_misc_mandel_2                    1455/1455 ok      0.1s  (dyn)
+  ts_stanford_floatmm                 1455/1455 ok      0.2s  (dyn)
+  ts_misc_reedsolomon                 1455/1455 ok      0.2s
+  ts_misc_flops_5                     1455/1455 ok      0.1s  (dyn)
+  ts_misc_flops_7                     1455/1455 ok      0.1s  (dyn)
+  ts_coyotebench_almabench            1455/1455 ok      0.1s
+  ts_shootout_sieve                   1455/1455 ok      0.2s
+  ts_dhrystone_fldry                  1455/1455 ok      0.2s
+  ts_misc_ffbench                     1455/1455 ok      0.2s  (dyn)
+  ts_misc_flops_8                     1455/1455 ok      0.2s  (dyn)
+  ts_shootout_heapsort                1455/1455 ok      0.2s
+  ts_misc_flops_6                     1455/1455 ok      0.2s  (dyn)
+  ts_misc_fbench                      1455/1455 ok      0.2s  (dyn)
+  ts_mcgill_chomp                     1455/1455 ok      0.1s  (dyn)
+  ts_misc_flops_4                     1455/1455 ok      0.2s  (dyn)
+  ts_misc_perlin                      1455/1455 ok      0.2s
+  ts_misc_pi                          1455/1455 ok      0.2s  (dyn)
+  ts_benchmarkgame_fannkuch           1455/1455 ok      0.1s
+  ts_dhrystone_dry                    1455/1455 ok      0.2s
+  ts_shootout_nestedloop              1455/1455 ok      0.2s  (dyn)
+  ts_benchmarkgame_n_body             1455/1455 ok      0.2s  (dyn)
+  pb_floyd_warshall                   1455/1455 ok      0.2s  (dyn)
+  ts_benchmarkgame_spectral_norm      1455/1455 ok      0.2s  (dyn)
+  ts_shootout_hash                    1455/1455 ok      0.2s
+  ts_shootout_random                  1455/1455 ok      0.2s
+  ts_shootout_fib2                    1455/1455 ok      0.2s
+  ts_misc_evalloop                    1455/1455 ok      0.2s  (dyn)
+  pb_deriche                          1455/1455 ok      0.2s  (dyn)
+  ts_misc_matmul_f64_4x4              1455/1455 ok      0.2s
+  ts_misc_dt                          1455/1455 ok      0.2s  (dyn)
+  pb_seidel_2d                        1455/1455 ok      0.2s  (dyn)
+  ts_mcgill_queens                    1455/1455 ok      0.2s
+  pb_lu                               1455/1455 ok      0.2s  (dyn)
+  ts_misc_mandel                      1455/1455 ok      0.2s  (dyn)
+  ts_shootout_ary3                    1455/1455 ok      0.2s
+  ts_misc_himenobmtxpa                1455/1455 ok      0.2s
+  ts_misc_whetstone                   1455/1455 ok      0.2s
+  ts_misc_fp_convert                  1455/1455 ok      0.2s
+  ts_benchmarkgame_puzzle             1455/1455 ok      0.2s
+  pb_cholesky                         1455/1455 ok      0.2s  (dyn)
+  ts_misc_flops_3                     1455/1455 ok      0.2s
+  ts_benchmarkgame_recursive          1455/1455 ok      0.2s
+  ts_benchmarkgame_large_fasta        1455/1455 ok      0.2s
+  ts_misc_flops_1                     1455/1455 ok      0.2s
+  ts_misc_flops_2                     1455/1455 ok      0.2s
+  pb_fdtd_2d                          1455/1455 ok      0.2s  (dyn)
+  pb_ludcmp                           1455/1455 ok      0.2s  (dyn)
+  ts_shootout_strcat                  1455/1455 ok      0.3s  (dyn)
+  pb_nussinov                         1455/1455 ok      0.2s  (dyn)
+  pb_doitgen                          1455/1455 ok      0.3s  (dyn)
+  pb_gesummv                          1455/1455 ok      0.3s  (dyn)
+  ts_mcgill_misr                      1455/1455 ok      0.3s  (dyn)
+  pb_gramschmidt                      1455/1455 ok      0.2s  (dyn)
+  ts_misc_revertbits                  1455/1455 ok      0.3s  (dyn)
+  pb_adi                              1455/1455 ok      0.3s  (dyn)
+  pb_3mm                              1455/1455 ok      0.3s  (dyn)
+  ts_benchmarkgame_partialsums        1455/1455 ok      0.2s  (dyn)
+  pb_covariance                       1455/1455 ok      0.2s  (dyn)
+  pb_heat_3d                          1455/1455 ok      0.2s  (dyn)
+  pb_2mm                              1455/1455 ok      0.2s  (dyn)
+  pb_jacobi_2d                        1455/1455 ok      0.2s  (dyn)
+  ts_stanford_puzzle                  1455/1455 ok      0.2s  (dyn)
+  pb_trisolv                          1455/1455 ok      0.2s  (dyn)
+  pb_correlation                      1455/1455 ok      0.2s  (dyn)
+  pb_syr2k                            1455/1455 ok      0.2s  (dyn)
+  pb_gemver                           1455/1455 ok      0.2s  (dyn)
+  pb_syrk                             1455/1455 ok      0.2s  (dyn)
+  pb_symm                             1455/1455 ok      0.3s  (dyn)
+  pb_trmm                             1455/1455 ok      0.2s  (dyn)
+  pb_gemm                             1455/1455 ok      0.2s  (dyn)
+  ts_stanford_treesort                1455/1455 ok      0.2s  (dyn)
+  pb_mvt                              1455/1455 ok      0.2s  (dyn)
+  pb_durbin                           1455/1455 ok      0.3s  (dyn)
+  pb_atax                             1455/1455 ok      0.3s  (dyn)
+  pb_bicg                             1455/1455 ok      0.2s  (dyn)
+  pb_jacobi_1d                        1455/1455 ok      0.3s  (dyn)
+  arith_05_reassoc                    1455/1455 ok      0.3s  (dyn)
+  arith_03_integer_mix                1455/1455 ok      0.3s  (dyn)
+  loop_04_invariant                   1455/1455 ok      0.3s  (dyn)
+  mem_02_array_init                   1455/1455 ok      0.2s  (dyn)
+  loop_01_array_sum                   1455/1455 ok      0.2s  (dyn)
+  loop_02_nested                      1455/1455 ok      0.2s  (dyn)
+  mem_04_struct_fields                1455/1455 ok      0.2s  (dyn)
+  mix_03_combined                     1455/1455 ok      0.2s  (dyn)
+  cf_01_if_else                       1455/1455 ok      0.2s  (dyn)
+  mem_01_array_copy                   1455/1455 ok      0.2s  (dyn)
+  mix_01_matrix_mul                   1455/1455 ok      0.2s  (dyn)
+  arith_02_redundant                  1455/1455 ok      0.2s  (dyn)
+  arith_04_float_series               1455/1455 ok      0.2s  (dyn)
+  cf_05_early_exit                    1455/1455 ok      0.2s  (dyn)
+  loop_03_accumulate                  1455/1455 ok      0.2s  (dyn)
+  loop_05_small_trip                  1455/1455 ok      0.2s  (dyn)
+  mem_03_traversal                    1455/1455 ok      0.2s  (dyn)
+  mix_05_prime_sieve                  1455/1455 ok      0.2s  (dyn)
+  cf_02_nested_cond                   1455/1455 ok      0.2s  (dyn)
+  cf_03_switch                        1455/1455 ok      0.2s  (dyn)
+  mix_02_func_calls                   1455/1455 ok      0.2s  (dyn)
+  arith_01_polynomial                 1455/1455 ok      0.1s  (dyn)
+  cf_04_const_branch                  1455/1455 ok      0.1s  (dyn)
+  mix_04_bubble_sort                  1455/1455 ok      0.1s  (dyn)
+
+experiments: 146955  success: 146955  failed: 0  (3s)
+interaction rows: 1367982  -> /mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/data/v3
+=== Phase 3: RQ1 analysis [01:13:02 IST]
++ python scripts/v3_analysis.py
+           metric contexts  programs  per_program_spearman_median  per_program_spearman_q1  per_program_spearman_q3  pooled_spearman  pair_mean_spearman
+instruction_count C0 vs C1       101                        0.244                    0.216                    0.322            0.280               0.410
+instruction_count C0 vs C2        93                        0.141                    0.086                    0.178            0.147               0.281
+instruction_count C1 vs C2        93                        0.554                    0.271                    0.682            0.513               0.397
+        text_size C0 vs C1        98                        0.011                   -0.030                    0.096            0.036              -0.002
+        text_size C0 vs C2        72                        0.001                   -0.013                    0.013            0.010               0.030
+        text_size C1 vs C2        72                        0.000                   -0.043                    0.053           -0.013               0.067
+ dyn_instructions C0 vs C1        78                       -0.012                   -0.111                    0.134           -0.009              -0.127
+ dyn_instructions C0 vs C2        76                       -0.012                   -0.062                    0.044            0.053               0.069
+ dyn_instructions C1 vs C2        76                       -0.009                   -0.104                    0.115           -0.140              -0.035
+           metric contexts  cells  sign_flips  sign_flip_frac  sign_flip_frac_of_nonweak  class_changed_frac  pairs_with_any_flip
+instruction_count C0 vs C1  46662         429          0.0092                     0.0336              0.2239                   63
+instruction_count C0 vs C2  46662         257          0.0055                     0.0207              0.2478                   44
+instruction_count C1 vs C2  46662         341          0.0073                     0.0391              0.1165                   67
+        text_size C0 vs C1  46662         367          0.0079                     0.0453              0.1624                   60
+        text_size C0 vs C2  46662          42          0.0009                     0.0063              0.1425                   27
+        text_size C1 vs C2  46662         135          0.0029                     0.0397              0.0704                   88
+ dyn_instructions C0 vs C1  36036          90          0.0025                     0.0286              0.0845                   23
+ dyn_instructions C0 vs C2  36036           4          0.0001                     0.0014              0.0808                    4
+ dyn_instructions C1 vs C2  36036           1          0.0000                     0.0017              0.0162                    1
+           metric context  unordered_cells  final_metric_differs_frac  order_matters_frac  median_abs_asymmetry
+instruction_count      C0            23331                      0.194               0.171                   0.0
+instruction_count      C1            23331                      0.142               0.127                   0.0
+instruction_count      C2            23331                      0.121               0.115                   0.0
+        text_size      C0            23331                      0.104               0.092                   0.0
+        text_size      C1            23331                      0.042               0.040                   0.0
+        text_size      C2            23331                      0.020               0.018                   0.0
+ dyn_instructions      C0            18018                      0.241               0.043                   0.0
+ dyn_instructions      C1            18018                      0.094               0.011                   0.0
+ dyn_instructions      C2            18018                      0.259               0.004                   0.0
+metric                       dyn_instructions  instruction_count  text_size
+term                                                                       
+context                                 0.001              0.008      0.000
+pair                                    0.115              0.098      0.057
+pair x context                          0.227              0.144      0.111
+pair x program_id                       0.216              0.262      0.276
+pair x program_id x context             0.422              0.481      0.547
+program_id                              0.004              0.003      0.003
+program_id x context                    0.013              0.004      0.007
+-> /mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/outputs/v3/tables, /mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/outputs/v3/figures, /mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/outputs/v3/reports
+=== Phase 4: representations and prediction (RQ2) [01:13:27 IST]
++ python scripts/v3_features.py
+  hand       101 programs x 30 features
+  funcprops  101 programs x 44 features
+  opcodes    101 programs x 43 features
+  ir2vec     101 programs x 75 features
++ python scripts/v3_train.py
+52 configurations, 22 passes, contexts ['C0', 'C1', 'C2'], metrics ['text_size', 'dyn_instructions', 'instruction_count']
+[1/52] main__text_size__C0__lopo__residual__both__hand
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+    main__text_size__C0__lopo__residual__both__hand: 46662 rows, 101 programs, 1283.5s
+[2/52] main__dyn_instructions__C0__lopo__residual__both__hand
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+    main__dyn_instructions__C0__lopo__residual__both__hand: 36036 rows, 78 programs, 63.7s
+[3/52] main__instruction_count__C0__lopo__residual__both__hand
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+    main__instruction_count__C0__lopo__residual__both__hand: 46662 rows, 101 programs, 87.4s
+[4/52] main__text_size__C0__kfold__residual__both__hand
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+    main__text_size__C0__kfold__residual__both__hand: 46662 rows, 101 programs, 572.6s
+[5/52] main__dyn_instructions__C0__kfold__residual__both__hand
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+    main__dyn_instructions__C0__kfold__residual__both__hand: 36036 rows, 78 programs, 70.3s
+[6/52] main__instruction_count__C0__kfold__residual__both__hand
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+    main__instruction_count__C0__kfold__residual__both__hand: 46662 rows, 101 programs, 79.2s
+[7/52] suite__text_size__C0__loso__residual__both__hand
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+    suite__text_size__C0__loso__residual__both__hand: 46662 rows, 101 programs, 26.0s
+[8/52] suite__text_size__C0__transfer-polybench-testsuite__residual__both__hand
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+    suite__text_size__C0__transfer-polybench-testsuite__residual__both__hand: 46662 rows, 101 programs, 12.6s
+[9/52] suite__text_size__C0__transfer-testsuite-polybench__residual__both__hand
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+    suite__text_size__C0__transfer-testsuite-polybench__residual__both__hand: 46662 rows, 101 programs, 15.5s
+[10/52] ablation_inputs__text_size__C0__kfold__direct__pass__hand
+    ablation_inputs__text_size__C0__kfold__direct__pass__hand: 46662 rows, 101 programs, 47.0s
+[11/52] ablation_inputs__text_size__C0__kfold__direct__features__hand
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+    ablation_inputs__text_size__C0__kfold__direct__features__hand: 46662 rows, 101 programs, 90.8s
+[12/52] ablation_inputs__text_size__C0__kfold__direct__both__hand
+    ablation_inputs__text_size__C0__kfold__direct__both__hand: 46662 rows, 101 programs, 77.9s
+[13/52] main__text_size__C1__lopo__residual__both__hand
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+    main__text_size__C1__lopo__residual__both__hand: 46662 rows, 101 programs, 1297.9s
+[14/52] main__text_size__C1__kfold__residual__both__hand
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+    main__text_size__C1__kfold__residual__both__hand: 46662 rows, 101 programs, 601.6s
+[15/52] main__dyn_instructions__C1__lopo__residual__both__hand
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+    main__dyn_instructions__C1__lopo__residual__both__hand: 36036 rows, 78 programs, 46.5s
+[16/52] main__dyn_instructions__C1__kfold__residual__both__hand
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+    main__dyn_instructions__C1__kfold__residual__both__hand: 36036 rows, 78 programs, 77.8s
+[17/52] main__instruction_count__C1__lopo__residual__both__hand
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+    main__instruction_count__C1__lopo__residual__both__hand: 46662 rows, 101 programs, 78.6s
+[18/52] main__instruction_count__C1__kfold__residual__both__hand
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+    main__instruction_count__C1__kfold__residual__both__hand: 46662 rows, 101 programs, 84.3s
+[19/52] suite__text_size__C1__loso__residual__both__hand
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+    suite__text_size__C1__loso__residual__both__hand: 46662 rows, 101 programs, 30.0s
+[20/52] suite__text_size__C1__transfer-polybench-testsuite__residual__both__hand
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+    suite__text_size__C1__transfer-polybench-testsuite__residual__both__hand: 46662 rows, 101 programs, 14.5s
+[21/52] suite__text_size__C1__transfer-testsuite-polybench__residual__both__hand
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+    suite__text_size__C1__transfer-testsuite-polybench__residual__both__hand: 46662 rows, 101 programs, 17.3s
+[22/52] ablation_inputs__text_size__C1__kfold__direct__pass__hand
+    ablation_inputs__text_size__C1__kfold__direct__pass__hand: 46662 rows, 101 programs, 56.3s
+[23/52] ablation_inputs__text_size__C1__kfold__direct__features__hand
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+    ablation_inputs__text_size__C1__kfold__direct__features__hand: 46662 rows, 101 programs, 97.1s
+[24/52] ablation_inputs__text_size__C1__kfold__direct__both__hand
+    ablation_inputs__text_size__C1__kfold__direct__both__hand: 46662 rows, 101 programs, 77.3s
+[25/52] main__text_size__C2__lopo__residual__both__hand
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+    main__text_size__C2__lopo__residual__both__hand: 46662 rows, 101 programs, 1205.7s
+[26/52] main__text_size__C2__kfold__residual__both__hand
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+    main__text_size__C2__kfold__residual__both__hand: 46662 rows, 101 programs, 581.2s
+[27/52] main__dyn_instructions__C2__lopo__residual__both__hand
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+    main__dyn_instructions__C2__lopo__residual__both__hand: 36036 rows, 78 programs, 46.3s
+[28/52] main__dyn_instructions__C2__kfold__residual__both__hand
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+    main__dyn_instructions__C2__kfold__residual__both__hand: 36036 rows, 78 programs, 67.4s
+[29/52] main__instruction_count__C2__lopo__residual__both__hand
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+    main__instruction_count__C2__lopo__residual__both__hand: 46662 rows, 101 programs, 71.2s
+[30/52] main__instruction_count__C2__kfold__residual__both__hand
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+    main__instruction_count__C2__kfold__residual__both__hand: 46662 rows, 101 programs, 74.8s
+[31/52] suite__text_size__C2__loso__residual__both__hand
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+    suite__text_size__C2__loso__residual__both__hand: 46662 rows, 101 programs, 24.9s
+[32/52] suite__text_size__C2__transfer-polybench-testsuite__residual__both__hand
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+    suite__text_size__C2__transfer-polybench-testsuite__residual__both__hand: 46662 rows, 101 programs, 12.0s
+[33/52] suite__text_size__C2__transfer-testsuite-polybench__residual__both__hand
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+    suite__text_size__C2__transfer-testsuite-polybench__residual__both__hand: 46662 rows, 101 programs, 14.3s
+[34/52] ablation_inputs__text_size__C2__kfold__direct__pass__hand
+    ablation_inputs__text_size__C2__kfold__direct__pass__hand: 46662 rows, 101 programs, 41.4s
+[35/52] ablation_inputs__text_size__C2__kfold__direct__features__hand
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+/mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/src/evaluation.py:29: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  return float(fn(a, b)[0])
+    ablation_inputs__text_size__C2__kfold__direct__features__hand: 46662 rows, 101 programs, 72.2s
+[36/52] ablation_inputs__text_size__C2__kfold__direct__both__hand
+    ablation_inputs__text_size__C2__kfold__direct__both__hand: 46662 rows, 101 programs, 61.0s
+[37/52] target__text_size__C0__kfold__direct__both__hand
+    target__text_size__C0__kfold__direct__both__hand: 46662 rows, 101 programs, 228.4s
+[38/52] ablation_reps__text_size__C0__kfold__residual__both__hand
+    ablation_reps__text_size__C0__kfold__residual__both__hand: 46662 rows, 101 programs, 62.0s
+[39/52] ablation_reps__text_size__C0__kfold__residual__both__funcprops
+    ablation_reps__text_size__C0__kfold__residual__both__funcprops: 46662 rows, 101 programs, 75.7s
+[40/52] ablation_reps__text_size__C0__kfold__residual__both__opcodes
+    ablation_reps__text_size__C0__kfold__residual__both__opcodes: 46662 rows, 101 programs, 75.4s
+[41/52] ablation_reps__text_size__C0__kfold__residual__both__ir2vec
+    ablation_reps__text_size__C0__kfold__residual__both__ir2vec: 46662 rows, 101 programs, 114.4s
+[42/52] ablation_reps__text_size__C0__kfold__residual__both__hand+funcprops+opcodes+ir2vec
+    ablation_reps__text_size__C0__kfold__residual__both__hand+funcprops+opcodes+ir2vec: 46662 rows, 101 programs, 259.8s
+[43/52] ablation_reps__dyn_instructions__C0__kfold__residual__both__hand
+    ablation_reps__dyn_instructions__C0__kfold__residual__both__hand: 36036 rows, 78 programs, 57.0s
+[44/52] ablation_reps__dyn_instructions__C0__kfold__residual__both__funcprops
+    ablation_reps__dyn_instructions__C0__kfold__residual__both__funcprops: 36036 rows, 78 programs, 68.9s
+[45/52] ablation_reps__dyn_instructions__C0__kfold__residual__both__opcodes
+    ablation_reps__dyn_instructions__C0__kfold__residual__both__opcodes: 36036 rows, 78 programs, 67.9s
+[46/52] ablation_reps__dyn_instructions__C0__kfold__residual__both__ir2vec
+    ablation_reps__dyn_instructions__C0__kfold__residual__both__ir2vec: 36036 rows, 78 programs, 99.5s
+[47/52] ablation_reps__dyn_instructions__C0__kfold__residual__both__hand+funcprops+opcodes+ir2vec
+    ablation_reps__dyn_instructions__C0__kfold__residual__both__hand+funcprops+opcodes+ir2vec: 36036 rows, 78 programs, 227.0s
+[48/52] ablation_reps__instruction_count__C0__kfold__residual__both__hand
+    ablation_reps__instruction_count__C0__kfold__residual__both__hand: 46662 rows, 101 programs, 64.9s
+[49/52] ablation_reps__instruction_count__C0__kfold__residual__both__funcprops
+    ablation_reps__instruction_count__C0__kfold__residual__both__funcprops: 46662 rows, 101 programs, 78.3s
+[50/52] ablation_reps__instruction_count__C0__kfold__residual__both__opcodes
+    ablation_reps__instruction_count__C0__kfold__residual__both__opcodes: 46662 rows, 101 programs, 78.4s
+[51/52] ablation_reps__instruction_count__C0__kfold__residual__both__ir2vec
+    ablation_reps__instruction_count__C0__kfold__residual__both__ir2vec: 46662 rows, 101 programs, 117.2s
+[52/52] ablation_reps__instruction_count__C0__kfold__residual__both__hand+funcprops+opcodes+ir2vec
+    ablation_reps__instruction_count__C0__kfold__residual__both__hand+funcprops+opcodes+ir2vec: 46662 rows, 101 programs, 273.2s
+    phase5_single__text_size__C0__lopo__residual__both__hand: 2222 rows, 101 programs, 17.6s
+    phase5_single__dyn_instructions__C0__lopo__residual__both__hand: 1716 rows, 78 programs, 13.9s
+           metric context                model    mae      r2  residual_r2  per_program_spearman_median  mae_diff_vs_pairmean  wilcoxon_p_holm
+        text_size      C0         MeanBaseline 0.0118 -0.0002      -0.4173                          NaN                   NaN              NaN
+        text_size      C0     PairMeanBaseline 0.0096  0.2943       0.0000                       0.3692                   NaN              NaN
+        text_size      C0          LinearRidge 0.0127  0.2782      -0.0228                       0.3312                0.0031           0.0000
+        text_size      C0         RandomForest 0.0108  0.3382       0.0623                       0.3294                0.0012           0.0000
+        text_size      C0     GradientBoosting 0.0114  0.2982       0.0055                       0.3303                0.0018           0.0000
+        text_size      C0 HistGradientBoosting 0.0099  0.3338       0.0560                       0.3197                0.0003           0.3542
+ dyn_instructions      C0         MeanBaseline 0.0091 -0.0005      -0.5756                          NaN                   NaN              NaN
+ dyn_instructions      C0     PairMeanBaseline 0.0077  0.3650       0.0000                       0.3505                   NaN              NaN
+ dyn_instructions      C0          LinearRidge 0.0122  0.3324      -0.0514                       0.3503                0.0045           0.0000
+ dyn_instructions      C0 HistGradientBoosting 0.0071  0.5027       0.2168                       0.2619               -0.0006           0.1050
+instruction_count      C0         MeanBaseline 0.0189 -0.0001      -1.3344                          NaN                   NaN              NaN
+instruction_count      C0     PairMeanBaseline 0.0084  0.5716       0.0000                       0.6366                   NaN              NaN
+instruction_count      C0          LinearRidge 0.0098  0.5680      -0.0084                       0.6027                0.0014           0.0000
+instruction_count      C0 HistGradientBoosting 0.0078  0.6230       0.1200                       0.5945               -0.0006           0.0001
+        text_size      C1         MeanBaseline 0.0042 -0.0004      -0.0191                          NaN                   NaN              NaN
+        text_size      C1     PairMeanBaseline 0.0049  0.0184       0.0000                       0.0502                   NaN              NaN
+        text_size      C1          LinearRidge 0.0078 -0.0782      -0.0984                       0.0478                0.0029           0.0000
+        text_size      C1         RandomForest 0.0056  0.0417       0.0237                       0.0953                0.0007           0.0022
+        text_size      C1     GradientBoosting 0.0065 -0.3050      -0.3295                       0.0703                0.0016           0.0000
+        text_size      C1 HistGradientBoosting 0.0061 -0.1978      -0.2203                       0.0488                0.0012           0.0076
+ dyn_instructions      C1         MeanBaseline 0.0013 -0.0005      -0.0015                          NaN                   NaN              NaN
+ dyn_instructions      C1     PairMeanBaseline 0.0016  0.0010       0.0000                       0.1783                   NaN              NaN
+ dyn_instructions      C1          LinearRidge 0.0030 -0.0289      -0.0299                       0.1758                0.0014           0.0000
+ dyn_instructions      C1 HistGradientBoosting 0.0021 -0.0710      -0.0721                       0.0415                0.0004           0.0191
+instruction_count      C1         MeanBaseline 0.0092 -0.0003      -0.1246                          NaN                   NaN              NaN
+instruction_count      C1     PairMeanBaseline 0.0086  0.1105       0.0000                       0.5104                   NaN              NaN
+instruction_count      C1          LinearRidge 0.0111  0.0839      -0.0299                       0.4973                0.0025           0.0000
+instruction_count      C1 HistGradientBoosting 0.0088  0.1395       0.0326                       0.4859                0.0002           0.9123
+        text_size      C2         MeanBaseline 0.0016 -0.0000      -0.0104                          NaN                   NaN              NaN
+        text_size      C2     PairMeanBaseline 0.0018  0.0103       0.0000                       0.0320                   NaN              NaN
+        text_size      C2          LinearRidge 0.0027  0.0072      -0.0032                       0.0320                0.0009           0.0000
+        text_size      C2         RandomForest 0.0023 -0.0069      -0.0174                       0.0265                0.0005           0.0000
+        text_size      C2     GradientBoosting 0.0027 -0.6712      -0.6886                       0.0328                0.0009           0.0000
+        text_size      C2 HistGradientBoosting 0.0036 -0.5355      -0.5515                       0.0181                0.0017           0.0000
+ dyn_instructions      C2         MeanBaseline 0.0003 -0.0001      -0.1135                          NaN                   NaN              NaN
+ dyn_instructions      C2     PairMeanBaseline 0.0004  0.1019       0.0000                       0.1701                   NaN              NaN
+ dyn_instructions      C2          LinearRidge 0.0006  0.0970      -0.0055                       0.1642                0.0002           0.0000
+ dyn_instructions      C2 HistGradientBoosting 0.0005  0.0912      -0.0119                       0.0265                0.0002           0.0000
+instruction_count      C2         MeanBaseline 0.0095 -0.0001      -0.0358                          NaN                   NaN              NaN
+instruction_count      C2     PairMeanBaseline 0.0061  0.0345       0.0000                       0.5889                   NaN              NaN
+instruction_count      C2          LinearRidge 0.0085  0.0207      -0.0143                       0.5079                0.0023           0.0000
+instruction_count      C2 HistGradientBoosting 0.0090 -0.6306      -0.6889                       0.4967                0.0029           0.1457
+=== Phase 5: graph-guided ordering (RQ3) [03:47:46 IST]
++ python scripts/v3_ordering.py
+Phase 5 measure: 78 programs, 22 passes, objectives ['text_size', 'dyn_instructions'], budgets [8, 12, 16], 50 random per budget
+  arith_01_polynomial                 200 variants  0 failed     197s
+  arith_02_redundant                  200 variants  0 failed     186s
+  arith_03_integer_mix                200 variants  0 failed     193s
+  arith_04_float_series               200 variants  0 failed     226s
+  arith_05_reassoc                    200 variants  0 failed     203s
+  cf_01_if_else                       200 variants  0 failed     189s
+  cf_02_nested_cond                   200 variants  0 failed     207s
+  cf_03_switch                        200 variants  0 failed     184s
+  cf_04_const_branch                  200 variants  0 failed     170s
+  cf_05_early_exit                    200 variants  0 failed     212s
+  loop_01_array_sum                   200 variants  0 failed     213s
+  loop_02_nested                      200 variants  0 failed     213s
+  loop_03_accumulate                  200 variants  0 failed     198s
+  loop_04_invariant                   200 variants  0 failed     223s
+  loop_05_small_trip                  200 variants  0 failed     191s
+  mem_01_array_copy                   200 variants  0 failed     253s
+  mem_02_array_init                   200 variants  0 failed     253s
+  mem_03_traversal                    200 variants  0 failed     251s
+  mem_04_struct_fields                200 variants  0 failed     230s
+  mix_01_matrix_mul                   200 variants  0 failed     315s
+  mix_02_func_calls                   200 variants  0 failed     193s
+  mix_03_combined                     200 variants  0 failed     224s
+  mix_04_bubble_sort                  200 variants  0 failed     251s
+  mix_05_prime_sieve                  200 variants  0 failed     262s
+  pb_2mm                              200 variants  0 failed     539s
+  pb_3mm                              200 variants  0 failed     506s
+  pb_adi                              200 variants  0 failed     787s
+  pb_atax                             200 variants  0 failed     408s
+  pb_bicg                             200 variants  0 failed     390s
+  pb_cholesky                         200 variants  0 failed    1333s
+  pb_correlation                      200 variants  0 failed     655s
+  pb_covariance                       200 variants  0 failed     760s
+  pb_deriche                          200 variants  0 failed    2304s
+  pb_doitgen                          200 variants  0 failed     951s
+  pb_durbin                           200 variants  0 failed     404s
+  pb_fdtd_2d                          200 variants  0 failed    1152s
+  pb_floyd_warshall                   200 variants  0 failed    1803s
+  pb_gemm                             200 variants  0 failed     517s
+  pb_gemver                           200 variants  0 failed     571s
+  pb_gesummv                          200 variants  0 failed     531s
+  pb_gramschmidt                      200 variants  0 failed     846s
+  pb_heat_3d                          200 variants  0 failed     885s
+  pb_jacobi_1d                        200 variants  0 failed     362s
+  pb_jacobi_2d                        200 variants  0 failed     876s
+  pb_lu                               200 variants  0 failed    1708s
+  pb_ludcmp                           200 variants  0 failed     765s
+  pb_mvt                              200 variants  0 failed     393s
+  pb_nussinov                         200 variants  0 failed     904s
+  pb_seidel_2d                        200 variants  0 failed    1307s
+  pb_symm                             200 variants  0 failed     587s
+  pb_syr2k                            200 variants  0 failed     691s
+  pb_syrk                             200 variants  0 failed     582s
+  pb_trisolv                          200 variants  0 failed     440s
+  pb_trmm                             200 variants  0 failed     467s
+  ts_benchmarkgame_n_body             200 variants  0 failed    2640s
+  ts_benchmarkgame_partialsums        200 variants  0 failed     925s
+  ts_benchmarkgame_spectral_norm      200 variants  0 failed    3085s
+  ts_mcgill_chomp                     200 variants  0 failed    2123s
+  ts_mcgill_misr                      200 variants  0 failed     874s
+  ts_misc_dt                          200 variants  0 failed    1155s
+  ts_misc_evalloop                    200 variants  0 failed    2714s
+  ts_misc_fbench                      200 variants  0 failed    3560s
+  ts_misc_ffbench                     200 variants  0 failed    2129s
+  ts_misc_flops_4                     200 variants  0 failed    1684s
+  ts_misc_flops_5                     200 variants  0 failed    2672s
+  ts_misc_flops_6                     200 variants  0 failed    2490s
+  ts_misc_flops_7                     200 variants  0 failed    2071s
+  ts_misc_flops_8                     200 variants  0 failed    2726s
+  ts_misc_mandel                      200 variants  0 failed    1644s
+  ts_misc_mandel_2                    200 variants  0 failed    3991s
+  ts_misc_pi                          200 variants  0 failed    1778s
+  ts_misc_revertbits                  200 variants  0 failed    1074s
+  ts_misc_richards_benchmark          200 variants  0 failed    3122s
+  ts_shootout_nestedloop              200 variants  0 failed     864s
+  ts_shootout_strcat                  200 variants  0 failed     441s
+  ts_stanford_floatmm                 200 variants  0 failed    1681s
+  ts_stanford_puzzle                  200 variants  0 failed     652s
+  ts_stanford_treesort                200 variants  0 failed     329s
+measure stage: 10768s -> /mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/data/v3/ordering_measurements.csv.gz
+runtime: 2147 unique key variants, 2147 to measure on cores [0, 2, 4, 6, 8, 10]
+  100/2147
+  200/2147
+  300/2147
+  400/2147
+  500/2147
+  600/2147
+  700/2147
+  800/2147
+  900/2147
+  1000/2147
+  1100/2147
+  1200/2147
+  1300/2147
+  1400/2147
+  1500/2147
+  1600/2147
+  1700/2147
+  1800/2147
+  1900/2147
+  2000/2147
+  2100/2147
+runtime stage: 1419s -> /mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/data/v3/ordering_runtime.csv
+       objective               strategy  programs  improvement_vs_O0  ratio_vs_O2  ratio_vs_O3
+       text_size                     O0        78             0.0000       1.0649       0.8968
+       text_size                     O1        78             0.2442       0.8049       0.6778
+       text_size                     O2        78             0.0609       1.0000       0.8421
+       text_size                     O3        78            -0.1151       1.1874       1.0000
+       text_size                     Os        78             0.0609       1.0000       0.8421
+       text_size              canonical        78            -0.0209       1.0872       0.9155
+       text_size          random_median        78             0.0992       0.9593       0.8078
+       text_size            random_best        78             0.2641       0.7836       0.6599
+       text_size graph_predicted_greedy        78             0.1996       0.8524       0.7178
+       text_size   graph_predicted_beam        78             0.2027       0.8490       0.7150
+       text_size  graph_agnostic_greedy        78             0.1938       0.8585       0.7230
+       text_size    graph_agnostic_beam        78             0.1898       0.8628       0.7266
+       text_size    graph_oracle_greedy        78             0.2334       0.8164       0.6875
+       text_size      graph_oracle_beam        78             0.2261       0.8241       0.6940
+       text_size                 search        78             0.2560       0.7923       0.6672
+dyn_instructions                     O0        78             0.0000       1.6685       1.6689
+dyn_instructions                     O1        78             0.3721       1.0476       1.0478
+dyn_instructions                     O2        78             0.4007       1.0000       1.0002
+dyn_instructions                     O3        78             0.4008       0.9998       1.0000
+dyn_instructions                     Os        78             0.4007       1.0000       1.0002
+dyn_instructions              canonical        78             0.3558       1.0748       1.0750
+dyn_instructions          random_median        78             0.2561       1.2412       1.2415
+dyn_instructions            random_best        78             0.4065       0.9903       0.9905
+dyn_instructions graph_predicted_greedy        78             0.2765       1.2071       1.2074
+dyn_instructions   graph_predicted_beam        78             0.2756       1.2087       1.2090
+dyn_instructions  graph_agnostic_greedy        78             0.3748       1.0431       1.0433
+dyn_instructions    graph_agnostic_beam        78             0.3641       1.0611       1.0613
+dyn_instructions    graph_oracle_greedy        78             0.3668       1.0565       1.0568
+dyn_instructions      graph_oracle_beam        78             0.3564       1.0738       1.0741
+dyn_instructions                 search        78             0.4010       0.9995       0.9997
+       objective  k           metric                      a                     b  programs  gmean_ratio_a_over_b  wins  ties  losses  wilcoxon_p_holm
+       text_size  8        text_size graph_predicted_greedy graph_agnostic_greedy        78                0.9996    25    39      14           0.4606
+       text_size  8        text_size graph_predicted_greedy         random_median        78                0.9063    72     4       2           0.0000
+       text_size  8        text_size   graph_predicted_beam   graph_agnostic_beam        78                0.9870    28    39      11           0.0339
+       text_size  8        text_size   graph_predicted_beam         random_median        78                0.8937    72     5       1           0.0000
+       text_size 12        text_size graph_predicted_greedy graph_agnostic_greedy        78                1.0120    29    17      32           0.8716
+       text_size 12        text_size graph_predicted_greedy         random_median        78                0.9206    68     4       6           0.0000
+       text_size 12        text_size   graph_predicted_beam   graph_agnostic_beam        78                1.0139    25    19      34           0.4606
+       text_size 12        text_size   graph_predicted_beam         random_median        78                0.9194    67     4       7           0.0000
+       text_size 16        text_size graph_predicted_greedy graph_agnostic_greedy        78                0.9928    28    35      15           0.4606
+       text_size 16        text_size graph_predicted_greedy         random_median        78                0.8886    68     1       9           0.0000
+       text_size 16        text_size   graph_predicted_beam   graph_agnostic_beam        78                0.9840    32    33      13           0.1082
+       text_size 16        text_size   graph_predicted_beam         random_median        78                0.8850    68     1       9           0.0000
+dyn_instructions  8 dyn_instructions graph_predicted_greedy graph_agnostic_greedy        78                1.1738    18     6      54           0.0001
+dyn_instructions  8 dyn_instructions graph_predicted_greedy         random_median        78                0.9471    61     2      15           0.0000
+dyn_instructions  8 dyn_instructions   graph_predicted_beam   graph_agnostic_beam        78                1.1600    18     3      57           0.0001
+dyn_instructions  8 dyn_instructions   graph_predicted_beam         random_median        78                0.9521    60     2      16           0.0000
+dyn_instructions  8          runtime graph_predicted_greedy graph_agnostic_greedy        52                1.1588    16     0      36           0.0339
+dyn_instructions  8          runtime graph_predicted_greedy         random_median        52                0.8962    38     0      14           0.0043
+dyn_instructions  8          runtime   graph_predicted_beam   graph_agnostic_beam        52                1.1223    22     0      30           0.2535
+dyn_instructions  8          runtime   graph_predicted_beam         random_median        52                0.8733    41     0      11           0.0001
+dyn_instructions 12 dyn_instructions graph_predicted_greedy graph_agnostic_greedy        78                1.1566    18     8      52           0.0012
+dyn_instructions 12 dyn_instructions graph_predicted_greedy         random_median        78                0.9486    58     0      20           0.0003
+dyn_instructions 12 dyn_instructions   graph_predicted_beam   graph_agnostic_beam        78                1.1469    18     9      51           0.0022
+dyn_instructions 12 dyn_instructions   graph_predicted_beam         random_median        78                0.9568    57     0      21           0.0011
+dyn_instructions 12          runtime graph_predicted_greedy graph_agnostic_greedy        52                1.1434    19     0      33           0.1397
+dyn_instructions 12          runtime graph_predicted_greedy         random_median        52                0.8828    44     0       8           0.0001
+dyn_instructions 12          runtime   graph_predicted_beam   graph_agnostic_beam        52                1.1096    20     0      32           0.6265
+dyn_instructions 12          runtime   graph_predicted_beam         random_median        52                0.8661    45     0       7           0.0001
+dyn_instructions 16 dyn_instructions graph_predicted_greedy graph_agnostic_greedy        78                1.1573    20     8      50           0.0051
+dyn_instructions 16 dyn_instructions graph_predicted_greedy         random_median        78                0.9725    49     3      26           0.0339
+dyn_instructions 16 dyn_instructions   graph_predicted_beam   graph_agnostic_beam        78                1.1392    21     9      48           0.0536
+dyn_instructions 16 dyn_instructions   graph_predicted_beam         random_median        78                0.9738    49     2      27           0.0657
+dyn_instructions 16          runtime graph_predicted_greedy graph_agnostic_greedy        52                1.1335    18     0      34           0.0637
+dyn_instructions 16          runtime graph_predicted_greedy         random_median        52                0.9213    39     0      13           0.0339
+dyn_instructions 16          runtime   graph_predicted_beam   graph_agnostic_beam        52                1.0969    24     0      28           0.8716
+dyn_instructions 16          runtime   graph_predicted_beam         random_median        52                0.8995    41     0      11           0.0080
+=== Phase 7: report [07:11:22 IST]
++ python scripts/v3_report.py --elapsed 21620
+wrote /mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/outputs/v3/report/index.html, /mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/outputs/v3/RESULTS.md, /mnt/c/Users/arrav/Desktop/5th_Sem/Compiler_Project/OptGraph/outputs/v3/results_v3.json
+=== tests (again) [07:11:23 IST]
++ python -m pytest tests -q
+...................................                                      [100%]
+35 passed in 16.86s
+total 21638s; log: outputs/v3/run_v3_20261022T011102_IST.log; report: outputs/v3/report/index.html

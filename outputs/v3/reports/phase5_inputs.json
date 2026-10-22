@@ -1,0 +1,34 @@
+{
+  "text_size": {
+    "pairs": "/home/arav/optgraph_work/v3/full/models/main__text_size__C0__lopo__residual__both__hand.csv.gz",
+    "singles": "/home/arav/optgraph_work/v3/full/models/phase5_single__text_size__C0__lopo__residual__both__hand.csv.gz",
+    "single_pass_eval": {
+      "PairMeanBaseline": {
+        "mae": 0.019755137561788455,
+        "r2": 0.5844741061709986,
+        "spearman": 0.6096380781421552
+      },
+      "HistGradientBoosting": {
+        "mae": 0.020403262242578178,
+        "r2": 0.6194847019224362,
+        "spearman": 0.5864357308004524
+      }
+    }
+  },
+  "dyn_instructions": {
+    "pairs": "/home/arav/optgraph_work/v3/full/models/main__dyn_instructions__C0__lopo__residual__both__hand.csv.gz",
+    "singles": "/home/arav/optgraph_work/v3/full/models/phase5_single__dyn_instructions__C0__lopo__residual__both__hand.csv.gz",
+    "single_pass_eval": {
+      "PairMeanBaseline": {
+        "mae": 0.03270804625008133,
+        "r2": 0.4280195528614349,
+        "spearman": 0.5500099251893242
+      },
+      "HistGradientBoosting": {
+        "mae": 0.02614125250928909,
+        "r2": 0.6041058128262746,
+        "spearman": 0.47840649651619477
+      }
+    }
+  }
+}
