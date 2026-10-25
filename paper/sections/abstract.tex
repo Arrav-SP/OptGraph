@@ -1,0 +1,19 @@
+\begin{abstract}
+Recent phase-ordering methods summarise pairwise pass interactions in a single graph learned from
+a training corpus and apply it to every program. We test that assumption in LLVM with a
+pre-registered study. We measure \NPairs{} ordered pass-pair interactions on \NPrograms{} programs
+at \NSnapshots{} points along LLVM's \texttt{-O2} pipeline (\NExperiments{} experiments, none
+failed). Three of four pre-registered hypotheses are supported.
+(1) Interactions are program-specific. Ordering with a program's own graph instead of a static
+one reduces IR size by \HOnePct\% at a budget of ten compilations. The gain carries over to
+\texttt{.text} size on x86-64 (\MSizeXPct\%) and AArch64 (\MSizeAPct\%).
+(2) Interactions drift. The median rank correlation between interactions on raw IR and after
+inlining is \HTwoRho, and the largest change happens in early simplification.
+(3) Interactions are predictable. A model trained on other programs removes \HThreeGap\% of the
+static graph's error.
+(4) Re-predicting interactions along the pipeline does not beat a genetic algorithm at ten
+compilations. Exploratory analysis shows that graph-based sequence builders plateau even with the
+program's own measured graph, while a predicted graph beats every search method when only one
+compilation is allowed. One graph does not fit all programs. The next step is to use per-program
+predictions inside search rather than as a fixed graph.
+\end{abstract}

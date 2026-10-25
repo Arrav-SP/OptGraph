@@ -1,0 +1,34 @@
+\section{Discussion and Future Work}
+\label{sec:discussion}
+
+\paragraph{What a static graph misses.}
+H1--H3 together say that a single interaction graph leaves a measurable, predictable share of the
+signal unused. Interactions depend on the program (H1, and the variance decomposition) and on how
+far optimization has progressed (H2). Both effects can be learned from other programs (H3). The
+drift is concentrated in the first simplification stage. This suggests that graphs should at
+least be measured on simplified IR rather than on raw front-end output.
+
+\paragraph{Why the method did not follow.}
+H4 failed. The exploratory analysis points to a specific cause: graph-to-sequence builders score a
+whole sequence by summing pairwise estimates. That ranks only a narrow family of near-identical
+sequences, so additional budget is wasted. Better information (re-prediction, or even the oracle
+graph) cannot fix a builder that does not explore. Search methods explore well but start from
+nothing: at $\E=1$ they are far behind predicted graphs.
+
+\paragraph{Proposal: prediction-seeded search.}
+These observations suggest combining the two: a search, such as a GA or OpenTuner, whose initial
+population is seeded with the top sequences of the program's predicted graph, and whose mutations
+are drawn from that graph. Such a search would start where predict-once is strong and keep
+improving the way search does. A static-graph variant of the same search would isolate the value
+of per-program prediction. We have \emph{not} evaluated this design; it is a proposal. Testing it
+would need its own pre-registration and held-out programs, because the idea came from the results
+reported here.
+
+\paragraph{Size versus speed.}
+Optimizing IR instruction count is a code-size objective. The GA's sequences at $\E=200$ have
+\MGAOThreeSizePct\% smaller x86-64 \texttt{.text} than \Othree{}. However, they execute
+\MGAOThreeDynWorse\% more instructions and run \MGAOThreeRuntimeWorse\% slower. They have
+\MGAOzIRPct\% fewer IR instructions than \Oz{}, yet \MGAOzSizeWorse\% larger x86-64 \texttt{.text}.
+We attribute part of that gap to backend size heuristics: \Oz{} IR carries the \texttt{minsize}
+attribute, which the backend honours. Our results therefore speak to IR- and code-size-oriented
+ordering, the setting of embedded targets, not to speed.

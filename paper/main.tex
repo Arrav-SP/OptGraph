@@ -1,0 +1,36 @@
+\documentclass[sigplan,review,anonymous]{acmart}
+\settopmatter{printfolios=true,printccs=false,printacmref=false}
+\setcopyright{none}
+\acmConference[LCTES '27]{ACM SIGPLAN/SIGBED International Conference on Languages, Compilers, and Tools for Embedded Systems}{2027}{}
+
+\usepackage{booktabs}
+\usepackage{xspace}
+\input{numbers}
+\newcommand{\Oz}{\texttt{-Oz}\xspace}
+\newcommand{\Othree}{\texttt{-O3}\xspace}
+\newcommand{\Otwo}{\texttt{-O2}\xspace}
+\newcommand{\E}{\ensuremath{E}\xspace}
+
+\begin{document}
+
+\title{One Graph Does Not Fit All: Program-Specific and Drifting Pass Interactions in LLVM}
+
+\author{Anonymous Author(s)}
+\affiliation{\institution{Anonymous Institution}\country{}}
+
+\input{sections/abstract}
+
+\maketitle
+
+\input{sections/intro}
+\input{sections/method}
+\input{sections/results}
+\input{sections/discussion}
+\input{sections/threats}
+\input{sections/related}
+\input{sections/conclusion}
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{refs}
+
+\end{document}

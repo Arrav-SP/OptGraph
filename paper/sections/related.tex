@@ -1,0 +1,23 @@
+\section{Related Work}
+\label{sec:related}
+
+\paragraph{Phase ordering and search.}
+Almagor et al.~\cite{almagor2004} showed that program-specific sequences found by search beat a
+fixed sequence, and characterised the search space. OpenTuner~\cite{opentuner} provides ensemble
+search for autotuning and is a standard baseline. Ashouri et al.~\cite{ashouri2018survey} survey
+machine-learning approaches to optimization selection and phase ordering.
+
+\paragraph{Learned ordering.}
+Kulkarni and Cavazos~\cite{kulkarni2012} learn a per-method ordering policy in a dynamic compiler.
+MILEPOST GCC~\cite{milepost} predicts optimizations from program features. MLGO~\cite{mlgo}
+replaces individual LLVM heuristics with learned policies. CompilerGym~\cite{compilergym} exposes
+LLVM phase ordering as a reinforcement-learning environment. IR2Vec~\cite{ir2vec} provides the IR
+embeddings we use as one feature representation.
+
+\paragraph{Pass-interaction graphs.}
+Closest to our work, DCO~\cite{dco2024} builds a dependence graph of passes from pairwise
+performance dependence and searches over the resulting sub-sequences. Pan et
+al.~\cite{pan2025synergy} mine a synergy knowledge graph over LLVM passes and use it to guide a
+genetic algorithm. Both derive one graph from a training corpus. We measure, under a
+pre-registered protocol, how much that choice costs per program and along the pipeline. We use
+reimplementations in their style as baselines.

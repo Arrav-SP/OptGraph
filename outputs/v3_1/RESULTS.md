@@ -1,6 +1,6 @@
 # OptGraph v3.1 results
 
-Generated 2026-10-25T03:47:31+00:00. Objective: IR instruction count / -Oz.
+Generated 2026-10-25T06:47:11+00:00. Objective: IR instruction count / -Oz.
 
 ## Pre-registered hypotheses (Holm across the four)
 

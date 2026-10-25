@@ -142,7 +142,7 @@ outputs/                    graphs/, plots/, models/, reports/, *.md summaries
 
 ## v3.1 (pre-registered experiments)
 
-Run: `OPTGRAPH_CONFIG=config/v3_1.yaml bash scripts/run_v3_1.sh`, then `bash scripts/run_v3_1.sh --runtime` (alone, serial), then `python scripts/v3_1_report.py`. Hypotheses: `outputs/v3_1/PREREGISTRATION.md` (frozen, sha256 in PROGRESS.md). Results: `outputs/v3_1/report/index.html`, `outputs/v3_1/RESULTS.md`, `outputs/v3_1/results_v3_1.json`. 129 programs (test-suite, PolyBench, cBench, v2 set).
+Run: `OPTGRAPH_CONFIG=v3_1.yaml bash scripts/run_v3_1.sh`, then `bash scripts/run_v3_1.sh --runtime` (alone, serial), then `python scripts/v3_1_report.py`. Hypotheses: `outputs/v3_1/PREREGISTRATION.md` (frozen, sha256 in PROGRESS.md). Results: `outputs/v3_1/report/index.html`, `outputs/v3_1/RESULTS.md`, `outputs/v3_1/results_v3_1.json`. 129 programs (test-suite, PolyBench, cBench, v2 set).
 
 | Claim | Result | Holm p | Supported |
 |---|---|---|---|
@@ -150,3 +150,11 @@ Run: `OPTGRAPH_CONFIG=config/v3_1.yaml bash scripts/run_v3_1.sh`, then `bash scr
 | 2 Drift (Spearman rho S0 vs S2) | median 0.29 | 8e-21 | yes |
 | 3 Predictable (LOPO model vs static graph) | residual R² 0.50 | 4.1e-21 | yes |
 | 4 Re-prediction vs strongest other method (GA), E = 10 | ratio 1.107 (worse) | 1.0 | no |
+
+**Rebuild every v3.1 table, figure and paper number from the existing data (no experiments are re-run):**
+
+```bash
+export OPTGRAPH_CONFIG=v3_1.yaml && python scripts/v3_1_report.py && python scripts/v3_1_analysis.py && python paper/make_numbers.py
+```
+
+This reads `data/v3_1/` only. It writes `outputs/v3_1/{report,tables,figures,RESULTS.md,results_v3_1.json,ANALYSIS.md}` and `paper/numbers.tex`. Exploratory analyses are in `outputs/v3_1/ANALYSIS.md`. The paper draft is in `paper/` (`paper/overleaf.zip` uploads directly to Overleaf).

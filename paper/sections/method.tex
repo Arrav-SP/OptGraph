@@ -1,0 +1,93 @@
+\section{Method and Setup}
+\label{sec:method}
+
+\paragraph{Corpus.}
+We screened \NCandidates{} candidate programs and kept \NPrograms{}:
+\NTestSuite{} from the LLVM test suite, \NPolyBench{} from PolyBench, \NCBench{} from
+cBench~\cite{milepost}, and \NOwn{} small hand-written kernels. A program is kept only if it
+compiles, terminates within the time window, passes UndefinedBehaviorSanitizer and
+AddressSanitizer, and produces deterministic output. The output is recorded as a reference digest.
+Multi-file programs are linked at the IR level. cBench programs run on their first dataset with a
+loop wrapper tuned to about 0.5\,s. Of the kept programs, \NRuntimeReliable{} have run times long
+and stable enough for wall-clock timing.
+
+\paragraph{Passes and interaction score.}
+We use \NPasses{} LLVM passes: \PassList{}. This gives \NPairs{} ordered pairs of distinct passes.
+For a program state $P$ and metric $m$ (lower is better), let
+$\Delta(B \mid P) = (m(P) - m(B(P)))/m(P)$ be the gain of running pass $B$ on $P$. The
+interaction of the ordered pair $(A,B)$ is
+\[ I(A,B,P) = \frac{m(A(P)) - m(B(A(P)))}{m(P)} - \Delta(B \mid P), \]
+that is, how much running $A$ first changes $B$'s gain. Positive values mean $A$ enables $B$;
+negative values mean $A$ disables it. Pairs with $|I| \le \Threshold$ are \emph{weak}. The search
+objective and the interaction metric for all hypotheses is the IR instruction count, with no-op
+intrinsics (\texttt{llvm.lifetime.*}, \texttt{llvm.dbg.*}) excluded.
+
+\paragraph{Snapshots.}
+Interactions are measured at \NSnapshots{} program states. S0 is raw IR from
+\texttt{clang -O1 -Xclang -disable-llvm-passes}. This form has no \texttt{optnone} and no
+compiler-added \texttt{noinline}, so the inliner can act. S1--S4 are prefixes of LLVM's own
+printed \texttt{default<O2>} pipeline: after early simplification (S1), after the CGSCC
+inliner and function simplification (S2), before the late module passes (S3), and the full
+pipeline (S4). In total there are \NExperiments{} experiments (\NExpFailed{} failed), yielding
+\NInteractionRows{} interaction values over all metrics.
+
+\paragraph{Machine-code metrics.}
+Every IR variant is compiled by one fixed backend (\texttt{clang -O2} with IR passes disabled).
+We measure \texttt{.text} size for x86-64, and for AArch64 from compile-only objects. We also
+measure executed instructions with Valgrind's cachegrind, and wall-clock time. Wall-clock time is
+the median of 20 runs after one warm-up, pinned to one core, run serially and alone, in a randomised
+order. Every measured binary's output is checked against the reference: \OutputFailures{}
+mismatches. \texttt{-Os} and \Oz{} are applied with clang's \texttt{optsize}/\texttt{minsize}
+attributes, so they differ from \Otwo{}.
+
+\paragraph{Static graphs and predictors.}
+All static graphs and models for a program are built from the \emph{other} programs only
+(leave-one-program-out, LOPO). Hyperparameters are tuned on a validation split of the training
+programs. We use three static graphs:
+\begin{itemize}
+\item the \emph{static graph}: the mean interaction per ordered pair, plus the mean single-pass gain;
+\item a \emph{DCO-style} reimplementation: positive, negative and neutral pair classes, with sub-sequences along positive edges searched by OpenTuner;
+\item a \emph{Pan-style} reimplementation: a synergy graph whose weighted random walks seed and mutate a genetic algorithm.
+\end{itemize}
+These are reimplementations in the style of the originals, not the original systems. The
+predictor is a gradient-boosted tree model of the residual from the static graph. Its inputs are
+the pass pair and \NReps{} representations of the IR the passes run on: hand-crafted counts,
+LLVM function properties, an opcode histogram, and IR2Vec~\cite{ir2vec}. The snapshot name is not
+an input, so the model applies to any IR state.
+
+\paragraph{Ordering under a compile budget.}
+The budget unit \E is one \emph{evaluation}: a not-yet-seen candidate sequence is applied to the program's S0 IR in one \texttt{opt} invocation and its
+objective is measured. A candidate sequence is drawn from the \NPasses{} passes; its length is
+capped at 16 passes, and each pass may appear at most twice. We also count all \texttt{opt} invocations, including feature extraction,
+and wall-clock time. Each method records its best-so-far result at
+$\E \in \{1,5,10,25,50,100,200\}$. The methods are:
+\begin{itemize}
+\item graph-based: \emph{static graph}, \emph{predict-once} (the LOPO model's prediction of the program's S0 graph),
+and \emph{oracle graph} (the program's own measured graph; this needs \NPairs{} extra measurements and is a
+headroom reference, not a usable method), all using the same capped beam builder;
+\item \emph{re-prediction}: the model is re-applied to the features of every intermediate IR state;
+\item \emph{graph-guided} search: graph proposals verified by measurement;
+\item search: Pan-style, DCO-style, OpenTuner~\cite{opentuner}, a genetic algorithm (GA) and random search, each with 5 seeds;
+\item \emph{measured greedy}, as a reference.
+\end{itemize}
+
+\paragraph{Pre-registration and statistics.}
+Before the pilot and before any full result, we froze the hypotheses, tests, thresholds and
+analysis choices in a pre-registration document (SHA-256 \texttt{\PreregShaShort\ldots}, full hash
+in the artifact). There are four primary hypotheses. Each is a one-sided Wilcoxon signed-rank test~\cite{wilcoxon1945}
+over programs, with Holm correction~\cite{holm1979} across exactly these four:
+\begin{itemize}
+\item H1: oracle graph vs.\ static graph at $\E=10$, on per-program log ratios; supported if Holm $p<0.05$ and geomean ratio $\le 0.98$.
+\item H2: per-program Spearman $\rho$ between S0 and S2 interactions over pairs non-weak in either; supported if $\rho<0.5$ and median $\le 0.5$.
+\item H3: LOPO model vs.\ static graph, per-program MAE; supported if residual $R^2 \ge 0.10$.
+\item H4: re-prediction vs.\ the strongest other method at $\E=10$, same thresholds as H1.
+\end{itemize}
+All other results are exploratory. They are reported with bootstrap 95\% confidence intervals and
+raw, uncorrected $p$-values.
+
+\paragraph{Deviations from the pre-registration.}
+One. After the pilot, a system library (zlib) was installed so that two cBench programs could be
+screened. Both then failed the sanitizer screen, so the kept corpus is unchanged. Only the
+manifest file's drop reasons, and therefore its hash, changed. Two operational changes did not
+alter any analysis choice: fewer parallel model fits to stay within memory, and a restart of the
+timing stage after a process check misfired.

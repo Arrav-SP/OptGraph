@@ -1,0 +1,41 @@
+\section{Introduction}
+
+The order in which a compiler applies its optimization passes changes the code it produces.
+Passes enable and disable each other. Inlining exposes constants that simplification folds, and
+an early simplification can remove the pattern a later pass was designed to catch. Choosing a good
+order is the phase-ordering problem, and the search space grows exponentially with sequence
+length~\cite{almagor2004,kulkarni2012,ashouri2018survey}.
+
+Recent work makes the search cheaper by summarising pairwise pass interactions in a graph.
+DCO~\cite{dco2024} classifies ordered pass pairs by their measured dependence and combines short
+sub-sequences along positive edges. Pan et al.~\cite{pan2025synergy} mine a synergy knowledge graph
+of LLVM passes and use it to guide a genetic algorithm. Both build \emph{one} graph from a training
+corpus and apply it to every program. This assumes that an interaction measured on other programs,
+on unoptimized IR, still holds for a new program at the point in the pipeline where the passes
+actually run.
+
+We test that assumption directly in LLVM~\LLVMVersion. We measure \NPairs{} ordered pass-pair
+interactions (\NPasses{} passes) on \NPrograms{} programs. For each program we do this at
+\NSnapshots{} points along LLVM's own \Otwo{} pipeline, using \NExperiments{} compile-and-measure
+experiments with no failures. We fixed four hypotheses, their tests and their thresholds in a
+pre-registration before any full result existed. We report all four, including the one that
+failed.
+
+\paragraph{Contributions.}
+\begin{itemize}
+\item \textbf{Program-specific headroom (H1, supported).} With the same sequence builder and the same budget, ordering with
+the program's own interaction graph instead of a static graph reduces IR size by \HOnePct\%. The reduction
+carries over to machine code: \MSizeXPct\% smaller \texttt{.text} on x86-64 and \MSizeAPct\% on AArch64.
+\item \textbf{Drift (H2, supported).} A program's interactions change as optimization proceeds. The
+median rank correlation between interactions on raw IR and after the inliner and function
+simplification is \HTwoRho. The largest change happens in the first simplification stage;
+later stages resemble each other more.
+\item \textbf{Predictability (H3, supported).} A per-program model trained on other programs removes
+\HThreeGap\% of the static graph's error (residual $R^2$ = \HThreeRsq) and is better on
+\HThreeBetter{} of \HThreePrograms{} held-out programs.
+\item \textbf{A negative result (H4, not supported).} Re-predicting interactions along the
+optimization trajectory does not beat the strongest search baseline at a budget of ten compilations.
+Exploratory analysis locates the cause in the graph-based sequence builder, not in the predictions.
+With a single compilation, however, predicted graphs do beat every search method.
+\end{itemize}
+The artifact will be made available.

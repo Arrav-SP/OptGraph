@@ -1,0 +1,9 @@
+\section{Conclusion}
+
+A single pass-interaction graph does not fit all programs. In a pre-registered study of \NPrograms{}
+programs in LLVM, interactions were program-specific, with headroom that reaches code size on x86-64
+and AArch64. They drifted as optimization proceeded, with the sharpest change in early simplification, and they
+were predictable from other programs. Re-predicting them along the pipeline did not beat a genetic
+algorithm at ten compilations. The limit we found is the graph-based sequence builder, not the
+information. This points to prediction-seeded search as the next step. The artifact will be made
+available.

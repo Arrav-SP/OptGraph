@@ -141,3 +141,4 @@ v3 results (data/v3, outputs/v3) are not modified. No git operations.
 
 - 25 Oct 10:20 IST: full v3.1 run complete (RUN_COMPLETE). Runtime: 6,432 binaries, 0 errors, median CV 1.9%, 805 flagged CV > 5% (a Windows background load slowed some hours; randomised order spreads it across methods). Pre-registered results (Holm across 4): H1 supported (oracle/static 0.949, p 2.6e-9); H2 supported (median rho 0.29, p 8e-21); H3 supported (residual R2 0.50, p 4.1e-21); H4 not supported (repredict/GA 1.107, p 1.0). Per the agreed rule, Claim 4 is reported as not supported, no re-runs.
 - 25 Oct 10:26 IST: exploratory analyses (scripts/v3_1_analysis.py) -> outputs/v3_1/ANALYSIS.md (takeaways in ANALYSIS_TAKEAWAYS.md).
+- 25 Oct 12:17 IST: paper draft in paper/ (make_numbers.py -> numbers.tex, sections, refs.bib, overleaf.zip); README rebuild command added and verified (data/v3_1 untouched).

@@ -1,0 +1,28 @@
+\section{Threats to Validity}
+\label{sec:threats}
+
+\paragraph{IR count as the objective.}
+All four hypotheses use IR instruction count. We confirm the H1 headroom in \texttt{.text} size on
+two ISAs. For executed instructions and wall-clock time, the evidence is only suggestive. Searched
+sequences that minimise IR count are slower than \Othree{} (\S\ref{sec:discussion}).
+
+\paragraph{One compiler version, one machine.}
+All results come from LLVM~\LLVMVersion{} on one x86-64 laptop. AArch64 numbers are compile-only
+code size. Other LLVM versions change the pass pipeline and could change the interactions.
+
+\paragraph{Timing noise.}
+Timing ran under WSL2 on a laptop: serial, pinned to one core, with 20 runs per binary in a
+randomised order. Across \NRuntimeBinaries{} timed binaries the median coefficient of variation is
+\RuntimeCV\%, but \RuntimeNoisy{} binaries (\RuntimeNoisyPct\%) exceed 5\%. Background load on the
+host varied during the timing stage. Randomised order spreads that drift across methods, but it
+adds noise~\cite{mytkowicz2009}. No hypothesis depends on timing.
+
+\paragraph{Reimplemented baselines.}
+DCO-style and Pan-style are our reimplementations of the published ideas under a common budget and
+evaluator, not the original systems. We do not compare against the numbers in those papers.
+
+\paragraph{Corpus.}
+\NPrograms{} programs from four suites, \NOwn{} of them small kernels. Results may differ on
+large applications. Leave-one-program-out evaluation keeps each program unseen by its own model and
+graphs. Programs from the same suite can still be similar, so the static graph shares that
+advantage.
