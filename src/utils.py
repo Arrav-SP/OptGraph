@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import os
 import shlex
 import subprocess
 import time
@@ -14,7 +15,8 @@ import yaml
 ROOT = Path(__file__).resolve().parent.parent
 BENCH_DIR = ROOT / "benchmarks"
 CONFIG_PATH = ROOT / "config" / "passes.yaml"
-V3_CONFIG_PATH = ROOT / "config" / "v3.yaml"
+# OPTGRAPH_CONFIG=v3_1.yaml selects the v3.1 configuration (default: v3).
+V3_CONFIG_PATH = ROOT / "config" / os.environ.get("OPTGRAPH_CONFIG", "v3.yaml")
 DATA_DIR = ROOT / "data"
 OUTPUT_DIR = ROOT / "outputs"
 EXPERIMENT_DIR = ROOT / "experiments"
@@ -90,6 +92,13 @@ class Benchmark:
     suite: str = "optgraph"
     cflags: tuple[str, ...] = ()
     support: tuple[Path, ...] = ()
+    # Flags that turn the source into the starting IR; empty = v2/v3 default (-O0, optnone off).
+    irflags: tuple[str, ...] = ()
+    # cBench-style programs: all source files linked into one module, a command line with
+    # optional `<`, `>`, `2>` redirections, and a loop-wrap count written to _finfo_dataset.
+    sources: tuple[Path, ...] = ()
+    run_cmd: str = ""
+    loop: int = 0
 
 
 def load_config(path: Path = CONFIG_PATH) -> dict:
@@ -103,6 +112,11 @@ def load_config(path: Path = CONFIG_PATH) -> dict:
 def load_v3_config(path: Path = V3_CONFIG_PATH) -> dict:
     with open(path) as f:
         return yaml.safe_load(f)
+
+
+def version(cfg: dict | None = None) -> str:
+    """Name of the results set (data/<version>, outputs/<version>, work_dir/<version>)."""
+    return (cfg or load_v3_config()).get("version", "v3")
 
 
 def work_dir(cfg: dict | None = None) -> Path:

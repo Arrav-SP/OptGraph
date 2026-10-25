@@ -1,0 +1,1367 @@
+{
+  "metric": "instruction_count",
+  "threshold": 0.005,
+  "snapshots": [
+    "S0",
+    "S1",
+    "S2",
+    "S3",
+    "S4"
+  ],
+  "programs": 129,
+  "H2": {
+    "programs": 123,
+    "median_rho": 0.29222899095388644,
+    "ci_median": [
+      0.2677262926961935,
+      0.335437002443899
+    ],
+    "p_one_sided": 2.67642776931558e-21,
+    "test": "Wilcoxon signed-rank of rho - 0.5, alternative less"
+  },
+  "drift_decay": [
+    {
+      "snapshot": "S0",
+      "median_rho_vs_S0": 1.0,
+      "programs": 129,
+      "share_pairs_near_zero": 0.8103459847645894
+    },
+    {
+      "snapshot": "S1",
+      "median_rho_vs_S0": 0.3159779205496739,
+      "programs": 125,
+      "share_pairs_near_zero": 0.8742743045068626
+    },
+    {
+      "snapshot": "S2",
+      "median_rho_vs_S0": 0.29222899095388644,
+      "programs": 123,
+      "share_pairs_near_zero": 0.8787543206147858
+    },
+    {
+      "snapshot": "S3",
+      "median_rho_vs_S0": 0.28893675472994973,
+      "programs": 123,
+      "share_pairs_near_zero": 0.8782341689318434
+    },
+    {
+      "snapshot": "S4",
+      "median_rho_vs_S0": 0.3195508393655497,
+      "programs": 122,
+      "share_pairs_near_zero": 0.8816067653276956
+    }
+  ],
+  "static_graph_error": [
+    {
+      "graph": "cross_suite",
+      "context": "S0",
+      "sign_flip_rate": 0.058823529411764705,
+      "class_error_rate": 0.09307359307359307,
+      "spearman": 0.5580762699921595,
+      "top_k_overlap": 0.4,
+      "mae": 0.008274460609731802
+    },
+    {
+      "graph": "cross_suite",
+      "context": "S1",
+      "sign_flip_rate": 0.023809523809523808,
+      "class_error_rate": 0.06277056277056277,
+      "spearman": 0.5730056041979588,
+      "top_k_overlap": 0.3,
+      "mae": 0.005161651565374
+    },
+    {
+      "graph": "cross_suite",
+      "context": "S2",
+      "sign_flip_rate": 0.0,
+      "class_error_rate": 0.025974025974025976,
+      "spearman": 0.6888744689339219,
+      "top_k_overlap": 0.4,
+      "mae": 0.00478055951366337
+    },
+    {
+      "graph": "cross_suite",
+      "context": "S3",
+      "sign_flip_rate": 0.0,
+      "class_error_rate": 0.025974025974025976,
+      "spearman": 0.6641061799729663,
+      "top_k_overlap": 0.4,
+      "mae": 0.004806430669386347
+    },
+    {
+      "graph": "cross_suite",
+      "context": "S4",
+      "sign_flip_rate": 0.0,
+      "class_error_rate": 0.025974025974025976,
+      "spearman": 0.6989121834767429,
+      "top_k_overlap": 0.7,
+      "mae": 0.003255897208967057
+    },
+    {
+      "graph": "lopo",
+      "context": "S0",
+      "sign_flip_rate": 0.04597701149425287,
+      "class_error_rate": 0.08441558441558442,
+      "spearman": 0.6142985883730051,
+      "top_k_overlap": 0.6,
+      "mae": 0.0075428876704549015
+    },
+    {
+      "graph": "lopo",
+      "context": "S1",
+      "sign_flip_rate": 0.023809523809523808,
+      "class_error_rate": 0.0670995670995671,
+      "spearman": 0.564383698205754,
+      "top_k_overlap": 0.4,
+      "mae": 0.00463408212064836
+    },
+    {
+      "graph": "lopo",
+      "context": "S2",
+      "sign_flip_rate": 0.0,
+      "class_error_rate": 0.025974025974025976,
+      "spearman": 0.6716811960961112,
+      "top_k_overlap": 0.4,
+      "mae": 0.004378812433611561
+    },
+    {
+      "graph": "lopo",
+      "context": "S3",
+      "sign_flip_rate": 0.0,
+      "class_error_rate": 0.025974025974025976,
+      "spearman": 0.6314606907563103,
+      "top_k_overlap": 0.4,
+      "mae": 0.004435004555894976
+    },
+    {
+      "graph": "lopo",
+      "context": "S4",
+      "sign_flip_rate": 0.0,
+      "class_error_rate": 0.025974025974025976,
+      "spearman": 0.6750937878539519,
+      "top_k_overlap": 0.7,
+      "mae": 0.0030949092801465677
+    }
+  ],
+  "variance_decomposition": [
+    {
+      "subset": "all",
+      "programs": 129,
+      "term": "pair",
+      "share": 0.185822274660718,
+      "ci_lo": 0.1690326592122603,
+      "ci_hi": 0.2079071614810948
+    },
+    {
+      "subset": "all",
+      "programs": 129,
+      "term": "program_id",
+      "share": 0.015573883188191496,
+      "ci_lo": 0.006569652009676286,
+      "ci_hi": 0.028719900083227258
+    },
+    {
+      "subset": "all",
+      "programs": 129,
+      "term": "context",
+      "share": 0.01750136826347497,
+      "ci_lo": 0.01542251916497928,
+      "ci_hi": 0.02065265654313289
+    },
+    {
+      "subset": "all",
+      "programs": 129,
+      "term": "pair x program_id",
+      "share": 0.22887519313018295,
+      "ci_lo": 0.1696240192171318,
+      "ci_hi": 0.2825580365261766
+    },
+    {
+      "subset": "all",
+      "programs": 129,
+      "term": "pair x context",
+      "share": 0.24014307398894055,
+      "ci_lo": 0.20572031467520388,
+      "ci_hi": 0.292986065349172
+    },
+    {
+      "subset": "all",
+      "programs": 129,
+      "term": "program_id x context",
+      "share": 0.0073756521221276265,
+      "ci_lo": 0.005006054428669494,
+      "ci_hi": 0.009698613567931278
+    },
+    {
+      "subset": "all",
+      "programs": 129,
+      "term": "pair x program_id x context",
+      "share": 0.30470855464636437,
+      "ci_lo": 0.2701777417635155,
+      "ci_hi": 0.33486001615878047
+    },
+    {
+      "subset": "all",
+      "programs": 129,
+      "term": "program_terms",
+      "share": 0.5565332830868664,
+      "ci_lo": 0.48906190986949355,
+      "ci_hi": 0.6039016112518804
+    },
+    {
+      "subset": "without_v2",
+      "programs": 105,
+      "term": "pair",
+      "share": 0.18236723686917897,
+      "ci_lo": 0.15746552426305327,
+      "ci_hi": 0.21290208867052757
+    },
+    {
+      "subset": "without_v2",
+      "programs": 105,
+      "term": "program_id",
+      "share": 0.017942529602935527,
+      "ci_lo": 0.004909356910352027,
+      "ci_hi": 0.03726979734952077
+    },
+    {
+      "subset": "without_v2",
+      "programs": 105,
+      "term": "context",
+      "share": 0.018285296144722216,
+      "ci_lo": 0.014994077266463457,
+      "ci_hi": 0.022403122745787162
+    },
+    {
+      "subset": "without_v2",
+      "programs": 105,
+      "term": "pair x program_id",
+      "share": 0.21999875335004054,
+      "ci_lo": 0.13590079341427963,
+      "ci_hi": 0.3168412635255306
+    },
+    {
+      "subset": "without_v2",
+      "programs": 105,
+      "term": "pair x context",
+      "share": 0.26462011582452916,
+      "ci_lo": 0.19850130848006736,
+      "ci_hi": 0.3303949800783129
+    },
+    {
+      "subset": "without_v2",
+      "programs": 105,
+      "term": "program_id x context",
+      "share": 0.008010737687154493,
+      "ci_lo": 0.004718928131299687,
+      "ci_hi": 0.011123519642263479
+    },
+    {
+      "subset": "without_v2",
+      "programs": 105,
+      "term": "pair x program_id x context",
+      "share": 0.2887753305214391,
+      "ci_lo": 0.2408090069956639,
+      "ci_hi": 0.3325525631862989
+    },
+    {
+      "subset": "without_v2",
+      "programs": 105,
+      "term": "program_terms",
+      "share": 0.5347273511615697,
+      "ci_lo": 0.4391090236254617,
+      "ci_hi": 0.6164565899239807
+    },
+    {
+      "subset": "rank_based",
+      "programs": 129,
+      "term": "pair",
+      "share": 0.4673114522140863,
+      "ci_lo": 0.4462855443940971,
+      "ci_hi": 0.48893493391739085
+    },
+    {
+      "subset": "rank_based",
+      "programs": 129,
+      "term": "program_id",
+      "share": 0.005775580827488166,
+      "ci_lo": 0.004270757866040741,
+      "ci_hi": 0.007539207753279333
+    },
+    {
+      "subset": "rank_based",
+      "programs": 129,
+      "term": "context",
+      "share": 0.028309633255921268,
+      "ci_lo": 0.02630102978096339,
+      "ci_hi": 0.030600519449239957
+    },
+    {
+      "subset": "rank_based",
+      "programs": 129,
+      "term": "pair x program_id",
+      "share": 0.12153695353171087,
+      "ci_lo": 0.10870679789027159,
+      "ci_hi": 0.13427153804457445
+    },
+    {
+      "subset": "rank_based",
+      "programs": 129,
+      "term": "pair x context",
+      "share": 0.17980747811923842,
+      "ci_lo": 0.17249969092402395,
+      "ci_hi": 0.1915839308086998
+    },
+    {
+      "subset": "rank_based",
+      "programs": 129,
+      "term": "program_id x context",
+      "share": 0.005531506982753078,
+      "ci_lo": 0.004195761029513679,
+      "ci_hi": 0.0069748573446635894
+    },
+    {
+      "subset": "rank_based",
+      "programs": 129,
+      "term": "pair x program_id x context",
+      "share": 0.1917273950688019,
+      "ci_lo": 0.17676606611346163,
+      "ci_hi": 0.2054074858037949
+    },
+    {
+      "subset": "rank_based",
+      "programs": 129,
+      "term": "program_terms",
+      "share": 0.32457143641075403,
+      "ci_lo": 0.2973767532144575,
+      "ci_hi": 0.3513962753758517
+    },
+    {
+      "subset": "suite_cbench",
+      "programs": 12,
+      "term": "pair",
+      "share": 0.24793240433050634,
+      "ci_lo": 0.1990096791013175,
+      "ci_hi": 0.3742891191566339
+    },
+    {
+      "subset": "suite_cbench",
+      "programs": 12,
+      "term": "program_id",
+      "share": 0.0057020471472715795,
+      "ci_lo": 0.0022457158082992337,
+      "ci_hi": 0.00795283240990994
+    },
+    {
+      "subset": "suite_cbench",
+      "programs": 12,
+      "term": "context",
+      "share": 0.022331454862194185,
+      "ci_lo": 0.01711772925669135,
+      "ci_hi": 0.03363573009111218
+    },
+    {
+      "subset": "suite_cbench",
+      "programs": 12,
+      "term": "pair x program_id",
+      "share": 0.130727760978087,
+      "ci_lo": 0.051684721470306304,
+      "ci_hi": 0.15845698811368142
+    },
+    {
+      "subset": "suite_cbench",
+      "programs": 12,
+      "term": "pair x context",
+      "share": 0.30370911065478967,
+      "ci_lo": 0.26752812924231334,
+      "ci_hi": 0.49574456562100233
+    },
+    {
+      "subset": "suite_cbench",
+      "programs": 12,
+      "term": "program_id x context",
+      "share": 0.0038456466989262427,
+      "ci_lo": 0.0013209934928437915,
+      "ci_hi": 0.004852117640025415
+    },
+    {
+      "subset": "suite_cbench",
+      "programs": 12,
+      "term": "pair x program_id x context",
+      "share": 0.2857515753282248,
+      "ci_lo": 0.08835209537266454,
+      "ci_hi": 0.33814098882208793
+    },
+    {
+      "subset": "suite_cbench",
+      "programs": 12,
+      "term": "program_terms",
+      "share": 0.42602703015250964,
+      "ci_lo": 0.15257139459609673,
+      "ci_hi": 0.5024968401592625
+    },
+    {
+      "subset": "suite_optgraph",
+      "programs": 24,
+      "term": "pair",
+      "share": 0.25303346175453184,
+      "ci_lo": 0.2135617496464607,
+      "ci_hi": 0.30495756951859726
+    },
+    {
+      "subset": "suite_optgraph",
+      "programs": 24,
+      "term": "program_id",
+      "share": 0.006760494080357959,
+      "ci_lo": 0.0032383181090271606,
+      "ci_hi": 0.01065785915548695
+    },
+    {
+      "subset": "suite_optgraph",
+      "programs": 24,
+      "term": "context",
+      "share": 0.01734424910890216,
+      "ci_lo": 0.014870509106346429,
+      "ci_hi": 0.022621650840622034
+    },
+    {
+      "subset": "suite_optgraph",
+      "programs": 24,
+      "term": "pair x program_id",
+      "share": 0.18885578612000317,
+      "ci_lo": 0.15359404082022896,
+      "ci_hi": 0.21468475936388232
+    },
+    {
+      "subset": "suite_optgraph",
+      "programs": 24,
+      "term": "pair x context",
+      "share": 0.2569340425709703,
+      "ci_lo": 0.23731398980540858,
+      "ci_hi": 0.29662449083146913
+    },
+    {
+      "subset": "suite_optgraph",
+      "programs": 24,
+      "term": "program_id x context",
+      "share": 0.004691830491142293,
+      "ci_lo": 0.003039074412866147,
+      "ci_hi": 0.006543081767906196
+    },
+    {
+      "subset": "suite_optgraph",
+      "programs": 24,
+      "term": "pair x program_id x context",
+      "share": 0.2723801358740921,
+      "ci_lo": 0.2278457346769198,
+      "ci_hi": 0.2972135135502438
+    },
+    {
+      "subset": "suite_optgraph",
+      "programs": 24,
+      "term": "program_terms",
+      "share": 0.47268824656559555,
+      "ci_lo": 0.38939077133271105,
+      "ci_hi": 0.5244434992094325
+    },
+    {
+      "subset": "suite_polybench",
+      "programs": 30,
+      "term": "pair",
+      "share": 0.2491979399401583,
+      "ci_lo": 0.23292796279510555,
+      "ci_hi": 0.275269348147815
+    },
+    {
+      "subset": "suite_polybench",
+      "programs": 30,
+      "term": "program_id",
+      "share": 0.001719262187484796,
+      "ci_lo": 0.0009450937148831473,
+      "ci_hi": 0.0026228057715418952
+    },
+    {
+      "subset": "suite_polybench",
+      "programs": 30,
+      "term": "context",
+      "share": 0.02659177475674428,
+      "ci_lo": 0.024187371810417958,
+      "ci_hi": 0.028854476763013028
+    },
+    {
+      "subset": "suite_polybench",
+      "programs": 30,
+      "term": "pair x program_id",
+      "share": 0.06759574150850851,
+      "ci_lo": 0.056187205053758314,
+      "ci_hi": 0.07702355443833557
+    },
+    {
+      "subset": "suite_polybench",
+      "programs": 30,
+      "term": "pair x context",
+      "share": 0.5111340325608078,
+      "ci_lo": 0.49419037993735787,
+      "ci_hi": 0.5442244052481232
+    },
+    {
+      "subset": "suite_polybench",
+      "programs": 30,
+      "term": "program_id x context",
+      "share": 0.001647315689226353,
+      "ci_lo": 0.0011821544967375395,
+      "ci_hi": 0.0020350147395407953
+    },
+    {
+      "subset": "suite_polybench",
+      "programs": 30,
+      "term": "pair x program_id x context",
+      "share": 0.14211393335706995,
+      "ci_lo": 0.11388164761439301,
+      "ci_hi": 0.15533548378860498
+    },
+    {
+      "subset": "suite_polybench",
+      "programs": 30,
+      "term": "program_terms",
+      "share": 0.2130762527422896,
+      "ci_lo": 0.17874308150160872,
+      "ci_hi": 0.23102337198351275
+    },
+    {
+      "subset": "suite_testsuite",
+      "programs": 63,
+      "term": "pair",
+      "share": 0.17416600948935657,
+      "ci_lo": 0.15116695885456818,
+      "ci_hi": 0.2157948494989066
+    },
+    {
+      "subset": "suite_testsuite",
+      "programs": 63,
+      "term": "program_id",
+      "share": 0.02397663234760396,
+      "ci_lo": 0.005510322671653789,
+      "ci_hi": 0.0453474633110114
+    },
+    {
+      "subset": "suite_testsuite",
+      "programs": 63,
+      "term": "context",
+      "share": 0.015338617748632386,
+      "ci_lo": 0.011378733307010103,
+      "ci_hi": 0.020500208688398573
+    },
+    {
+      "subset": "suite_testsuite",
+      "programs": 63,
+      "term": "pair x program_id",
+      "share": 0.2611216994405067,
+      "ci_lo": 0.143449057530833,
+      "ci_hi": 0.36057334822005926
+    },
+    {
+      "subset": "suite_testsuite",
+      "programs": 63,
+      "term": "pair x context",
+      "share": 0.22102080795152837,
+      "ci_lo": 0.15030654271681235,
+      "ci_hi": 0.3014779722847506
+    },
+    {
+      "subset": "suite_testsuite",
+      "programs": 63,
+      "term": "program_id x context",
+      "share": 0.01031564568605809,
+      "ci_lo": 0.005370959294214101,
+      "ci_hi": 0.01376976890100458
+    },
+    {
+      "subset": "suite_testsuite",
+      "programs": 63,
+      "term": "pair x program_id x context",
+      "share": 0.29406058733631374,
+      "ci_lo": 0.2286980651333883,
+      "ci_hi": 0.35827019211508704
+    },
+    {
+      "subset": "suite_testsuite",
+      "programs": 63,
+      "term": "program_terms",
+      "share": 0.5894745648104825,
+      "ci_lo": 0.4736868042852419,
+      "ci_hi": 0.6664566336279042
+    }
+  ],
+  "representations": [
+    "hand",
+    "funcprops",
+    "opcodes",
+    "ir2vec"
+  ],
+  "H3": {
+    "programs": 129,
+    "mae_model": 0.005092944929895412,
+    "mae_static": 0.008370603054264706,
+    "residual_r2": 0.5041764422685338,
+    "gap_closed": 0.39156774047472875,
+    "programs_better": 127,
+    "programs_worse": 2,
+    "ci_mean_mae_diff": [
+      -0.003570872225174797,
+      -0.0029710722825549004
+    ],
+    "p_one_sided": 1.0241966156659128e-21,
+    "test": "Wilcoxon signed-rank of per-program MAE(model) - MAE(static), alternative less",
+    "params": [
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 31
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 31
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 31
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 31
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      }
+    ]
+  },
+  "H3_by_snapshot": [
+    {
+      "context": "S0",
+      "em": 0.007623018479724486,
+      "es": 0.01477607564801934
+    },
+    {
+      "context": "S1",
+      "em": 0.0047944150171950325,
+      "es": 0.006972624508180397
+    },
+    {
+      "context": "S2",
+      "em": 0.004560787355523753,
+      "es": 0.007017218950014898
+    },
+    {
+      "context": "S3",
+      "em": 0.004599938124520332,
+      "es": 0.007042626630925678
+    },
+    {
+      "context": "S4",
+      "em": 0.0038865656725134536,
+      "es": 0.00604446953418322
+    }
+  ],
+  "single_pass_lopo": {
+    "gap_closed": 0.5433762710971656,
+    "models": "/home/arav/optgraph_work/v3_1/full/models/single_lopo",
+    "feature_columns": [
+      "f_instruction_count",
+      "f_basic_blocks",
+      "f_functions",
+      "f_branches",
+      "f_conditional_branches",
+      "f_loads",
+      "f_stores",
+      "f_calls",
+      "f_phis",
+      "f_integer_ops",
+      "f_floating_ops",
+      "f_arithmetic_ops",
+      "f_memory_ops",
+      "f_returns",
+      "f_cfg_edges",
+      "f_loop_count",
+      "f_loop_depth",
+      "f_allocas",
+      "f_geps",
+      "f_compares",
+      "f_casts",
+      "f_load_frac",
+      "f_store_frac",
+      "f_branch_frac",
+      "f_call_frac",
+      "f_arith_frac",
+      "f_memory_frac",
+      "f_float_frac",
+      "f_avg_block_size",
+      "f_cyclomatic",
+      "fp_BasicBlockCount",
+      "fp_BlocksReachedFromConditionalInstruction",
+      "fp_Uses",
+      "fp_DirectCallsToDefinedFunctions",
+      "fp_LoadInstCount",
+      "fp_StoreInstCount",
+      "fp_MaxLoopDepth",
+      "fp_TopLevelLoopCount",
+      "fp_TotalInstructionCount",
+      "fp_BasicBlocksWithSingleSuccessor",
+      "fp_BasicBlocksWithTwoSuccessors",
+      "fp_BasicBlocksWithMoreThanTwoSuccessors",
+      "fp_BasicBlocksWithSinglePredecessor",
+      "fp_BasicBlocksWithTwoPredecessors",
+      "fp_BasicBlocksWithMoreThanTwoPredecessors",
+      "fp_BigBasicBlocks",
+      "fp_MediumBasicBlocks",
+      "fp_SmallBasicBlocks",
+      "fp_CastInstructionCount",
+      "fp_FloatingPointInstructionCount",
+      "fp_IntegerInstructionCount",
+      "fp_ConstantIntOperandCount",
+      "fp_ConstantFPOperandCount",
+      "fp_ConstantOperandCount",
+      "fp_InstructionOperandCount",
+      "fp_BasicBlockOperandCount",
+      "fp_GlobalValueOperandCount",
+      "fp_InlineAsmOperandCount",
+      "fp_ArgumentOperandCount",
+      "fp_UnknownOperandCount",
+      "fp_CriticalEdgeCount",
+      "fp_ControlFlowEdgeCount",
+      "fp_UnconditionalBranchCount",
+      "fp_IntrinsicCount",
+      "fp_DirectCallCount",
+      "fp_IndirectCallCount",
+      "fp_CallReturnsIntegerCount",
+      "fp_CallReturnsFloatCount",
+      "fp_CallReturnsPointerCount",
+      "fp_CallReturnsVectorIntCount",
+      "fp_CallReturnsVectorFloatCount",
+      "fp_CallReturnsVectorPointerCount",
+      "fp_CallWithManyArgumentsCount",
+      "fp_CallWithPointerArgumentCount",
+      "op_add",
+      "op_alloca",
+      "op_br",
+      "op_call",
+      "op_getelementptr",
+      "op_icmp",
+      "op_load",
+      "op_mul",
+      "op_ret",
+      "op_sext",
+      "op_store",
+      "op_xor",
+      "op_phi",
+      "op_zext",
+      "op_or",
+      "op_shl",
+      "op_sub",
+      "op_udiv",
+      "op_and",
+      "op_lshr",
+      "op_trunc",
+      "op_urem",
+      "op_fadd",
+      "op_fdiv",
+      "op_fmul",
+      "op_fneg",
+      "op_sitofp",
+      "op_uitofp",
+      "op_extractelement",
+      "op_insertelement",
+      "op_sdiv",
+      "op_srem",
+      "op_select",
+      "op_switch",
+      "op_unreachable",
+      "op_bitcast",
+      "op_shufflevector",
+      "op_extractvalue",
+      "op_insertvalue",
+      "op_fcmp",
+      "op_fsub",
+      "op_ptrtoint",
+      "op_fpext",
+      "op_fptosi",
+      "op_fptrunc",
+      "op_ashr",
+      "op_indirectbr",
+      "op_fptoui",
+      "op_inttoptr",
+      "op_freeze",
+      "iv_00",
+      "iv_01",
+      "iv_02",
+      "iv_03",
+      "iv_04",
+      "iv_05",
+      "iv_06",
+      "iv_07",
+      "iv_08",
+      "iv_09",
+      "iv_10",
+      "iv_11",
+      "iv_12",
+      "iv_13",
+      "iv_14",
+      "iv_15",
+      "iv_16",
+      "iv_17",
+      "iv_18",
+      "iv_19",
+      "iv_20",
+      "iv_21",
+      "iv_22",
+      "iv_23",
+      "iv_24",
+      "iv_25",
+      "iv_26",
+      "iv_27",
+      "iv_28",
+      "iv_29",
+      "iv_30",
+      "iv_31",
+      "iv_32",
+      "iv_33",
+      "iv_34",
+      "iv_35",
+      "iv_36",
+      "iv_37",
+      "iv_38",
+      "iv_39",
+      "iv_40",
+      "iv_41",
+      "iv_42",
+      "iv_43",
+      "iv_44",
+      "iv_45",
+      "iv_46",
+      "iv_47",
+      "iv_48",
+      "iv_49",
+      "iv_50",
+      "iv_51",
+      "iv_52",
+      "iv_53",
+      "iv_54",
+      "iv_55",
+      "iv_56",
+      "iv_57",
+      "iv_58",
+      "iv_59",
+      "iv_60",
+      "iv_61",
+      "iv_62",
+      "iv_63",
+      "iv_64",
+      "iv_65",
+      "iv_66",
+      "iv_67",
+      "iv_68",
+      "iv_69",
+      "iv_70",
+      "iv_71",
+      "iv_72",
+      "iv_73",
+      "iv_74"
+    ]
+  }
+}

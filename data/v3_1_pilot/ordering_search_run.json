@@ -1,0 +1,38 @@
+{
+  "timestamp": "2026-10-22T11:00:22+00:00",
+  "elapsed_s": 2488.9,
+  "stage": "search",
+  "programs": [
+    "mix_01_matrix_mul",
+    "pb_gemm",
+    "ts_misc_dt",
+    "ts_shootout_heapsort",
+    "cb_bzip2e"
+  ],
+  "budget": 200,
+  "environment": {
+    "os": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+    "system": "Linux",
+    "kernel": "6.18.33.2-microsoft-standard-WSL2",
+    "is_wsl": true,
+    "wsl_distro": "Ubuntu",
+    "distribution": "Ubuntu 26.04.1 LTS",
+    "ubuntu_version": "26.04",
+    "python_version": "3.14.4",
+    "python_executable": "/home/arav/.venvs/optgraph/bin/python",
+    "clang_version": "21.1.8",
+    "llvm_version": "21.1.8",
+    "opt_version": "21.1.8",
+    "llvm_config_version": "21.1.8",
+    "llc_version": "21.1.8",
+    "tool_paths": {
+      "clang": "/usr/bin/clang",
+      "opt": "/usr/bin/opt",
+      "llc": "/usr/bin/llc",
+      "llvm-config": "/usr/bin/llvm-config",
+      "llvm-size": "/usr/bin/llvm-size",
+      "valgrind": "/usr/bin/valgrind"
+    },
+    "timestamp": "2026-10-22T11:00:22+00:00"
+  }
+}

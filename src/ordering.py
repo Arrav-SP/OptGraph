@@ -52,3 +52,31 @@ def beam_search(passes: list[str], delta: dict, inter: dict, k: int, width: int 
 def greedy(passes: list[str], delta: dict, inter: dict, k: int,
            allow_repeats: bool = True) -> tuple[list[str], float]:
     return beam_search(passes, delta, inter, k, 1, allow_repeats)
+
+
+# ---- v3.1 -----------------------------------------------------------------------------
+# Repeat cap: a pass may occur at most REPEAT_CAP times and never twice in a row. This stops
+# the v3 failure mode where one-shot interactions made cycles look profitable indefinitely.
+
+REPEAT_CAP = 2
+
+
+def allowed(seq: tuple, b: str, cap: int = REPEAT_CAP) -> bool:
+    return (not seq or seq[-1] != b) and seq.count(b) < cap
+
+
+def beam_candidates(passes: list[str], delta: dict, inter: dict, k: int, width: int = 16,
+                    cap: int = REPEAT_CAP) -> list[tuple[tuple, float]]:
+    """Every sequence a capped beam search over the additive estimate visits (all depths),
+    ranked by estimated gain (best first, ties by sequence). Feeds budget-limited evaluation."""
+    seen, beams = {}, [((), 0.0)]
+    for _ in range(k):
+        children = [(seq + (b,), total + step_gain(seq, b, delta, inter))
+                    for seq, total in beams for b in passes if allowed(seq, b, cap)]
+        if not children:
+            break
+        children.sort(key=lambda s: (-s[1], s[0]))
+        beams = children[:width]
+        for seq, total in beams:
+            seen.setdefault(seq, total)
+    return sorted(seen.items(), key=lambda s: (-s[1], s[0]))

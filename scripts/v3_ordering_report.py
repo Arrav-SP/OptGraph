@@ -15,7 +15,7 @@ import pandas as pd
 
 from src.reporting import BLUE, GREEN, GREY, ORANGE, PURPLE, RED, save_fig, save_table
 from src.stats import bootstrap_ci, cv, holm, paired_test
-from src.utils import DATA_DIR, write_json
+from src.utils import version, DATA_DIR, write_json
 
 METRICS = ["text_size", "dyn_instructions", "instruction_count", "runtime"]
 LEVELS = ["O1", "O2", "O3", "Os"]
@@ -89,7 +89,7 @@ def report(data, out, ocfg: dict, seed: int) -> dict:
         df = pd.concat([df, role_rows], ignore_index=True)
     else:
         df["runtime"] = np.nan
-    manifest = pd.read_csv(DATA_DIR / "v3" / "benchmarks.csv", keep_default_na=False)
+    manifest = pd.read_csv(DATA_DIR / version() / "benchmarks.csv", keep_default_na=False)
     reliable = set(manifest[manifest["runtime_reliable"].astype(str) == "True"]["program_id"])
 
     failures = df[df["error"].fillna("") != ""]

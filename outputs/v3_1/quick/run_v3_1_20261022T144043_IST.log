@@ -1,0 +1,49 @@
+=== environment and tests [14:40:43 IST]
++ python scripts/check_environment.py --no-write
+Operating system :  Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.43
+WSL              :  yes (Ubuntu)
+Distribution     :  Ubuntu 26.04.1 LTS
+Ubuntu version   :  26.04
+Python           :  3.14.4
+Clang            :  21.1.8
+LLVM             :  21.1.8
+opt              :  21.1.8
+llvm-config      :  21.1.8
+llc              :  21.1.8
+C -> LLVM IR     :  ok
+opt pass run     :  ok
+IR changed       :  yes
+Configured passes:  12/12 accepted by opt
+Environment OK.
++ python -m pytest tests -q
+.....F.......................................................            [100%]
+=================================== FAILURES ===================================
+______________________________ test_tiny_pipeline ______________________________
+
+tmp_path = PosixPath('/tmp/pytest-of-arav/pytest-16/test_tiny_pipeline0')
+
+    def test_tiny_pipeline(tmp_path):
+        start = time.perf_counter()
+        v3, cfg = load_v3_config(), load_config()
+        q = v3["quick"]
+        tc = lp.Toolchain().require()
+        benches = load_manifest(MANIFEST, q["programs"])
+        passes = load_passes(cfg, q["passes"], v3=True)
+>       contexts = {c: v3["contexts"][c] for c in q["contexts"]}
+                       ^^^^^^^^^^^^^^
+E       KeyError: 'contexts'
+
+tests/test_integration.py:36: KeyError
+=============================== warnings summary ===============================
+tests/test_search.py::test_opentuner_runs_within_budget
+  /home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/resultsdb/models.py:47: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+    Base = declarative_base(cls=Base)
+
+tests/test_search.py::test_opentuner_runs_within_budget
+  /home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+    self.session.flush()  # populate configuration_id
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_integration.py::test_tiny_pipeline - KeyError: 'contexts'
+1 failed, 60 passed, 2 warnings in 29.04s

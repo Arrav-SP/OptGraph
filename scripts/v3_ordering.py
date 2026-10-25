@@ -30,7 +30,7 @@ from src import llvm_pipeline as lp
 from src.measure import build, measure_variant, timed_runs
 from src.ordering import beam_search, greedy
 from src.suites import load_manifest
-from src.utils import (DATA_DIR, OUTPUT_DIR, PassSpec, load_config, load_passes, load_v3_config, rel_path,
+from src.utils import (version, DATA_DIR, OUTPUT_DIR, PassSpec, load_config, load_passes, load_v3_config, rel_path,
                        now_iso, work_dir, write_json)
 
 O_LEVELS = {"O1": "default<O1>", "O2": "default<O2>", "O3": "default<O3>", "Os": "default<Os>"}
@@ -73,7 +73,7 @@ class Program:
         self.evals = 0
         wd.mkdir(parents=True, exist_ok=True)
         self.raw = wd / "raw.ll"
-        r = lp.compile_to_ir(tc, bench.path, self.raw, 120, bench.cflags)
+        r = lp.program_ir(tc, bench, self.raw, 120)
         if not r.ok:
             raise RuntimeError(f"compile failed: {r.stderr[:300]}")
         self.prefix[()] = str(self.raw)
@@ -99,7 +99,7 @@ class Program:
 
     def measure(self, ll: str, dynamic: bool = True) -> dict:
         self.evals += 1
-        return measure_variant(self.tc, Path(ll), self.bench.support,
+        return measure_variant(self.tc, Path(ll), self.bench,
                                self.expected, self.cache, dynamic, True, self.timeout)
 
 
@@ -227,7 +227,7 @@ def runtime_stage(tc, benches, df, ocfg, root, out_csv):
             _, exe, err = build(tc, Path(ll), b.support)
             if err:
                 return {"program_id": r.program_id, "ir_sha256": r.ir_sha256, "error": err}
-            times, err = timed_runs(exe, ocfg["runtime_runs"], ocfg["runtime_warmup"], core)
+            times, err = timed_runs(exe, ocfg["runtime_runs"], ocfg["runtime_warmup"], core, bench=b)
             shutil.rmtree(wd, ignore_errors=True)
             return {"program_id": r.program_id, "ir_sha256": r.ir_sha256, "core": core,
                     "times": json.dumps([round(t, 6) for t in times]), "error": err}
@@ -260,8 +260,8 @@ def main() -> int:
     tag = "quick" if args.quick else ""
     if args.quick:
         ocfg = {**ocfg, **v3["quick"].get("ordering", {})}
-    data, out = DATA_DIR / "v3" / tag, OUTPUT_DIR / "v3" / tag
-    root = work_dir(v3) / "v3" / (tag or "full") / "ordering"
+    data, out = DATA_DIR / version() / tag, OUTPUT_DIR / version() / tag
+    root = work_dir(v3) / version(v3) / (tag or "full") / "ordering"
     tc = lp.Toolchain().require()
     inputs = json.loads((out / "reports" / "phase5_inputs.json").read_text())
     objectives = [o for o in ocfg["objectives"] if o in inputs]
@@ -275,9 +275,9 @@ def main() -> int:
     programs = sorted(set.intersection(*(set(pairs[o]["program_id"]) for o in objectives)))
     if args.programs:
         programs = [p for p in programs if p in set(args.programs)]
-    manifest = pd.read_csv(DATA_DIR / "v3" / "benchmarks.csv", keep_default_na=False)
+    manifest = pd.read_csv(DATA_DIR / version() / "benchmarks.csv", keep_default_na=False)
     expected = dict(zip(manifest["program_id"], manifest["output_sha256"]))
-    benches = load_manifest(DATA_DIR / "v3" / "benchmarks.csv", programs)
+    benches = load_manifest(DATA_DIR / version() / "benchmarks.csv", programs)
     meas_csv = data / "ordering_measurements.csv.gz"
     rt_csv = data / "ordering_runtime.csv"
     start = time.perf_counter()

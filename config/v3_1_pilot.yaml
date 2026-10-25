@@ -1,0 +1,96 @@
+# Pilot (M9): v3_1.yaml with version v3_1_pilot; data/v3_1_pilot/benchmarks.csv holds the 5 pilot
+# programs of the v3.1 manifest. Generated; do not edit by hand.
+# OptGraph v3.1 configuration (selected with OPTGRAPH_CONFIG=v3_1.yaml). Copied from v3.yaml;
+# differences: version, ir_flags, and the sections added by later milestones. Original header:
+# OptGraph v3 configuration. v2 settings stay in passes.yaml (the v3 pass set is
+# its `v3_passes` key). Paths under `benchmarks` are relative to work_dir.
+
+# Heavy workspace: IR, objects, binaries, downloaded suites. Kept off the OneDrive repo.
+version: v3_1_pilot
+# Starting IR without optnone/noinline (source-level noinline kept); see llvm_pipeline.IR_FLAGS_V3_1.
+ir_flags: [-O1, -Xclang, -disable-llvm-passes]
+work_dir: ~/optgraph_work
+seed: 42
+workers: 8
+
+# v3.1 snapshots along LLVM's own optimisation trajectory: the first n top-level stages of
+# opt's default<O2> pipeline (llvm_pipeline.o2_prefix_pipelines). S0 = starting IR; S2 = after the
+# CGSCC inliner + function simplification; S3 = end of module simplification; S4 = full default<O2>.
+snapshots: {S0: 0, S1: 10, S2: 15, S3: 22, S4: 29}
+# Dynamic instruction counts (cachegrind) are collected at these snapshots only.
+dynamic_contexts: [S0]
+
+benchmarks:
+  polybench_dir: polybench-c-4.2.1-beta
+  # Smallest dataset whose -O0 runtime reaches min_runtime_s is used.
+  polybench_datasets: [MINI, SMALL, MEDIUM, LARGE, EXTRALARGE]
+  polybench_max_runtime_s: 2.0
+  test_suite_dir: llvm-test-suite/SingleSource/Benchmarks
+  test_suite_subdirs: [BenchmarkGame, BenchmarkGame/Large, CoyoteBench, Dhrystone, Linpack,
+                       McGill, Misc, Shootout, Stanford]
+  test_suite_max_runtime_s: 5.0
+  # v3.1: test-suite programs below min_runtime_s are kept (runtime not used), not dropped.
+  keep_fast: true
+  # cBench V1.1 (official tarball, dataset 1 of each program), relative to work_dir.
+  cbench_dir: cbench_src
+  cbench_flags: [-w, -std=gnu89, -fcommon]
+  cbench_target_runtime_s: 0.5
+  # Old sources that redefine POSIX-2008 names (dprintf, getline): hide them from glibc's headers.
+  cbench_program_flags:
+    office_ghostscript: [-include, stdio.h]    # declare glibc's dprintf before gs defines its macro
+    office_ispell: [-std=c89, -D_XOPEN_SOURCE=500]
+    security_pgp_d: [-std=c89, -D_XOPEN_SOURCE=500]
+    security_pgp_e: [-std=c89, -D_XOPEN_SOURCE=500]
+  # Optional back ends that need libraries not installed and are unused unless configured
+  # (consumer_mad: audio.c references audio_esd only under HAVE_LIBESD).
+  cbench_exclude_files:
+    consumer_mad: [audio_esd.c]
+    security_pgp_d: [gettime.c]    # replacement for gettimeofday; glibc provides it
+    security_pgp_e: [gettime.c]
+  cbench_max_runtime_s: 5.0
+  min_runtime_s: 0.05
+  run_timeout_s: 60
+  # Flags copied from the CMakeLists.txt of each test-suite directory / file.
+  # (C_STANDARD 17 with CMake's default extensions is -std=gnu17.)
+  test_suite_flags:
+    Dhrystone: [-Wno-implicit-int, -std=gnu17]
+    Linpack: [-ffp-contract=off, -DFMA_DISABLED=1]
+    Misc: [-Wno-implicit-int]
+    Misc/flops.c: [-std=gnu17]
+    Shootout: [-Wno-error=incompatible-pointer-types]
+    Shootout/methcall.c: [-std=gnu17]
+    Shootout/objinst.c: [-std=gnu17]
+  # FP_TOLERANCE of each directory (relative, as fpcmp -r) for the reference-output check.
+  test_suite_fp_tolerance: {Linpack: 0.0001, McGill: 0.001, Misc: 0.001, Stanford: 0.001}
+  # Only built for AArch64 by the test-suite.
+  test_suite_exclude: [Misc/aarch64-init-cpu-features.c]
+
+# LLVM 21.1.8 in-tree IR2Vec vocabulary (llvm/lib/Analysis/models/seedEmbeddingVocab75D.json at
+# tag llvmorg-21.1.8, sha256 2f057ba5...0140), relative to work_dir.
+ir2vec_vocab: downloads/ir2vec/seedEmbeddingVocab75D.json
+
+# Programs measured with cachegrind in the pair experiments (Phase 3). Every program gets
+# dynamic counts in Phase 5. For pairs, a program costs ~250 unique-IR cachegrind runs
+# (~8.4x its runtime + 0.4 s each), so only programs with -O0 runtime <= max_runtime_s are used;
+# subset_size: null = all of them, otherwise a seeded sample stratified by suite.
+# Chosen from the Phase 2 pilot (outputs/v3/PROGRESS.md).
+dynamic_pairs:
+  subset_size: null
+  max_runtime_s: 5.0
+
+# `--quick`: the tiny end-to-end subset (also used by the integration test).
+quick:
+  programs: [arith_02_redundant, pb_gemm, ts_stanford_treesort]
+  passes: [mem2reg, instcombine, gvn, licm]
+  contexts: [S0, S2]
+  ordering: {budgets: [4], random_per_budget: 5, runtime_runs: 3}
+
+# v3.1 Claim 4 ordering (scripts/v3_1_ordering.py). Budget, checkpoints, seeds and methods are
+# fixed in src/search.py and the script; this section only holds the runtime stage settings.
+ordering:
+  # Runtime stage: alone and serial on an idle machine, one pinned core (a physical core;
+  # SMT siblings are n, n+1), randomised order, 20 timed runs after 1 warm-up.
+  runtime_runs: 20
+  runtime_warmup: 1
+  runtime_core: 2
+  runtime_cv_flag: 0.05

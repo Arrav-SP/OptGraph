@@ -1,0 +1,12 @@
+Why re-prediction loses (exploratory)
+
+| a | b | E | question | programs | geomean_ratio | ci95 | wins | ties | losses | p_one_sided |
+|---|---|---|---|---|---|---|---|---|---|---|
+| oracle_graph | ga | 10 | perfect graph vs strongest search: is the builder the limit? | 129 | 1.0521 | [1.001250724014941, 1.1162754742610475] | 69 | 3 | 57 | 0.2551 |
+| repredict | static_graph | 10 | does re-conditioning beat a static graph? | 129 | 0.9978 | [0.9831267898827782, 1.0135377187648957] | 53 | 13 | 63 | 0.3550 |
+| repredict | predict_once | 10 | does re-conditioning beat predicting once? | 129 | 1.0253 | [1.0069083074141467, 1.0435741905132148] | 36 | 14 | 79 | 1.0000 |
+| predict_once | pan_style | 1 | graph guidance at the smallest budget | 129 | 0.9115 | [0.8788814118304744, 0.9429442453763272] | 89 | 1 | 39 | 0.0000 |
+| repredict | pan_style | 1 | re-prediction at the smallest budget | 129 | 0.9381 | [0.9037678846352102, 0.9721470570865924] | 68 | 1 | 60 | 0.0148 |
+| oracle_graph | pan_style | 1 | headroom at the smallest budget | 129 | 0.8908 | [0.8585817176783169, 0.9223993320388117] | 96 | 1 | 32 | 0.0000 |
+| predict_once | pan_style | 5 | graph guidance at E = 5 | 129 | 1.0033 | [0.9534349222958662, 1.0570159366091632] | 48 | 5 | 76 | 0.7713 |
+| repredict | pan_style | 5 | re-prediction at E = 5 | 129 | 1.0329 | [0.9819147748110805, 1.08679652985651] | 48 | 2 | 79 | 0.9623 |

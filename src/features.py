@@ -147,3 +147,16 @@ def ir2vec_embedding(ll: Path, tc: Toolchain, vocab: Path) -> dict:
     if total is None:
         raise RuntimeError("ir2vec printed no function vectors")
     return {f"iv_{i:02d}": v for i, v in enumerate(total)}
+
+
+REPRESENTATIONS = ("hand", "funcprops", "opcodes", "ir2vec")
+
+
+def all_representations(ll: Path, tc: Toolchain, vocab: Path | None) -> dict[str, dict]:
+    """Every representation of one IR file ({rep: {column: value}}). IR2Vec is skipped when
+    no vocabulary is available (v3.1 rule: drop it rather than delay)."""
+    out = {"hand": {"f_" + k: v for k, v in extract_features(ll, tc).items() if k != "loop_method"},
+           "funcprops": func_properties(ll, tc), "opcodes": opcode_histogram(ll)}
+    if vocab is not None and Path(vocab).exists():
+        out["ir2vec"] = ir2vec_embedding(ll, tc, vocab)
+    return out

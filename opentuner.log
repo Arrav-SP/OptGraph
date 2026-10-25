@@ -1,0 +1,52 @@
+[2026-10-22 09:19:19,985]   ERROR sqlalchemy.pool.impl.SingletonThreadPool: Exception during reset or similar @base.py:1042
+Traceback (most recent call last):
+  File "/home/arav/.venvs/optgraph/lib/python3.14/site-packages/sqlalchemy/pool/base.py", line 1020, in _finalize_fairy
+    fairy._reset(
+    ~~~~~~~~~~~~^
+        pool,
+        ^^^^^
+    ...<2 lines>...
+        asyncio_safe=can_manipulate_connection,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/arav/.venvs/optgraph/lib/python3.14/site-packages/sqlalchemy/pool/base.py", line 1492, in _reset
+    pool._dialect.do_rollback(self)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/home/arav/.venvs/optgraph/lib/python3.14/site-packages/sqlalchemy/engine/default.py", line 951, in do_rollback
+    dbapi_connection.rollback()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+sqlite3.ProgrammingError: SQLite objects created in a thread can only be used in that same thread. The object was created in thread id 137721158887104 and this is thread id 137721175672512.
+[2026-10-22 09:19:20,025]   ERROR sqlalchemy.pool.impl.SingletonThreadPool: Exception terminating connection <sqlite3.Connection object at 0x7d41a4778130> @base.py:374
+Traceback (most recent call last):
+  File "/home/arav/.venvs/optgraph/lib/python3.14/site-packages/sqlalchemy/pool/base.py", line 1020, in _finalize_fairy
+    fairy._reset(
+    ~~~~~~~~~~~~^
+        pool,
+        ^^^^^
+    ...<2 lines>...
+        asyncio_safe=can_manipulate_connection,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/arav/.venvs/optgraph/lib/python3.14/site-packages/sqlalchemy/pool/base.py", line 1492, in _reset
+    pool._dialect.do_rollback(self)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/home/arav/.venvs/optgraph/lib/python3.14/site-packages/sqlalchemy/engine/default.py", line 951, in do_rollback
+    dbapi_connection.rollback()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+sqlite3.ProgrammingError: SQLite objects created in a thread can only be used in that same thread. The object was created in thread id 137721158887104 and this is thread id 137721175672512.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/arav/.venvs/optgraph/lib/python3.14/site-packages/sqlalchemy/pool/base.py", line 370, in _close_connection
+    self._dialect.do_terminate(connection)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/home/arav/.venvs/optgraph/lib/python3.14/site-packages/sqlalchemy/engine/default.py", line 957, in do_terminate
+    self.do_close(dbapi_connection)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/home/arav/.venvs/optgraph/lib/python3.14/site-packages/sqlalchemy/engine/default.py", line 960, in do_close
+    dbapi_connection.close()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+sqlite3.ProgrammingError: SQLite objects created in a thread can only be used in that same thread. The object was created in thread id 137721158887104 and this is thread id 137721175672512.

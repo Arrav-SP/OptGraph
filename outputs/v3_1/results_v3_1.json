@@ -1,0 +1,1289 @@
+{
+  "generated": "2026-10-25T03:47:31+00:00",
+  "quick": false,
+  "objective": "IR instruction count / -Oz",
+  "primary": {
+    "H1": {
+      "programs": 129,
+      "geomean_ratio": 0.948565775428857,
+      "ci95": [
+        0.9194949705351928,
+        0.9761091804211286
+      ],
+      "wins": 95,
+      "ties": 8,
+      "losses": 26,
+      "p_one_sided": 1.2950045487502845e-09,
+      "claim": "Claim 1 headroom: oracle graph vs static graph, E = 10",
+      "p_holm": 2.590009097500569e-09,
+      "supported": true
+    },
+    "H2": {
+      "programs": 123,
+      "median_rho": 0.29222899095388644,
+      "ci_median": [
+        0.2677262926961935,
+        0.335437002443899
+      ],
+      "p_one_sided": 2.67642776931558e-21,
+      "test": "Wilcoxon signed-rank of rho - 0.5, alternative less",
+      "claim": "Claim 2 drift: rho(S0, S2) < 0.5",
+      "p_holm": 8.02928330794674e-21,
+      "supported": true
+    },
+    "H3": {
+      "programs": 129,
+      "mae_model": 0.005092944929895412,
+      "mae_static": 0.008370603054264706,
+      "residual_r2": 0.5041764422685338,
+      "gap_closed": 0.39156774047472875,
+      "programs_better": 127,
+      "programs_worse": 2,
+      "ci_mean_mae_diff": [
+        -0.003570872225174797,
+        -0.0029710722825549004
+      ],
+      "p_one_sided": 1.0241966156659128e-21,
+      "test": "Wilcoxon signed-rank of per-program MAE(model) - MAE(static), alternative less",
+      "params": [
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 31
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 31
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 31
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 31
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        }
+      ],
+      "claim": "Claim 3: LOPO model MAE < static-graph MAE",
+      "p_holm": 4.096786462663651e-21,
+      "supported": true
+    },
+    "H4": {
+      "programs": 129,
+      "geomean_ratio": 1.1067135016788912,
+      "ci95": [
+        1.0528613040472223,
+        1.1698649900243832
+      ],
+      "wins": 38,
+      "ties": 3,
+      "losses": 88,
+      "p_one_sided": 0.9999999800878785,
+      "strongest_other": "ga",
+      "pool_geomean_ratio_vs_Oz_at_E10": {
+        "predict_once": 1.1649510478068519,
+        "static_graph": 1.1970861365946892,
+        "graph_guided": 1.216588057045496,
+        "pan_style": 1.1142006595702143,
+        "dco_style": 1.1444675101603907,
+        "opentuner": 1.1389100791247349,
+        "ga": 1.0792485300889494,
+        "random": 1.0792485300889494
+      },
+      "claim": "Claim 4: re-prediction vs strongest other method, E = 10",
+      "p_holm": 0.9999999800878785,
+      "supported": false
+    }
+  },
+  "levels_vs_Oz": {
+    "O0": 2.660721403313665,
+    "O1": 1.113033634003821,
+    "O2": 1.252749804566504,
+    "O3": 1.299816086984419,
+    "Os": 1.0284218163364511,
+    "Oz": 1.0
+  },
+  "measured": [
+    {
+      "method": "O0",
+      "checkpoint": 0,
+      "programs": 129,
+      "text_size_vs_O2": 1.2556288245536953,
+      "text_size_aarch64_vs_O2": 1.1222632694908468,
+      "dyn_instructions_vs_O2": 1.7756979321496773
+    },
+    {
+      "method": "O1",
+      "checkpoint": 0,
+      "programs": 129,
+      "text_size_vs_O2": 0.810776033801074,
+      "text_size_aarch64_vs_O2": 0.7980546997959491,
+      "dyn_instructions_vs_O2": 1.086521461118481
+    },
+    {
+      "method": "O2",
+      "checkpoint": 0,
+      "programs": 129,
+      "text_size_vs_O2": 1.0,
+      "text_size_aarch64_vs_O2": 1.0,
+      "dyn_instructions_vs_O2": 1.0
+    },
+    {
+      "method": "O3",
+      "checkpoint": 0,
+      "programs": 129,
+      "text_size_vs_O2": 1.0363748816726848,
+      "text_size_aarch64_vs_O2": 1.03626168064307,
+      "dyn_instructions_vs_O2": 0.9968846022721175
+    },
+    {
+      "method": "Os",
+      "checkpoint": 0,
+      "programs": 129,
+      "text_size_vs_O2": 0.7291031537706598,
+      "text_size_aarch64_vs_O2": 0.793165984289169,
+      "dyn_instructions_vs_O2": 1.0005246057216086
+    },
+    {
+      "method": "Oz",
+      "checkpoint": 0,
+      "programs": 129,
+      "text_size_vs_O2": 0.6900108607331326,
+      "text_size_aarch64_vs_O2": 0.7447654610108747,
+      "dyn_instructions_vs_O2": 1.1483451958954949
+    },
+    {
+      "method": "dco_style",
+      "checkpoint": 10,
+      "programs": 129,
+      "text_size_vs_O2": 0.866266909533581,
+      "text_size_aarch64_vs_O2": 0.8359284419764221,
+      "dyn_instructions_vs_O2": 1.2871049504786165
+    },
+    {
+      "method": "dco_style",
+      "checkpoint": 25,
+      "programs": 129,
+      "text_size_vs_O2": 0.8373606566754018,
+      "text_size_aarch64_vs_O2": 0.8100841349503379,
+      "dyn_instructions_vs_O2": 1.2015461137356813
+    },
+    {
+      "method": "dco_style",
+      "checkpoint": 200,
+      "programs": 129,
+      "text_size_vs_O2": 0.8097237935033084,
+      "text_size_aarch64_vs_O2": 0.7849060823859093,
+      "dyn_instructions_vs_O2": 1.184675459675885
+    },
+    {
+      "method": "ga",
+      "checkpoint": 10,
+      "programs": 129,
+      "text_size_vs_O2": 0.8346688359242509,
+      "text_size_aarch64_vs_O2": 0.8166434362879869,
+      "dyn_instructions_vs_O2": 1.2051344220775413
+    },
+    {
+      "method": "ga",
+      "checkpoint": 25,
+      "programs": 129,
+      "text_size_vs_O2": 0.821259691169681,
+      "text_size_aarch64_vs_O2": 0.8028514460004456,
+      "dyn_instructions_vs_O2": 1.20181803246824
+    },
+    {
+      "method": "ga",
+      "checkpoint": 200,
+      "programs": 129,
+      "text_size_vs_O2": 0.8045918943198421,
+      "text_size_aarch64_vs_O2": 0.7811659955168012,
+      "dyn_instructions_vs_O2": 1.1903735804663258
+    },
+    {
+      "method": "graph_guided",
+      "checkpoint": 10,
+      "programs": 129,
+      "text_size_vs_O2": 0.9204762991223346,
+      "text_size_aarch64_vs_O2": 0.9368800950813382,
+      "dyn_instructions_vs_O2": 1.3367752187298412
+    },
+    {
+      "method": "graph_guided",
+      "checkpoint": 25,
+      "programs": 129,
+      "text_size_vs_O2": 0.9127822112715429,
+      "text_size_aarch64_vs_O2": 0.9286729259813592,
+      "dyn_instructions_vs_O2": 1.3311580649318346
+    },
+    {
+      "method": "graph_guided",
+      "checkpoint": 200,
+      "programs": 129,
+      "text_size_vs_O2": 0.9127822112715429,
+      "text_size_aarch64_vs_O2": 0.9286729259813592,
+      "dyn_instructions_vs_O2": 1.3311580649318346
+    },
+    {
+      "method": "measured_greedy",
+      "checkpoint": 10,
+      "programs": 129,
+      "text_size_vs_O2": 0.9467169977911916,
+      "text_size_aarch64_vs_O2": 0.9637365625178149,
+      "dyn_instructions_vs_O2": 1.3584992402281053
+    },
+    {
+      "method": "measured_greedy",
+      "checkpoint": 25,
+      "programs": 129,
+      "text_size_vs_O2": 0.9198088315813604,
+      "text_size_aarch64_vs_O2": 0.9417535213577148,
+      "dyn_instructions_vs_O2": 1.3280092955806808
+    },
+    {
+      "method": "measured_greedy",
+      "checkpoint": 200,
+      "programs": 129,
+      "text_size_vs_O2": 0.8282893667102024,
+      "text_size_aarch64_vs_O2": 0.811946066452614,
+      "dyn_instructions_vs_O2": 1.2235976757190854
+    },
+    {
+      "method": "opentuner",
+      "checkpoint": 10,
+      "programs": 129,
+      "text_size_vs_O2": 0.8637747193468238,
+      "text_size_aarch64_vs_O2": 0.8469406026094636,
+      "dyn_instructions_vs_O2": 1.254757997490624
+    },
+    {
+      "method": "opentuner",
+      "checkpoint": 25,
+      "programs": 129,
+      "text_size_vs_O2": 0.831238807217367,
+      "text_size_aarch64_vs_O2": 0.8098875885661683,
+      "dyn_instructions_vs_O2": 1.2138722076770845
+    },
+    {
+      "method": "opentuner",
+      "checkpoint": 200,
+      "programs": 129,
+      "text_size_vs_O2": 0.8035410744009911,
+      "text_size_aarch64_vs_O2": 0.7807173910408798,
+      "dyn_instructions_vs_O2": 1.191786276452232
+    },
+    {
+      "method": "oracle_graph",
+      "checkpoint": 10,
+      "programs": 129,
+      "text_size_vs_O2": 0.8748133650163922,
+      "text_size_aarch64_vs_O2": 0.8650278980358904,
+      "dyn_instructions_vs_O2": 1.2037545551634767
+    },
+    {
+      "method": "oracle_graph",
+      "checkpoint": 25,
+      "programs": 129,
+      "text_size_vs_O2": 0.8748133650163922,
+      "text_size_aarch64_vs_O2": 0.8650814812065473,
+      "dyn_instructions_vs_O2": 1.2037543335919418
+    },
+    {
+      "method": "oracle_graph",
+      "checkpoint": 200,
+      "programs": 129,
+      "text_size_vs_O2": 0.8449237091326288,
+      "text_size_aarch64_vs_O2": 0.8343648171813762,
+      "dyn_instructions_vs_O2": 1.2161487976535983
+    },
+    {
+      "method": "pan_style",
+      "checkpoint": 10,
+      "programs": 129,
+      "text_size_vs_O2": 0.8654574526970793,
+      "text_size_aarch64_vs_O2": 0.8391956529438096,
+      "dyn_instructions_vs_O2": 1.2009168330948494
+    },
+    {
+      "method": "pan_style",
+      "checkpoint": 25,
+      "programs": 129,
+      "text_size_vs_O2": 0.8278429750168006,
+      "text_size_aarch64_vs_O2": 0.8021468471505522,
+      "dyn_instructions_vs_O2": 1.1929293104877967
+    },
+    {
+      "method": "pan_style",
+      "checkpoint": 200,
+      "programs": 129,
+      "text_size_vs_O2": 0.8033077090061599,
+      "text_size_aarch64_vs_O2": 0.7812102687343886,
+      "dyn_instructions_vs_O2": 1.1897443357092092
+    },
+    {
+      "method": "predict_once",
+      "checkpoint": 10,
+      "programs": 129,
+      "text_size_vs_O2": 0.8867913250455092,
+      "text_size_aarch64_vs_O2": 0.8666872555585271,
+      "dyn_instructions_vs_O2": 1.3163100414556304
+    },
+    {
+      "method": "predict_once",
+      "checkpoint": 25,
+      "programs": 129,
+      "text_size_vs_O2": 0.884099773586513,
+      "text_size_aarch64_vs_O2": 0.8625914427130577,
+      "dyn_instructions_vs_O2": 1.317533452501857
+    },
+    {
+      "method": "predict_once",
+      "checkpoint": 200,
+      "programs": 129,
+      "text_size_vs_O2": 0.8760003332191233,
+      "text_size_aarch64_vs_O2": 0.8557158963552125,
+      "dyn_instructions_vs_O2": 1.3200177259709331
+    },
+    {
+      "method": "random",
+      "checkpoint": 10,
+      "programs": 129,
+      "text_size_vs_O2": 0.8346688359242509,
+      "text_size_aarch64_vs_O2": 0.8166434362879869,
+      "dyn_instructions_vs_O2": 1.2051344220775413
+    },
+    {
+      "method": "random",
+      "checkpoint": 25,
+      "programs": 129,
+      "text_size_vs_O2": 0.8194381003276495,
+      "text_size_aarch64_vs_O2": 0.7964686242181183,
+      "dyn_instructions_vs_O2": 1.1977369118350385
+    },
+    {
+      "method": "random",
+      "checkpoint": 200,
+      "programs": 129,
+      "text_size_vs_O2": 0.8100749350944314,
+      "text_size_aarch64_vs_O2": 0.7884946583675949,
+      "dyn_instructions_vs_O2": 1.1917761465811774
+    },
+    {
+      "method": "repredict",
+      "checkpoint": 10,
+      "programs": 129,
+      "text_size_vs_O2": 0.8913309745329636,
+      "text_size_aarch64_vs_O2": 0.9117704706252614,
+      "dyn_instructions_vs_O2": 1.3118364703820844
+    },
+    {
+      "method": "repredict",
+      "checkpoint": 25,
+      "programs": 129,
+      "text_size_vs_O2": 0.8905489691672022,
+      "text_size_aarch64_vs_O2": 0.9113482566645004,
+      "dyn_instructions_vs_O2": 1.312148609683056
+    },
+    {
+      "method": "repredict",
+      "checkpoint": 200,
+      "programs": 129,
+      "text_size_vs_O2": 0.8884475427465517,
+      "text_size_aarch64_vs_O2": 0.9078539038397958,
+      "dyn_instructions_vs_O2": 1.3236915417591644
+    },
+    {
+      "method": "static_graph",
+      "checkpoint": 10,
+      "programs": 129,
+      "text_size_vs_O2": 0.9210702601879437,
+      "text_size_aarch64_vs_O2": 0.9294149642267618,
+      "dyn_instructions_vs_O2": 1.3074868999990912
+    },
+    {
+      "method": "static_graph",
+      "checkpoint": 25,
+      "programs": 129,
+      "text_size_vs_O2": 0.921854487690592,
+      "text_size_aarch64_vs_O2": 0.928490830321776,
+      "dyn_instructions_vs_O2": 1.3057946528390088
+    },
+    {
+      "method": "static_graph",
+      "checkpoint": 200,
+      "programs": 129,
+      "text_size_vs_O2": 0.8994884411466045,
+      "text_size_aarch64_vs_O2": 0.9158802510999291,
+      "dyn_instructions_vs_O2": 1.3108642254708998
+    }
+  ],
+  "output_failures": 0,
+  "runtime_noise": {
+    "binaries": 6432,
+    "median_cv": 0.01923962684184119,
+    "noisy": 805
+  },
+  "claims_exploratory": {
+    "drift_decay": [
+      {
+        "snapshot": "S0",
+        "median_rho_vs_S0": 1.0,
+        "programs": 129,
+        "share_pairs_near_zero": 0.8103459847645894
+      },
+      {
+        "snapshot": "S1",
+        "median_rho_vs_S0": 0.3159779205496739,
+        "programs": 125,
+        "share_pairs_near_zero": 0.8742743045068626
+      },
+      {
+        "snapshot": "S2",
+        "median_rho_vs_S0": 0.29222899095388644,
+        "programs": 123,
+        "share_pairs_near_zero": 0.8787543206147858
+      },
+      {
+        "snapshot": "S3",
+        "median_rho_vs_S0": 0.28893675472994973,
+        "programs": 123,
+        "share_pairs_near_zero": 0.8782341689318434
+      },
+      {
+        "snapshot": "S4",
+        "median_rho_vs_S0": 0.3195508393655497,
+        "programs": 122,
+        "share_pairs_near_zero": 0.8816067653276956
+      }
+    ],
+    "static_graph_error": [
+      {
+        "graph": "cross_suite",
+        "context": "S0",
+        "sign_flip_rate": 0.058823529411764705,
+        "class_error_rate": 0.09307359307359307,
+        "spearman": 0.5580762699921595,
+        "top_k_overlap": 0.4,
+        "mae": 0.008274460609731802
+      },
+      {
+        "graph": "cross_suite",
+        "context": "S1",
+        "sign_flip_rate": 0.023809523809523808,
+        "class_error_rate": 0.06277056277056277,
+        "spearman": 0.5730056041979588,
+        "top_k_overlap": 0.3,
+        "mae": 0.005161651565374
+      },
+      {
+        "graph": "cross_suite",
+        "context": "S2",
+        "sign_flip_rate": 0.0,
+        "class_error_rate": 0.025974025974025976,
+        "spearman": 0.6888744689339219,
+        "top_k_overlap": 0.4,
+        "mae": 0.00478055951366337
+      },
+      {
+        "graph": "cross_suite",
+        "context": "S3",
+        "sign_flip_rate": 0.0,
+        "class_error_rate": 0.025974025974025976,
+        "spearman": 0.6641061799729663,
+        "top_k_overlap": 0.4,
+        "mae": 0.004806430669386347
+      },
+      {
+        "graph": "cross_suite",
+        "context": "S4",
+        "sign_flip_rate": 0.0,
+        "class_error_rate": 0.025974025974025976,
+        "spearman": 0.6989121834767429,
+        "top_k_overlap": 0.7,
+        "mae": 0.003255897208967057
+      },
+      {
+        "graph": "lopo",
+        "context": "S0",
+        "sign_flip_rate": 0.04597701149425287,
+        "class_error_rate": 0.08441558441558442,
+        "spearman": 0.6142985883730051,
+        "top_k_overlap": 0.6,
+        "mae": 0.0075428876704549015
+      },
+      {
+        "graph": "lopo",
+        "context": "S1",
+        "sign_flip_rate": 0.023809523809523808,
+        "class_error_rate": 0.0670995670995671,
+        "spearman": 0.564383698205754,
+        "top_k_overlap": 0.4,
+        "mae": 0.00463408212064836
+      },
+      {
+        "graph": "lopo",
+        "context": "S2",
+        "sign_flip_rate": 0.0,
+        "class_error_rate": 0.025974025974025976,
+        "spearman": 0.6716811960961112,
+        "top_k_overlap": 0.4,
+        "mae": 0.004378812433611561
+      },
+      {
+        "graph": "lopo",
+        "context": "S3",
+        "sign_flip_rate": 0.0,
+        "class_error_rate": 0.025974025974025976,
+        "spearman": 0.6314606907563103,
+        "top_k_overlap": 0.4,
+        "mae": 0.004435004555894976
+      },
+      {
+        "graph": "lopo",
+        "context": "S4",
+        "sign_flip_rate": 0.0,
+        "class_error_rate": 0.025974025974025976,
+        "spearman": 0.6750937878539519,
+        "top_k_overlap": 0.7,
+        "mae": 0.0030949092801465677
+      }
+    ],
+    "H3_by_snapshot": [
+      {
+        "context": "S0",
+        "em": 0.007623018479724486,
+        "es": 0.01477607564801934
+      },
+      {
+        "context": "S1",
+        "em": 0.0047944150171950325,
+        "es": 0.006972624508180397
+      },
+      {
+        "context": "S2",
+        "em": 0.004560787355523753,
+        "es": 0.007017218950014898
+      },
+      {
+        "context": "S3",
+        "em": 0.004599938124520332,
+        "es": 0.007042626630925678
+      },
+      {
+        "context": "S4",
+        "em": 0.0038865656725134536,
+        "es": 0.00604446953418322
+      }
+    ],
+    "single_pass_lopo": {
+      "gap_closed": 0.5433762710971656,
+      "models": "/home/arav/optgraph_work/v3_1/full/models/single_lopo",
+      "feature_columns": [
+        "f_instruction_count",
+        "f_basic_blocks",
+        "f_functions",
+        "f_branches",
+        "f_conditional_branches",
+        "f_loads",
+        "f_stores",
+        "f_calls",
+        "f_phis",
+        "f_integer_ops",
+        "f_floating_ops",
+        "f_arithmetic_ops",
+        "f_memory_ops",
+        "f_returns",
+        "f_cfg_edges",
+        "f_loop_count",
+        "f_loop_depth",
+        "f_allocas",
+        "f_geps",
+        "f_compares",
+        "f_casts",
+        "f_load_frac",
+        "f_store_frac",
+        "f_branch_frac",
+        "f_call_frac",
+        "f_arith_frac",
+        "f_memory_frac",
+        "f_float_frac",
+        "f_avg_block_size",
+        "f_cyclomatic",
+        "fp_BasicBlockCount",
+        "fp_BlocksReachedFromConditionalInstruction",
+        "fp_Uses",
+        "fp_DirectCallsToDefinedFunctions",
+        "fp_LoadInstCount",
+        "fp_StoreInstCount",
+        "fp_MaxLoopDepth",
+        "fp_TopLevelLoopCount",
+        "fp_TotalInstructionCount",
+        "fp_BasicBlocksWithSingleSuccessor",
+        "fp_BasicBlocksWithTwoSuccessors",
+        "fp_BasicBlocksWithMoreThanTwoSuccessors",
+        "fp_BasicBlocksWithSinglePredecessor",
+        "fp_BasicBlocksWithTwoPredecessors",
+        "fp_BasicBlocksWithMoreThanTwoPredecessors",
+        "fp_BigBasicBlocks",
+        "fp_MediumBasicBlocks",
+        "fp_SmallBasicBlocks",
+        "fp_CastInstructionCount",
+        "fp_FloatingPointInstructionCount",
+        "fp_IntegerInstructionCount",
+        "fp_ConstantIntOperandCount",
+        "fp_ConstantFPOperandCount",
+        "fp_ConstantOperandCount",
+        "fp_InstructionOperandCount",
+        "fp_BasicBlockOperandCount",
+        "fp_GlobalValueOperandCount",
+        "fp_InlineAsmOperandCount",
+        "fp_ArgumentOperandCount",
+        "fp_UnknownOperandCount",
+        "fp_CriticalEdgeCount",
+        "fp_ControlFlowEdgeCount",
+        "fp_UnconditionalBranchCount",
+        "fp_IntrinsicCount",
+        "fp_DirectCallCount",
+        "fp_IndirectCallCount",
+        "fp_CallReturnsIntegerCount",
+        "fp_CallReturnsFloatCount",
+        "fp_CallReturnsPointerCount",
+        "fp_CallReturnsVectorIntCount",
+        "fp_CallReturnsVectorFloatCount",
+        "fp_CallReturnsVectorPointerCount",
+        "fp_CallWithManyArgumentsCount",
+        "fp_CallWithPointerArgumentCount",
+        "op_add",
+        "op_alloca",
+        "op_br",
+        "op_call",
+        "op_getelementptr",
+        "op_icmp",
+        "op_load",
+        "op_mul",
+        "op_ret",
+        "op_sext",
+        "op_store",
+        "op_xor",
+        "op_phi",
+        "op_zext",
+        "op_or",
+        "op_shl",
+        "op_sub",
+        "op_udiv",
+        "op_and",
+        "op_lshr",
+        "op_trunc",
+        "op_urem",
+        "op_fadd",
+        "op_fdiv",
+        "op_fmul",
+        "op_fneg",
+        "op_sitofp",
+        "op_uitofp",
+        "op_extractelement",
+        "op_insertelement",
+        "op_sdiv",
+        "op_srem",
+        "op_select",
+        "op_switch",
+        "op_unreachable",
+        "op_bitcast",
+        "op_shufflevector",
+        "op_extractvalue",
+        "op_insertvalue",
+        "op_fcmp",
+        "op_fsub",
+        "op_ptrtoint",
+        "op_fpext",
+        "op_fptosi",
+        "op_fptrunc",
+        "op_ashr",
+        "op_indirectbr",
+        "op_fptoui",
+        "op_inttoptr",
+        "op_freeze",
+        "iv_00",
+        "iv_01",
+        "iv_02",
+        "iv_03",
+        "iv_04",
+        "iv_05",
+        "iv_06",
+        "iv_07",
+        "iv_08",
+        "iv_09",
+        "iv_10",
+        "iv_11",
+        "iv_12",
+        "iv_13",
+        "iv_14",
+        "iv_15",
+        "iv_16",
+        "iv_17",
+        "iv_18",
+        "iv_19",
+        "iv_20",
+        "iv_21",
+        "iv_22",
+        "iv_23",
+        "iv_24",
+        "iv_25",
+        "iv_26",
+        "iv_27",
+        "iv_28",
+        "iv_29",
+        "iv_30",
+        "iv_31",
+        "iv_32",
+        "iv_33",
+        "iv_34",
+        "iv_35",
+        "iv_36",
+        "iv_37",
+        "iv_38",
+        "iv_39",
+        "iv_40",
+        "iv_41",
+        "iv_42",
+        "iv_43",
+        "iv_44",
+        "iv_45",
+        "iv_46",
+        "iv_47",
+        "iv_48",
+        "iv_49",
+        "iv_50",
+        "iv_51",
+        "iv_52",
+        "iv_53",
+        "iv_54",
+        "iv_55",
+        "iv_56",
+        "iv_57",
+        "iv_58",
+        "iv_59",
+        "iv_60",
+        "iv_61",
+        "iv_62",
+        "iv_63",
+        "iv_64",
+        "iv_65",
+        "iv_66",
+        "iv_67",
+        "iv_68",
+        "iv_69",
+        "iv_70",
+        "iv_71",
+        "iv_72",
+        "iv_73",
+        "iv_74"
+      ]
+    },
+    "representations": [
+      "hand",
+      "funcprops",
+      "opcodes",
+      "ir2vec"
+    ]
+  }
+}

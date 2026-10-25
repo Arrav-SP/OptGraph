@@ -25,6 +25,11 @@ INSTALL_HINT = "sudo apt update && sudo apt install -y clang llvm libc6-dev"
 # running its IR pipeline again; -O2 only selects the codegen level.
 BACKEND_FLAGS = ["-O2", "-c", "-Xclang", "-disable-llvm-passes", "-Wno-override-module"]
 SANITIZER_FLAGS = ["-O0", "-g", "-fsanitize=address,undefined", "-fno-sanitize-recover=all"]
+IR_FLAGS_O0 = ["-O0", "-Xclang", "-disable-O0-optnone"]
+# v3.1: unoptimised IR without optnone/noinline (source-level noinline is kept).
+IR_FLAGS_V3_1 = ["-O1", "-Xclang", "-disable-llvm-passes"]
+# Function attributes clang adds at -Os / -Oz; opt's default<Os|Oz> relies on them.
+SIZE_ATTRS = {"Os": "optsize", "Oz": "optsize minsize"}
 
 SMOKE_SOURCE = "int main() {\n    int x = 10;\n    int y = x + 0;\n    return y;\n}\n"
 
@@ -56,6 +61,7 @@ class Toolchain:
         self.llc = _find("llc")
         self.llvm_config = _find("llvm-config")
         self.llvm_size = _find("llvm-size")
+        self.llvm_link = _find("llvm-link")
         self.valgrind = shutil.which("valgrind")
 
     def missing(self) -> list[str]:
@@ -86,11 +92,12 @@ class Toolchain:
 
     # ---- command construction ------------------------------------------------
 
-    def emit_ir_cmd(self, src: Path, out_ll: Path, cflags=()) -> list[str]:
-        # -O0 keeps the IR close to the source. Clang normally tags -O0 functions
-        # `optnone`, which makes every later opt pass skip them, so that is disabled.
+    def emit_ir_cmd(self, src: Path, out_ll: Path, cflags=(), irflags=()) -> list[str]:
+        # Default (v2/v3): -O0 keeps the IR close to the source; clang tags -O0 functions
+        # `optnone`, which makes every later opt pass skip them, so that is disabled. -O0 still
+        # adds `noinline` everywhere; v3.1 uses IR_FLAGS_V3_1 instead.
         driver = self.clang if src.suffix == ".c" else (self.clangxx or self.clang)
-        return [driver, "-O0", "-Xclang", "-disable-O0-optnone", *cflags, "-S", "-emit-llvm",
+        return [driver, *(irflags or IR_FLAGS_O0), *cflags, "-S", "-emit-llvm",
                 str(src), "-o", str(out_ll)]
 
     def object_cmd(self, ll: Path, obj: Path) -> list[str]:
@@ -105,6 +112,10 @@ class Toolchain:
 
     def sanitizer_cmd(self, srcs, exe: Path, cflags=()) -> list[str]:
         return [self.clang, *SANITIZER_FLAGS, *cflags, *map(str, srcs), "-o", str(exe), "-lm"]
+
+    def aarch64_object_cmd(self, ll: Path, obj: Path) -> list[str]:
+        """Compile-only code size on a second ISA: same IR, no IR passes, AArch64 backend."""
+        return [self.clang, "--target=aarch64-linux-gnu", *BACKEND_FLAGS, str(ll), "-o", str(obj)]
 
     def size_cmd(self, obj: Path) -> list[str]:
         return [self.llvm_size, "-A", str(obj)]
@@ -130,9 +141,75 @@ class Toolchain:
 # ---- operations ----------------------------------------------------------------
 
 def compile_to_ir(tc: Toolchain, src: Path, out_ll: Path, timeout: float = 60,
-                  cflags=()) -> CommandResult:
+                  cflags=(), irflags=()) -> CommandResult:
     out_ll.parent.mkdir(parents=True, exist_ok=True)
-    return run_cmd(tc.emit_ir_cmd(src, out_ll, cflags), timeout)
+    return run_cmd(tc.emit_ir_cmd(src, out_ll, cflags, irflags), timeout)
+
+
+def add_size_attrs(text: str, level: str) -> str:
+    """IR text with clang's -Os/-Oz function attributes added to every function definition."""
+    attrs = SIZE_ATTRS[level]
+    out = []
+    for line in text.splitlines():
+        if line.startswith("define ") and line.rstrip().endswith("{") and "optnone" not in line:
+            line = line.rstrip()[:-1].rstrip() + f" {attrs} {{"
+        out.append(line)
+    return "\n".join(out) + "\n"
+
+
+def sequence_pipeline(specs: list[PassSpec]) -> str:
+    """One `opt -passes=` string for a whole sequence; function passes get explicit adaptors."""
+    return ",".join(s.pipeline if s.pipeline.startswith(("cgscc(", "module(")) else
+                    f"function({s.pipeline})" for s in specs)
+
+
+def program_ir(tc: Toolchain, bench, out_ll: Path, timeout: float = 120) -> CommandResult:
+    """Starting IR of a benchmark: one file compiled, or every source compiled and linked
+    with llvm-link into one module (multi-file programs such as cBench)."""
+    if not bench.sources:
+        return compile_to_ir(tc, bench.path, out_ll, timeout, bench.cflags, bench.irflags)
+    parts = out_ll.parent / (out_ll.stem + "_parts")
+    shutil.rmtree(parts, ignore_errors=True)
+    parts.mkdir(parents=True)
+    lls = []
+    for i, src in enumerate(bench.sources):
+        ll = parts / f"{i:03d}_{Path(src).stem}.ll"
+        r = compile_to_ir(tc, Path(src), ll, timeout, bench.cflags, bench.irflags)
+        if not r.ok:
+            return r
+        lls.append(ll)
+    r = run_cmd([tc.llvm_link, "-S", *map(str, lls), "-o", str(out_ll)], timeout)
+    shutil.rmtree(parts, ignore_errors=True)
+    return r
+
+
+def split_top_level(pipeline: str) -> list[str]:
+    """Top-level stages of a printed pass pipeline (commas outside (), <>)."""
+    parts, depth, cur = [], 0, ""
+    for ch in pipeline:
+        depth += ch in "(<"
+        depth -= ch in ")>"
+        if ch == "," and depth == 0:
+            parts.append(cur)
+            cur = ""
+        else:
+            cur += ch
+    return parts + [cur] if cur else parts
+
+
+def o2_prefix_pipelines(tc: Toolchain, stages: dict[str, int]) -> dict[str, str]:
+    """{snapshot: pipeline} made of the first n top-level stages of opt's own default<O2>
+    (n = 0 means the starting IR itself). Built from `opt -print-pipeline-passes`."""
+    with tempfile.TemporaryDirectory(prefix="optgraph_o2_") as d:
+        ll = Path(d) / "e.ll"
+        ll.write_text("define i32 @main() {\n  ret i32 0\n}\n")
+        r = run_cmd([tc.opt, "-passes=default<O2>", "-print-pipeline-passes", "-disable-output", str(ll)])
+    if not r.ok:
+        raise ToolchainError(f"could not print default<O2>: {r.stderr}")
+    parts = split_top_level(r.stdout.strip())
+    if max(stages.values()) > len(parts):
+        raise ToolchainError(f"default<O2> has {len(parts)} stages, config asks for {max(stages.values())}")
+    return {name: ",".join(parts[:n]) for name, n in stages.items()}
 
 
 def verify_ir(tc: Toolchain, ll: Path, timeout: float = 60) -> CommandResult:

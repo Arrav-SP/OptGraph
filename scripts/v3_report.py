@@ -14,7 +14,7 @@ import numpy as np
 import pandas as pd
 
 import _bootstrap  # noqa: F401
-from src.utils import DATA_DIR, OUTPUT_DIR, load_v3_config, now_iso, write_json
+from src.utils import version, DATA_DIR, OUTPUT_DIR, load_v3_config, now_iso, write_json
 
 RULES = {
     "RQ2": "supported for a metric/context if the LOPO main model (HistGradientBoosting, residual target) "
@@ -51,7 +51,7 @@ def pval(p):
 def collect(data, out, quick):
     rep = out / "reports"
     H = {"generated": now_iso(), "quick": quick}
-    man = pd.read_csv(DATA_DIR / "v3" / "benchmarks.csv", keep_default_na=False)
+    man = pd.read_csv(DATA_DIR / version() / "benchmarks.csv", keep_default_na=False)
     kept = man[man["kept"].astype(str) == "True"]
     H["benchmarks"] = {"candidates": int(len(man)), "kept": int(len(kept)),
                        "kept_by_suite": kept["suite"].value_counts().to_dict(),
@@ -304,9 +304,9 @@ def build_html(H, out, elapsed):
     add(fig_html(F / "rq3_cost_vs_benefit.png", "Cost (compile evaluations) vs benefit"))
 
     add("<h2>What failed or was dropped</h2>")
-    man = pd.read_csv(DATA_DIR / "v3" / "benchmarks.csv", keep_default_na=False)
+    man = pd.read_csv(DATA_DIR / version() / "benchmarks.csv", keep_default_na=False)
     add(table_html(man[man["kept"].astype(str) != "True"][["program_id", "suite", "runtime_o0_s", "drop_reason"]]))
-    fails = read_csv(DATA_DIR / "v3" / ("quick/" if H["quick"] else "") / "experiment_failures.csv")
+    fails = read_csv(DATA_DIR / version() / ("quick/" if H["quick"] else "") / "experiment_failures.csv")
     if fails is not None and len(fails):
         add("<h3>Failed pass experiments</h3>" + table_html(fails.groupby("error").size().rename("count").reset_index()))
     else:
@@ -390,7 +390,7 @@ def main() -> int:
     args = ap.parse_args()
     load_v3_config()
     tag = "quick" if args.quick else ""
-    data, out = DATA_DIR / "v3" / tag, OUTPUT_DIR / "v3" / tag
+    data, out = DATA_DIR / version() / tag, OUTPUT_DIR / version() / tag
     H = collect(data, out, args.quick)
     H["elapsed_s"] = args.elapsed or None
     (out / "report").mkdir(parents=True, exist_ok=True)

@@ -1,0 +1,605 @@
+{
+  "metric": "instruction_count",
+  "threshold": 0.005,
+  "snapshots": [
+    "S0",
+    "S1",
+    "S2",
+    "S3",
+    "S4"
+  ],
+  "programs": 5,
+  "H2": {
+    "programs": 5,
+    "median_rho": 0.2605688240397615,
+    "ci_median": [
+      0.04630723457723831,
+      0.4023943195836219
+    ],
+    "p_one_sided": 0.03125,
+    "test": "Wilcoxon signed-rank of rho - 0.5, alternative less"
+  },
+  "drift_decay": [
+    {
+      "snapshot": "S0",
+      "median_rho_vs_S0": 1.0,
+      "programs": 5,
+      "share_pairs_near_zero": 0.8121212121212121
+    },
+    {
+      "snapshot": "S1",
+      "median_rho_vs_S0": 0.29092664403791124,
+      "programs": 5,
+      "share_pairs_near_zero": 0.8653679653679653
+    },
+    {
+      "snapshot": "S2",
+      "median_rho_vs_S0": 0.2605688240397615,
+      "programs": 5,
+      "share_pairs_near_zero": 0.893073593073593
+    },
+    {
+      "snapshot": "S3",
+      "median_rho_vs_S0": 0.2605688240397615,
+      "programs": 5,
+      "share_pairs_near_zero": 0.893073593073593
+    },
+    {
+      "snapshot": "S4",
+      "median_rho_vs_S0": 0.33205264611302254,
+      "programs": 4,
+      "share_pairs_near_zero": 0.8978354978354979
+    }
+  ],
+  "static_graph_error": [
+    {
+      "graph": "cross_suite",
+      "context": "S0",
+      "sign_flip_rate": 0.06593406593406594,
+      "class_error_rate": 0.08008658008658008,
+      "spearman": 0.6108715609073501,
+      "top_k_overlap": 0.6,
+      "mae": 0.006824473129382372
+    },
+    {
+      "graph": "cross_suite",
+      "context": "S1",
+      "sign_flip_rate": 0.029411764705882353,
+      "class_error_rate": 0.05411255411255411,
+      "spearman": 0.595734580289895,
+      "top_k_overlap": 0.3,
+      "mae": 0.005300470064073984
+    },
+    {
+      "graph": "cross_suite",
+      "context": "S2",
+      "sign_flip_rate": 0.04838709677419355,
+      "class_error_rate": 0.021645021645021644,
+      "spearman": 0.6624196064023448,
+      "top_k_overlap": 0.7,
+      "mae": 0.005768212933295767
+    },
+    {
+      "graph": "cross_suite",
+      "context": "S3",
+      "sign_flip_rate": 0.04838709677419355,
+      "class_error_rate": 0.021645021645021644,
+      "spearman": 0.6786093215991758,
+      "top_k_overlap": 0.7,
+      "mae": 0.005725541462407319
+    },
+    {
+      "graph": "cross_suite",
+      "context": "S4",
+      "sign_flip_rate": 0.0,
+      "class_error_rate": 0.012987012987012988,
+      "spearman": 0.7492444079208822,
+      "top_k_overlap": 0.8,
+      "mae": 0.0018189738943416606
+    },
+    {
+      "graph": "lopo",
+      "context": "S0",
+      "sign_flip_rate": 0.06593406593406594,
+      "class_error_rate": 0.08008658008658008,
+      "spearman": 0.5976001392020056,
+      "top_k_overlap": 0.6,
+      "mae": 0.0073505481640817405
+    },
+    {
+      "graph": "lopo",
+      "context": "S1",
+      "sign_flip_rate": 0.03333333333333333,
+      "class_error_rate": 0.05411255411255411,
+      "spearman": 0.5936782199967483,
+      "top_k_overlap": 0.3,
+      "mae": 0.004787448737465459
+    },
+    {
+      "graph": "lopo",
+      "context": "S2",
+      "sign_flip_rate": 0.05970149253731343,
+      "class_error_rate": 0.021645021645021644,
+      "spearman": 0.6624196064023448,
+      "top_k_overlap": 0.6,
+      "mae": 0.005040790434497318
+    },
+    {
+      "graph": "lopo",
+      "context": "S3",
+      "sign_flip_rate": 0.05970149253731343,
+      "class_error_rate": 0.021645021645021644,
+      "spearman": 0.6786093215991758,
+      "top_k_overlap": 0.6,
+      "mae": 0.005055757595228105
+    },
+    {
+      "graph": "lopo",
+      "context": "S4",
+      "sign_flip_rate": 0.0,
+      "class_error_rate": 0.012987012987012988,
+      "spearman": 0.7492444079208822,
+      "top_k_overlap": 0.8,
+      "mae": 0.0019186128911367782
+    }
+  ],
+  "variance_decomposition": [
+    {
+      "subset": "all",
+      "programs": 5,
+      "term": "pair",
+      "share": 0.2627662963530258,
+      "ci_lo": 0.23273503117318614,
+      "ci_hi": 0.3638373004914573
+    },
+    {
+      "subset": "all",
+      "programs": 5,
+      "term": "program_id",
+      "share": 0.003166182102774384,
+      "ci_lo": 0.0003260175484023352,
+      "ci_hi": 0.0047217032256503
+    },
+    {
+      "subset": "all",
+      "programs": 5,
+      "term": "context",
+      "share": 0.01725061364656704,
+      "ci_lo": 0.013662838793794265,
+      "ci_hi": 0.03007641009789605
+    },
+    {
+      "subset": "all",
+      "programs": 5,
+      "term": "pair x program_id",
+      "share": 0.13453905334685234,
+      "ci_lo": 0.03101586685701612,
+      "ci_hi": 0.15832714713864834
+    },
+    {
+      "subset": "all",
+      "programs": 5,
+      "term": "pair x context",
+      "share": 0.3576219422097223,
+      "ci_lo": 0.30830418855718766,
+      "ci_hi": 0.5113064724636341
+    },
+    {
+      "subset": "all",
+      "programs": 5,
+      "term": "program_id x context",
+      "share": 0.00260378738335917,
+      "ci_lo": 0.0010361075619436028,
+      "ci_hi": 0.0029981364949789604
+    },
+    {
+      "subset": "all",
+      "programs": 5,
+      "term": "pair x program_id x context",
+      "share": 0.22205212495769888,
+      "ci_lo": 0.07436936738504579,
+      "ci_hi": 0.26707319247528244
+    },
+    {
+      "subset": "all",
+      "programs": 5,
+      "term": "program_terms",
+      "share": 0.3623611477906848,
+      "ci_lo": 0.11815263941952298,
+      "ci_hi": 0.43336291863791576
+    },
+    {
+      "subset": "without_v2",
+      "programs": 4,
+      "term": "pair",
+      "share": 0.2599476543177398,
+      "ci_lo": 0.24329244340311265,
+      "ci_hi": 0.4073565274925583
+    },
+    {
+      "subset": "without_v2",
+      "programs": 4,
+      "term": "program_id",
+      "share": 0.0016782041985314356,
+      "ci_lo": 2.480835304781252e-05,
+      "ci_hi": 0.004009929539947986
+    },
+    {
+      "subset": "without_v2",
+      "programs": 4,
+      "term": "context",
+      "share": 0.021612465415683606,
+      "ci_lo": 0.016027061541674312,
+      "ci_hi": 0.038073070463357166
+    },
+    {
+      "subset": "without_v2",
+      "programs": 4,
+      "term": "pair x program_id",
+      "share": 0.12845590386133898,
+      "ci_lo": 0.020486356924805094,
+      "ci_hi": 0.12845590386133898
+    },
+    {
+      "subset": "without_v2",
+      "programs": 4,
+      "term": "pair x context",
+      "share": 0.3959733042794841,
+      "ci_lo": 0.3648758192102687,
+      "ci_hi": 0.5505896380165528
+    },
+    {
+      "subset": "without_v2",
+      "programs": 4,
+      "term": "program_id x context",
+      "share": 0.002008905546234948,
+      "ci_lo": 0.00029548299960027003,
+      "ci_hi": 0.002072081559544138
+    },
+    {
+      "subset": "without_v2",
+      "programs": 4,
+      "term": "pair x program_id x context",
+      "share": 0.19032356238098708,
+      "ci_lo": 0.04148053149914275,
+      "ci_hi": 0.19364451735247332
+    },
+    {
+      "subset": "without_v2",
+      "programs": 4,
+      "term": "program_terms",
+      "share": 0.32246657598709244,
+      "ci_lo": 0.0755045787753736,
+      "ci_hi": 0.32246657598709244
+    },
+    {
+      "subset": "rank_based",
+      "programs": 5,
+      "term": "pair",
+      "share": 0.41091985974593975,
+      "ci_lo": 0.30774439709900103,
+      "ci_hi": 0.5616639920322334
+    },
+    {
+      "subset": "rank_based",
+      "programs": 5,
+      "term": "program_id",
+      "share": 0.014669972051238381,
+      "ci_lo": 0.0016115710194702841,
+      "ci_hi": 0.024921790028728658
+    },
+    {
+      "subset": "rank_based",
+      "programs": 5,
+      "term": "context",
+      "share": 0.023264636966519738,
+      "ci_lo": 0.018087199580723957,
+      "ci_hi": 0.03325748826030252
+    },
+    {
+      "subset": "rank_based",
+      "programs": 5,
+      "term": "pair x program_id",
+      "share": 0.1648749900001812,
+      "ci_lo": 0.058375928468116935,
+      "ci_hi": 0.19486059294396904
+    },
+    {
+      "subset": "rank_based",
+      "programs": 5,
+      "term": "pair x context",
+      "share": 0.19414033784253268,
+      "ci_lo": 0.18980941976126928,
+      "ci_hi": 0.40344168900662
+    },
+    {
+      "subset": "rank_based",
+      "programs": 5,
+      "term": "program_id x context",
+      "share": 0.003924335509202996,
+      "ci_lo": 0.0006280063193576176,
+      "ci_hi": 0.00862647341787535
+    },
+    {
+      "subset": "rank_based",
+      "programs": 5,
+      "term": "pair x program_id x context",
+      "share": 0.18820586788438526,
+      "ci_lo": 0.06512766950175845,
+      "ci_hi": 0.19710985415992813
+    },
+    {
+      "subset": "rank_based",
+      "programs": 5,
+      "term": "program_terms",
+      "share": 0.37167516544500784,
+      "ci_lo": 0.12275223087398937,
+      "ci_hi": 0.42111190495930834
+    }
+  ],
+  "representations": [
+    "hand",
+    "funcprops",
+    "opcodes",
+    "ir2vec"
+  ],
+  "H3": {
+    "programs": 5,
+    "mae_model": 0.00907514709618141,
+    "mae_static": 0.008306622373168152,
+    "residual_r2": -0.07262773884027207,
+    "gap_closed": -0.09251952099035199,
+    "programs_better": 3,
+    "programs_worse": 2,
+    "ci_mean_mae_diff": [
+      -0.0014479986032285609,
+      0.0037630175112020685
+    ],
+    "p_one_sided": 0.6875,
+    "test": "Wilcoxon signed-rank of per-program MAE(model) - MAE(static), alternative less",
+    "params": [
+      {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 31
+      },
+      {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 63
+      }
+    ]
+  },
+  "H3_by_snapshot": [
+    {
+      "context": "S0",
+      "em": 0.009457711354679887,
+      "es": 0.0139341157684424
+    },
+    {
+      "context": "S1",
+      "em": 0.008415998148959783,
+      "es": 0.006526753744241174
+    },
+    {
+      "context": "S2",
+      "em": 0.009828938372139667,
+      "es": 0.007723964074235251
+    },
+    {
+      "context": "S3",
+      "em": 0.009823492753733336,
+      "es": 0.007732274855812069
+    },
+    {
+      "context": "S4",
+      "em": 0.007849594851394385,
+      "es": 0.005616003423109869
+    }
+  ],
+  "single_pass_lopo": {
+    "gap_closed": -0.053889143388402116,
+    "models": "/home/arav/optgraph_work/v3_1_pilot/full/models/single_lopo",
+    "feature_columns": [
+      "f_instruction_count",
+      "f_basic_blocks",
+      "f_functions",
+      "f_branches",
+      "f_conditional_branches",
+      "f_loads",
+      "f_stores",
+      "f_calls",
+      "f_phis",
+      "f_integer_ops",
+      "f_floating_ops",
+      "f_arithmetic_ops",
+      "f_memory_ops",
+      "f_returns",
+      "f_cfg_edges",
+      "f_loop_count",
+      "f_loop_depth",
+      "f_allocas",
+      "f_geps",
+      "f_compares",
+      "f_casts",
+      "f_load_frac",
+      "f_store_frac",
+      "f_branch_frac",
+      "f_call_frac",
+      "f_arith_frac",
+      "f_memory_frac",
+      "f_float_frac",
+      "f_avg_block_size",
+      "f_cyclomatic",
+      "fp_BasicBlockCount",
+      "fp_BlocksReachedFromConditionalInstruction",
+      "fp_Uses",
+      "fp_DirectCallsToDefinedFunctions",
+      "fp_LoadInstCount",
+      "fp_StoreInstCount",
+      "fp_MaxLoopDepth",
+      "fp_TopLevelLoopCount",
+      "fp_TotalInstructionCount",
+      "fp_BasicBlocksWithSingleSuccessor",
+      "fp_BasicBlocksWithTwoSuccessors",
+      "fp_BasicBlocksWithMoreThanTwoSuccessors",
+      "fp_BasicBlocksWithSinglePredecessor",
+      "fp_BasicBlocksWithTwoPredecessors",
+      "fp_BasicBlocksWithMoreThanTwoPredecessors",
+      "fp_BigBasicBlocks",
+      "fp_MediumBasicBlocks",
+      "fp_SmallBasicBlocks",
+      "fp_CastInstructionCount",
+      "fp_FloatingPointInstructionCount",
+      "fp_IntegerInstructionCount",
+      "fp_ConstantIntOperandCount",
+      "fp_ConstantFPOperandCount",
+      "fp_ConstantOperandCount",
+      "fp_InstructionOperandCount",
+      "fp_BasicBlockOperandCount",
+      "fp_GlobalValueOperandCount",
+      "fp_InlineAsmOperandCount",
+      "fp_ArgumentOperandCount",
+      "fp_UnknownOperandCount",
+      "fp_CriticalEdgeCount",
+      "fp_ControlFlowEdgeCount",
+      "fp_UnconditionalBranchCount",
+      "fp_IntrinsicCount",
+      "fp_DirectCallCount",
+      "fp_IndirectCallCount",
+      "fp_CallReturnsIntegerCount",
+      "fp_CallReturnsFloatCount",
+      "fp_CallReturnsPointerCount",
+      "fp_CallReturnsVectorIntCount",
+      "fp_CallReturnsVectorFloatCount",
+      "fp_CallReturnsVectorPointerCount",
+      "fp_CallWithManyArgumentsCount",
+      "fp_CallWithPointerArgumentCount",
+      "op_add",
+      "op_alloca",
+      "op_br",
+      "op_call",
+      "op_getelementptr",
+      "op_icmp",
+      "op_load",
+      "op_mul",
+      "op_ret",
+      "op_sext",
+      "op_store",
+      "op_phi",
+      "op_zext",
+      "op_trunc",
+      "op_insertelement",
+      "op_or",
+      "op_shufflevector",
+      "op_fdiv",
+      "op_fmul",
+      "op_sitofp",
+      "op_srem",
+      "op_uitofp",
+      "op_urem",
+      "op_and",
+      "op_fpext",
+      "op_sub",
+      "op_ashr",
+      "op_fcmp",
+      "op_shl",
+      "op_fsub",
+      "op_lshr",
+      "op_ptrtoint",
+      "op_sdiv",
+      "op_select",
+      "op_switch",
+      "op_udiv",
+      "op_unreachable",
+      "op_xor",
+      "op_freeze",
+      "op_extractelement",
+      "iv_00",
+      "iv_01",
+      "iv_02",
+      "iv_03",
+      "iv_04",
+      "iv_05",
+      "iv_06",
+      "iv_07",
+      "iv_08",
+      "iv_09",
+      "iv_10",
+      "iv_11",
+      "iv_12",
+      "iv_13",
+      "iv_14",
+      "iv_15",
+      "iv_16",
+      "iv_17",
+      "iv_18",
+      "iv_19",
+      "iv_20",
+      "iv_21",
+      "iv_22",
+      "iv_23",
+      "iv_24",
+      "iv_25",
+      "iv_26",
+      "iv_27",
+      "iv_28",
+      "iv_29",
+      "iv_30",
+      "iv_31",
+      "iv_32",
+      "iv_33",
+      "iv_34",
+      "iv_35",
+      "iv_36",
+      "iv_37",
+      "iv_38",
+      "iv_39",
+      "iv_40",
+      "iv_41",
+      "iv_42",
+      "iv_43",
+      "iv_44",
+      "iv_45",
+      "iv_46",
+      "iv_47",
+      "iv_48",
+      "iv_49",
+      "iv_50",
+      "iv_51",
+      "iv_52",
+      "iv_53",
+      "iv_54",
+      "iv_55",
+      "iv_56",
+      "iv_57",
+      "iv_58",
+      "iv_59",
+      "iv_60",
+      "iv_61",
+      "iv_62",
+      "iv_63",
+      "iv_64",
+      "iv_65",
+      "iv_66",
+      "iv_67",
+      "iv_68",
+      "iv_69",
+      "iv_70",
+      "iv_71",
+      "iv_72",
+      "iv_73",
+      "iv_74"
+    ]
+  }
+}

@@ -33,6 +33,9 @@ MEMORY = {"alloca", "load", "store", "getelementptr"}
 CASTS = {"trunc", "zext", "sext", "fptrunc", "fpext", "fptoui", "fptosi", "uitofp",
          "sitofp", "ptrtoint", "inttoptr", "bitcast", "addrspacecast"}
 CALL_PREFIXES = {"tail", "musttail", "notail"}
+# Intrinsic calls with no runtime effect (absent from -O0 IR; present in v3.1's -O1 frontend IR).
+NOOP_INTRINSICS = ("@llvm.lifetime.", "@llvm.dbg.", "@llvm.experimental.noalias.scope.decl",
+                   "@llvm.pseudoprobe")
 
 _LABEL = re.compile(r'^("[^"]*"|[-a-zA-Z$._0-9]+):')
 _ASSIGN = re.compile(r'^(?:%"[^"]*"|%[-a-zA-Z$._0-9]+)\s*=\s*(.*)$')
@@ -97,6 +100,8 @@ def parse_ir(text: str) -> ParsedIR:
         opcode = tokens[0]
         if opcode in CALL_PREFIXES and len(tokens) > 1:
             opcode = tokens[1]
+        if opcode == "call" and any(i in body for i in NOOP_INTRINSICS):
+            continue
         out.opcodes[opcode] += 1
 
         if opcode == "br":

@@ -20,7 +20,7 @@ from src import llvm_pipeline as lp
 from src.experiments_v3 import RECORD_COLUMNS, V3_METRICS, run_program_v3
 from src.interaction import compute_interactions
 from src.suites import load_manifest
-from src.utils import DATA_DIR, load_config, load_passes, load_v3_config, now_iso, work_dir, write_json
+from src.utils import version, DATA_DIR, load_config, load_passes, load_v3_config, now_iso, work_dir, write_json
 
 
 def dynamic_subset(manifest: pd.DataFrame, size: int, max_rt: float, seed: int) -> list[str]:
@@ -39,7 +39,7 @@ def dynamic_subset(manifest: pd.DataFrame, size: int, max_rt: float, seed: int) 
 
 
 def data_dir(quick: bool):
-    return DATA_DIR / "v3" / ("quick" if quick else "")
+    return DATA_DIR / version() / ("quick" if quick else "")
 
 
 def main() -> int:
@@ -58,14 +58,16 @@ def main() -> int:
     q = v3["quick"] if args.quick else {}
     out = data_dir(args.quick)
     out.mkdir(parents=True, exist_ok=True)
-    manifest_path = DATA_DIR / "v3" / "benchmarks.csv"
+    manifest_path = DATA_DIR / version() / "benchmarks.csv"
     manifest = pd.read_csv(manifest_path, keep_default_na=False)
     manifest = manifest[manifest["kept"].astype(str) == "True"]
 
     programs = args.programs or q.get("programs") or sorted(manifest["program_id"])
     benches = load_manifest(manifest_path, programs)
     passes = load_passes(cfg, args.passes or q.get("passes"), v3=True)
-    contexts = {c: v3["contexts"][c] for c in (args.contexts or q.get("contexts") or v3["contexts"])}
+    all_contexts = lp.o2_prefix_pipelines(lp.Toolchain(), v3["snapshots"]) if "snapshots" in v3 else v3["contexts"]
+    contexts = {c: all_contexts[c] for c in (args.contexts or q.get("contexts") or all_contexts)}
+    dyn_ctx = set(v3["dynamic_contexts"]) if "dynamic_contexts" in v3 else None
     if args.dynamic is not None:
         dyn = set(args.dynamic)
     elif args.quick:
@@ -75,7 +77,7 @@ def main() -> int:
         dyn = set(dynamic_subset(manifest, d["subset_size"], d["max_runtime_s"], seed))
     expected = dict(zip(manifest["program_id"], manifest["output_sha256"]))
     workers = args.workers or v3["workers"]
-    root = work_dir(v3) / "v3" / ("quick" if args.quick else "full") / "experiments"
+    root = work_dir(v3) / version(v3) / ("quick" if args.quick else "full") / "experiments"
     tc = lp.Toolchain().require()
 
     per = len(contexts) * (1 + len(passes) + len(passes) * (len(passes) - 1))
@@ -87,7 +89,8 @@ def main() -> int:
         t = time.perf_counter()
         try:
             recs, feats = run_program_v3(tc, b, passes, contexts, root / b.program_id,
-                                         expected[b.program_id], b.program_id in dyn)
+                                         expected[b.program_id], b.program_id in dyn,
+                                         dynamic_contexts=dyn_ctx)
         except Exception as e:  # noqa: BLE001 - one broken program must not stop the run
             recs, feats = [{"program_id": b.program_id, "suite": b.suite, "category": b.category,
                             "variant": "baseline", "kind": "baseline", "status": "FAILED",

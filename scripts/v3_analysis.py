@@ -20,7 +20,7 @@ import _bootstrap  # noqa: F401
 from src.graph import aggregate_graph, draw_graph, edge_table, graph_statistics, program_graph
 from src.reporting import BLUE, GREEN, GREY, ORANGE, PURPLE, RED, save_fig, save_table
 from src.stats import variance_decomposition
-from src.utils import DATA_DIR, OUTPUT_DIR, load_config, write_json
+from src.utils import version, DATA_DIR, OUTPUT_DIR, load_config, write_json
 
 METRICS = ["instruction_count", "text_size", "dyn_instructions"]
 TERM_COLORS = {"pair": BLUE, "program_id": ORANGE, "context": GREEN, "pair x program_id": PURPLE,
@@ -42,8 +42,8 @@ def main() -> int:
     ap.add_argument("--quick", action="store_true")
     args = ap.parse_args()
     thr = load_config()["settings"]["interaction_threshold"]
-    data = DATA_DIR / "v3" / ("quick" if args.quick else "")
-    out = OUTPUT_DIR / "v3" / ("quick" if args.quick else "")
+    data = DATA_DIR / version() / ("quick" if args.quick else "")
+    out = OUTPUT_DIR / version() / ("quick" if args.quick else "")
     tables, figs, reports = out / "tables", out / "figures", out / "reports"
     ds = pd.read_csv(data / "interaction_dataset.csv.gz")
     ds = ds[ds["interaction_score"].notna()].copy()

@@ -1,0 +1,265 @@
+=== environment and tests [14:42:39 IST]
++ python scripts/check_environment.py --no-write
+Operating system :  Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.43
+WSL              :  yes (Ubuntu)
+Distribution     :  Ubuntu 26.04.1 LTS
+Ubuntu version   :  26.04
+Python           :  3.14.4
+Clang            :  21.1.8
+LLVM             :  21.1.8
+opt              :  21.1.8
+llvm-config      :  21.1.8
+llc              :  21.1.8
+C -> LLVM IR     :  ok
+opt pass run     :  ok
+IR changed       :  yes
+Configured passes:  12/12 accepted by opt
+Environment OK.
++ python -m pytest tests -q
+.............................................................            [100%]
+=============================== warnings summary ===============================
+tests/test_search.py::test_opentuner_runs_within_budget
+  /home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/resultsdb/models.py:47: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+    Base = declarative_base(cls=Base)
+
+tests/test_search.py::test_opentuner_runs_within_budget
+  /home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+    self.session.flush()  # populate configuration_id
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+61 passed, 2 warnings in 27.71s
+=== M2: benchmarks (rebuilt only if the screening signature changed) [14:43:08 IST]
++ python scripts/v3_benchmarks.py --workers 1 --if-stale
+/mnt/c/Users/arrav/Desktop/5th_Sem/OptGraph/data/v3_1/benchmarks.csv is up to date
+=== M3: snapshot experiments [14:43:09 IST]
++ python scripts/v3_experiments.py --quick
+v3 experiments: 3 programs x 4 passes x 2 contexts = 102 opt runs; dynamic counts for 3 programs; 8 workers
+  pb_gemm                               34/34 ok     24.7s  (dyn)
+  ts_stanford_treesort                  34/34 ok     16.3s  (dyn)
+  arith_02_redundant                    34/34 ok     10.0s  (dyn)
+
+experiments: 102  success: 102  failed: 0  (25s)
+interaction rows: 684  -> /mnt/c/Users/arrav/Desktop/5th_Sem/OptGraph/data/v3_1/quick
+=== M5: snapshot features [14:43:34 IST]
++ python scripts/v3_features.py --quick
+  hand       6 rows x 30 features
+  funcprops  6 rows x 44 features
+  opcodes    6 rows x 28 features
+  ir2vec     6 rows x 75 features
+=== Claims 1-3 [14:43:35 IST]
++ python scripts/v3_1_claims.py --quick
+{'H2': {'programs': 1, 'median_rho': 0.4288629675969663, 'ci_median': [0.4288629675969663, 0.4288629675969663], 'p_one_sided': None, 'test': 'Wilcoxon signed-rank of rho - 0.5, alternative less'}, 'H3': {'programs': 3, 'mae_model': 0.06418702846235097, 'mae_static': 0.06059011777402019, 'residual_r2': -0.12076308021005544, 'gap_closed': -0.0593646426261456, 'programs_better': 0, 'programs_worse': 3, 'ci_mean_mae_diff': [0.00030276931006916613, 0.005887595118821226], 'p_one_sided': 1.0, 'test': 'Wilcoxon signed-rank of per-program MAE(model) - MAE(static), alternative less', 'params': [{'learning_rate': 0.05, 'max_leaf_nodes': 31}, {'learning_rate': 0.05, 'max_leaf_nodes': 31}, {'learning_rate': 0.05, 'max_leaf_nodes': 31}]}}
+=== Claim 4: searches [14:43:41 IST]
++ python scripts/v3_1_ordering.py --stage search --quick
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+[    54s]    INFO opentuner.search.plugin.DisplayPlugin: tests=307, best #1, cost time=154.0000, found by DifferentialEvolutionAlt
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+[    59s]    INFO opentuner.search.plugin.DisplayPlugin: tests=208, best #4, cost time=18.0000, found by DifferentialEvolutionAlt
+[    70s]    INFO opentuner.search.plugin.DisplayPlugin: tests=345, best #4, cost time=18.0000, found by DifferentialEvolutionAlt
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+[   121s]    INFO opentuner.search.plugin.DisplayPlugin: tests=621, best {'s0': 4, 's1': 6, 's2': 0, 's3': 5, 's4': 1, 's5': 1, 's6': 2, 's7': 2}, cost time=154.0000, found by DifferentialEvolutionAlt
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+[   151s]    INFO opentuner.search.plugin.DisplayPlugin: tests=191, best {'s0': 4, 's1': 6, 's2': 0, 's3': 1, 's4': 2, 's5': 2, 's6': 5, 's7': 1}, cost time=159.0000, found by DifferentialEvolutionAlt
+[   161s]    INFO opentuner.search.plugin.DisplayPlugin: tests=337, best {'s0': 4, 's1': 6, 's2': 0, 's3': 1, 's4': 2, 's5': 2, 's6': 5, 's7': 1}, cost time=159.0000, found by DifferentialEvolutionAlt
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+[   171s]    INFO opentuner.search.metatechniques: AUCBanditMetaTechniqueA: [('DifferentialEvolutionAlt', 169), ('UniformGreedyMutation', 166), ('NormalGreedyMutation', 166)]
+[   171s]    INFO opentuner.search.plugin.DisplayPlugin: tests=507, best {'s0': 4, 's1': 6, 's2': 0, 's3': 1, 's4': 2, 's5': 2, 's6': 5, 's7': 1}, cost time=159.0000, found by DifferentialEvolutionAlt
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+[   209s]    INFO opentuner.search.plugin.DisplayPlugin: tests=382, best {'s0': 6, 's1': 5, 's2': 1, 's3': 6, 's4': 5, 's5': 4, 's6': 2, 's7': 0}, cost time=159.0000, found by NormalGreedyMutation
+[   214s]    INFO opentuner.search.plugin.DisplayPlugin: tests=204, best #5, cost time=18.0000, found by DifferentialEvolutionAlt
+[   216s]    INFO opentuner.search.metatechniques: AUCBanditMetaTechniqueA: [('NormalGreedyMutation', 169), ('UniformGreedyMutation', 166), ('DifferentialEvolutionAlt', 166)]
+[   219s]    INFO opentuner.search.plugin.DisplayPlugin: tests=568, best {'s0': 6, 's1': 5, 's2': 1, 's3': 6, 's4': 5, 's5': 4, 's6': 2, 's7': 0}, cost time=159.0000, found by NormalGreedyMutation
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+[   229s]    INFO opentuner.search.plugin.DisplayPlugin: tests=738, best {'s0': 6, 's1': 5, 's2': 1, 's3': 6, 's4': 5, 's5': 4, 's6': 2, 's7': 0}, cost time=159.0000, found by NormalGreedyMutation
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+[   281s]    INFO opentuner.search.plugin.DisplayPlugin: tests=274, best {'s0': 6, 's1': 4, 's2': 0, 's3': 6, 's4': 2, 's5': 2, 's6': 3, 's7': 1}, cost time=159.0000, found by NormalGreedyMutation
+[   291s]    INFO opentuner.search.plugin.DisplayPlugin: tests=444, best {'s0': 6, 's1': 4, 's2': 0, 's3': 6, 's4': 2, 's5': 2, 's6': 3, 's7': 1}, cost time=159.0000, found by NormalGreedyMutation
+[   294s]    INFO opentuner.search.metatechniques: AUCBanditMetaTechniqueA: [('NormalGreedyMutation', 168), ('UniformGreedyMutation', 167), ('DifferentialEvolutionAlt', 166)]
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+[   313s]    INFO opentuner.search.plugin.DisplayPlugin: tests=310, best {'s5': 5, 's1': 3, 's7': 4, 's3': 4, 's4': 4, 's0': 2, 's6': 0, 's2': 5}, cost time=154.0000, found by DifferentialEvolutionAlt
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+[   338s]   ERROR sqlalchemy.pool.impl.SingletonThreadPool: Exception during reset or similar
+Traceback (most recent call last):
+  File "/home/arav/.venvs/optgraph/lib/python3.14/site-packages/sqlalchemy/pool/base.py", line 1020, in _finalize_fairy
+    fairy._reset(
+    ~~~~~~~~~~~~^
+        pool,
+        ^^^^^
+    ...<2 lines>...
+        asyncio_safe=can_manipulate_connection,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/arav/.venvs/optgraph/lib/python3.14/site-packages/sqlalchemy/pool/base.py", line 1492, in _reset
+    pool._dialect.do_rollback(self)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/home/arav/.venvs/optgraph/lib/python3.14/site-packages/sqlalchemy/engine/default.py", line 951, in do_rollback
+    dbapi_connection.rollback()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+sqlite3.ProgrammingError: SQLite objects created in a thread can only be used in that same thread. The object was created in thread id 137721158887104 and this is thread id 137721175672512.
+[   339s]   ERROR sqlalchemy.pool.impl.SingletonThreadPool: Exception terminating connection <sqlite3.Connection object at 0x7d41a4778130>
+Traceback (most recent call last):
+  File "/home/arav/.venvs/optgraph/lib/python3.14/site-packages/sqlalchemy/pool/base.py", line 1020, in _finalize_fairy
+    fairy._reset(
+    ~~~~~~~~~~~~^
+        pool,
+        ^^^^^
+    ...<2 lines>...
+        asyncio_safe=can_manipulate_connection,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/arav/.venvs/optgraph/lib/python3.14/site-packages/sqlalchemy/pool/base.py", line 1492, in _reset
+    pool._dialect.do_rollback(self)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/home/arav/.venvs/optgraph/lib/python3.14/site-packages/sqlalchemy/engine/default.py", line 951, in do_rollback
+    dbapi_connection.rollback()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+sqlite3.ProgrammingError: SQLite objects created in a thread can only be used in that same thread. The object was created in thread id 137721158887104 and this is thread id 137721175672512.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/arav/.venvs/optgraph/lib/python3.14/site-packages/sqlalchemy/pool/base.py", line 370, in _close_connection
+    self._dialect.do_terminate(connection)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/home/arav/.venvs/optgraph/lib/python3.14/site-packages/sqlalchemy/engine/default.py", line 957, in do_terminate
+    self.do_close(dbapi_connection)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/home/arav/.venvs/optgraph/lib/python3.14/site-packages/sqlalchemy/engine/default.py", line 960, in do_close
+    dbapi_connection.close()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+sqlite3.ProgrammingError: SQLite objects created in a thread can only be used in that same thread. The object was created in thread id 137721158887104 and this is thread id 137721175672512.
+[   343s]    INFO opentuner.search.plugin.DisplayPlugin: tests=298, best {'s0': 0, 's1': 1, 's2': 4, 's3': 6, 's4': 1, 's5': 0, 's6': 6, 's7': 1}, cost time=18.0000, found by DifferentialEvolutionAlt
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+/home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+  self.session.flush()  # populate configuration_id
+  arith_02_redundant                   223 rows      384s
+  pb_gemm                              223 rows      322s
+  ts_stanford_treesort                 223 rows      346s
+=== Claim 4: size, AArch64 size, executed instructions [14:50:06 IST]
++ python scripts/v3_1_ordering.py --stage measure --quick
+  arith_02_redundant                   70 sequences  0 failed
+  pb_gemm                              65 sequences  0 failed
+  ts_stanford_treesort                 66 sequences  0 failed
+=== report (runtime results are added after: bash scripts/run_v3_1.sh --runtime, then the report again) [14:50:45 IST]
++ python scripts/v3_1_report.py --quick
+hypothesis                                                    claim  programs    effect  p_one_sided  p_holm  supported
+        H1   Claim 1 headroom: oracle graph vs static graph, E = 10         3  1.000000          1.0     1.0      False
+        H2                         Claim 2 drift: rho(S0, S2) < 0.5         1  0.428863          NaN     1.0      False
+        H3               Claim 3: LOPO model MAE < static-graph MAE         3 -0.120763          1.0     1.0      False
+        H4 Claim 4: re-prediction vs strongest other method, E = 10         3  1.002092          1.0     1.0      False
+total 490s; log: outputs/v3_1/quick/run_v3_1_20261022T144239_IST.log

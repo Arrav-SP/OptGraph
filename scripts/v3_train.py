@@ -27,7 +27,7 @@ from src import model as ml  # noqa: E402
 from src.evaluation import evaluate_v3, per_program_scores  # noqa: E402
 from src.reporting import BLUE, GREY, ORANGE, save_fig, save_table  # noqa: E402
 from src.stats import holm, paired_test  # noqa: E402
-from src.utils import (DATA_DIR, OUTPUT_DIR, load_config, load_passes, load_v3_config,  # noqa: E402
+from src.utils import (version, DATA_DIR, OUTPUT_DIR, load_config, load_passes, load_v3_config,  # noqa: E402
                        work_dir, write_json)
 
 ALL = ml.V3_MODELS
@@ -115,15 +115,15 @@ def main() -> int:
     cfg, v3 = load_config(), load_v3_config()
     seed, thr = v3["seed"], cfg["settings"]["interaction_threshold"]
     tag = "quick" if args.quick else ""
-    data, out = DATA_DIR / "v3" / tag, OUTPUT_DIR / "v3" / tag
+    data, out = DATA_DIR / version() / tag, OUTPUT_DIR / version() / tag
     tables, figs, rep_dir = out / "tables", out / "figures", out / "reports"
-    cache = work_dir(v3) / "v3" / (tag or "full") / "models"
+    cache = work_dir(v3) / version(v3) / (tag or "full") / "models"
     cache.mkdir(parents=True, exist_ok=True)
     ds_path = data / "interaction_dataset.csv.gz"
     # Content, not file bytes: rewriting the same dataset must not invalidate cached models.
     sig = hashlib.sha256(gzip.decompress(ds_path.read_bytes())).hexdigest()[:16]
     ds = pd.read_csv(ds_path)
-    manifest = pd.read_csv(DATA_DIR / "v3" / "benchmarks.csv", keep_default_na=False)
+    manifest = pd.read_csv(DATA_DIR / version() / "benchmarks.csv", keep_default_na=False)
     suites_of = dict(zip(manifest["program_id"], manifest["suite"]))
     present = set(ds["pass_a"]) | set(ds["pass_b"])
     pass_names = [p.name for p in load_passes(cfg, v3=True) if p.name in present]

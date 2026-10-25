@@ -9,3 +9,8 @@ PyYAML==6.0.3
 joblib==1.6.0
 # v3 additions
 pytest==9.1.1
+# v3.1 additions (OpenTuner baseline and its dependencies)
+opentuner==0.8.8
+SQLAlchemy==2.1.6
+future==1.0.0
+typing_extensions==4.16.0

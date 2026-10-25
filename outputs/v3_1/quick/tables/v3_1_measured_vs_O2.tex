@@ -1,0 +1,50 @@
+\begin{table}[t]
+\centering
+\caption{Size, AArch64 size and executed instructions of best sequences, relative to -O2 (exploratory)}
+\label{tab:v3-1-measured-vs-O2}
+\begin{tabular}{lrrrrr}
+\toprule
+method & checkpoint & programs & text\_size\_vs\_O2 & text\_size\_aarch64\_vs\_O2 & dyn\_instructions\_vs\_O2 \\
+\midrule
+O0 & 0 & 3 & 2.0276 & 1.6983 & 1.4936 \\
+O1 & 0 & 3 & 0.7861 & 0.7942 & 1.0999 \\
+O2 & 0 & 3 & 1.0000 & 1.0000 & 1.0000 \\
+O3 & 0 & 3 & 1.0000 & 1.0000 & 1.0000 \\
+Os & 0 & 3 & 0.7809 & 0.8187 & 1.1016 \\
+Oz & 0 & 3 & 0.7246 & 0.8024 & 1.1311 \\
+dco\_style & 10 & 3 & 1.4147 & 1.3764 & 1.1774 \\
+dco\_style & 25 & 3 & 1.4147 & 1.3764 & 1.1774 \\
+dco\_style & 200 & 3 & 1.4147 & 1.3764 & 1.1774 \\
+ga & 10 & 3 & 1.4147 & 1.3764 & 1.1774 \\
+ga & 25 & 3 & 1.4147 & 1.3764 & 1.1766 \\
+ga & 200 & 3 & 1.4147 & 1.3764 & 1.1766 \\
+graph\_guided & 10 & 3 & 1.4147 & 1.3827 & 1.1765 \\
+graph\_guided & 25 & 3 & 1.4147 & 1.3827 & 1.1765 \\
+graph\_guided & 200 & 3 & 1.4147 & 1.3827 & 1.1765 \\
+measured\_greedy & 10 & 3 & 1.4147 & 1.3827 & 1.1765 \\
+measured\_greedy & 25 & 3 & 1.4147 & 1.3827 & 1.1765 \\
+measured\_greedy & 200 & 3 & 1.4147 & 1.3827 & 1.1765 \\
+opentuner & 10 & 3 & 1.4147 & 1.3764 & 1.1782 \\
+opentuner & 25 & 3 & 1.4147 & 1.3764 & 1.1774 \\
+opentuner & 200 & 3 & 1.4147 & 1.3764 & 1.1782 \\
+oracle\_graph & 10 & 3 & 1.4147 & 1.3764 & 1.1766 \\
+oracle\_graph & 25 & 3 & 1.4147 & 1.3764 & 1.1766 \\
+oracle\_graph & 200 & 3 & 1.4147 & 1.3764 & 1.1766 \\
+pan\_style & 10 & 3 & 1.4147 & 1.3764 & 1.1774 \\
+pan\_style & 25 & 3 & 1.4147 & 1.3764 & 1.1774 \\
+pan\_style & 200 & 3 & 1.4147 & 1.3764 & 1.1766 \\
+predict\_once & 10 & 3 & 1.4147 & 1.3764 & 1.1766 \\
+predict\_once & 25 & 3 & 1.4147 & 1.3764 & 1.1766 \\
+predict\_once & 200 & 3 & 1.4147 & 1.3764 & 1.1766 \\
+random & 10 & 3 & 1.4147 & 1.3764 & 1.1774 \\
+random & 25 & 3 & 1.4147 & 1.3764 & 1.1774 \\
+random & 200 & 3 & 1.4147 & 1.3764 & 1.1774 \\
+repredict & 10 & 3 & 1.4147 & 1.3827 & 1.1765 \\
+repredict & 25 & 3 & 1.4147 & 1.3827 & 1.1765 \\
+repredict & 200 & 3 & 1.4147 & 1.3827 & 1.1765 \\
+static\_graph & 10 & 3 & 1.4147 & 1.3764 & 1.1766 \\
+static\_graph & 25 & 3 & 1.4147 & 1.3764 & 1.1766 \\
+static\_graph & 200 & 3 & 1.4147 & 1.3764 & 1.1766 \\
+\bottomrule
+\end{tabular}
+\end{table}

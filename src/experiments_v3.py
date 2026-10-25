@@ -36,15 +36,19 @@ def signature(bench: Benchmark, passes: list[PassSpec], contexts: dict, dynamic:
               expected: str) -> dict:
     """Everything that determines a program's results; a change forces a rerun."""
     return {"program_id": bench.program_id, "source": rel_path(bench.path), "cflags": list(bench.cflags),
-            "support": [str(s) for s in bench.support], "passes": [p.__dict__ for p in passes],
+            "support": [str(s) for s in bench.support],
+            # only when set, so v3 signatures (no irflags) stay valid
+            **({"irflags": list(bench.irflags)} if bench.irflags else {}), "passes": [p.__dict__ for p in passes],
             "contexts": contexts, "dynamic": dynamic, "expected_output": expected}
 
 
 def run_program_v3(tc: lp.Toolchain, bench: Benchmark, passes: list[PassSpec], contexts: dict,
                    out_dir: Path, expected: str, dynamic: bool = False, keep_pairs: bool = False,
-                   timeout: float = 60) -> tuple[list[dict], dict | None]:
+                   timeout: float = 60, dynamic_contexts=None) -> tuple[list[dict], dict | None]:
     """All experiments of one program. Returns (records, features of the raw -O0 IR)."""
     sig = signature(bench, passes, contexts, dynamic, expected)
+    if dynamic_contexts is not None:      # v3.1: dynamic counts only in these contexts
+        sig["dynamic_contexts"] = sorted(dynamic_contexts)
     done = out_dir / "done.json"
     if done.exists() and json.loads(done.read_text()).get("signature") == sig:
         d = json.loads(done.read_text())
@@ -66,7 +70,8 @@ def run_program_v3(tc: lp.Toolchain, bench: Benchmark, passes: list[PassSpec], c
             rec["error"] = error or res.error
             rec["stderr"] = res.stderr.strip()[:2000]
         elif not error and ll is not None:
-            m = measure_variant(tc, ll, bench.support, expected, cache, dynamic, True, timeout)
+            dyn = dynamic and (dynamic_contexts is None or ctx in dynamic_contexts)
+            m = measure_variant(tc, ll, bench, expected, cache, dyn, True, timeout)
             rec.update(m)
             rec["ir_changed"] = None if parent_sha is None else m["ir_sha256"] != parent_sha
             if not m.get("error"):
@@ -75,7 +80,7 @@ def run_program_v3(tc: lp.Toolchain, bench: Benchmark, passes: list[PassSpec], c
         return rec
 
     raw = out_dir / "raw.ll"
-    res = lp.compile_to_ir(tc, bench.path, raw, timeout, bench.cflags)
+    res = lp.program_ir(tc, bench, raw, timeout)
     features = extract_features(raw, tc) if res.ok else None
     for ctx, pipeline in contexts.items():
         cdir = out_dir / ctx

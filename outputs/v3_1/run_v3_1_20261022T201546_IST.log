@@ -1,0 +1,176 @@
+=== environment and tests [20:15:46 IST]
++ python scripts/check_environment.py --no-write
+Operating system :  Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.43
+WSL              :  yes (Ubuntu)
+Distribution     :  Ubuntu 26.04.1 LTS
+Ubuntu version   :  26.04
+Python           :  3.14.4
+Clang            :  21.1.8
+LLVM             :  21.1.8
+opt              :  21.1.8
+llvm-config      :  21.1.8
+llc              :  21.1.8
+C -> LLVM IR     :  ok
+opt pass run     :  ok
+IR changed       :  yes
+Configured passes:  12/12 accepted by opt
+Environment OK.
++ env OPTGRAPH_CONFIG=v3_1.yaml python -m pytest tests -q
+.............................................................            [100%]
+=============================== warnings summary ===============================
+tests/test_search.py::test_opentuner_runs_within_budget
+  /home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/resultsdb/models.py:47: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+    Base = declarative_base(cls=Base)
+
+tests/test_search.py::test_opentuner_runs_within_budget
+  /home/arav/.venvs/optgraph/lib/python3.14/site-packages/opentuner/search/driver.py:183: SAWarning: Object of type <DesiredResult> not in session, add operation along 'TuningRun.desired_results' will not proceed
+    self.session.flush()  # populate configuration_id
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+61 passed, 2 warnings in 49.58s
+=== M2: benchmarks (rebuilt only if the screening signature changed) [20:16:38 IST]
++ python scripts/v3_benchmarks.py --workers 1 --if-stale
+/mnt/c/Users/arrav/Desktop/5th_Sem/OptGraph/data/v3_1/benchmarks.csv is up to date
+=== M3: snapshot experiments [20:16:39 IST]
++ python scripts/v3_experiments.py
+v3 experiments: 129 programs x 22 passes x 5 contexts = 312825 opt runs; dynamic counts for 129 programs; 8 workers
+  ts_misc_oourafft                    2425/2425 ok  33058.5s  (dyn)
+  ts_misc_fp_convert                  2425/2425 ok   9581.6s  (dyn)
+  ts_shootout_matrix                  2425/2425 ok  11294.2s  (dyn)
+  ts_linpack_linpack_pc               2425/2425 ok  27396.4s  (dyn)
+  ts_coyotebench_lpbench              2425/2425 ok  17973.5s  (dyn)
+  ts_misc_salsa20                     2425/2425 ok  23186.5s  (dyn)
+  ts_misc_reedsolomon                 2425/2425 ok  17070.9s  (dyn)
+  ts_shootout_sieve                   2425/2425 ok  11855.4s  (dyn)
+  ts_coyotebench_almabench            2425/2425 ok  33218.7s  (dyn)
+  ts_dhrystone_fldry                  2425/2425 ok  21345.7s  (dyn)
+  ts_shootout_heapsort                2425/2425 ok   4113.2s  (dyn)
+  ts_misc_perlin                      2425/2425 ok  11337.3s  (dyn)
+  ts_benchmarkgame_fannkuch           2425/2425 ok   7076.2s  (dyn)
+  ts_dhrystone_dry                    2425/2425 ok  16521.6s  (dyn)
+  ts_shootout_hash                    2425/2425 ok   7904.8s  (dyn)
+  ts_shootout_fib2                    2425/2425 ok   2451.9s  (dyn)
+  ts_shootout_random                  2425/2425 ok   2730.4s  (dyn)
+  ts_misc_matmul_f64_4x4              2425/2425 ok   6482.5s  (dyn)
+  ts_shootout_ary3                    2425/2425 ok   3281.0s  (dyn)
+  ts_mcgill_queens                    2425/2425 ok   2971.9s  (dyn)
+  ts_misc_himenobmtxpa                2425/2425 ok   4062.7s  (dyn)
+  ts_misc_whetstone                   2425/2425 ok   4716.6s  (dyn)
+  ts_misc_flops_3                     2425/2425 ok   1859.5s  (dyn)
+  ts_benchmarkgame_puzzle             2425/2425 ok   1741.9s  (dyn)
+  ts_benchmarkgame_large_fasta        2425/2425 ok   1374.6s  (dyn)
+  ts_misc_flops_1                     2425/2425 ok   2405.7s  (dyn)
+  ts_benchmarkgame_recursive          2425/2425 ok    914.1s  (dyn)
+  ts_misc_flops_2                     2425/2425 ok   1372.3s  (dyn)
+  cb_automotive_susan_c               2425/2425 ok   4581.0s  (dyn)
+  ts_misc_mandel_2                    2425/2425 ok   3857.6s  (dyn)
+  ts_misc_richards_benchmark          2425/2425 ok   2957.4s  (dyn)
+  ts_misc_flops_8                     2425/2425 ok   1552.8s  (dyn)
+  ts_misc_flops_5                     2425/2425 ok   1501.1s  (dyn)
+  ts_misc_flops_7                     2425/2425 ok   1432.7s  (dyn)
+  ts_stanford_floatmm                 2425/2425 ok   1554.1s  (dyn)
+  ts_misc_ffbench                     2425/2425 ok   1663.5s  (dyn)
+  ts_misc_flops_6                     2425/2425 ok   1488.4s  (dyn)
+  ts_mcgill_chomp                     2425/2425 ok   2149.7s  (dyn)
+  cb_bzip2e                           2425/2425 ok   4157.3s  (dyn)
+  ts_misc_fbench                      2425/2425 ok   2931.1s  (dyn)
+  ts_misc_flops_4                     2425/2425 ok   1096.9s  (dyn)
+  cb_office_stringsearch1             2425/2425 ok   3864.8s  (dyn)
+  cb_automotive_bitcount              2425/2425 ok   4165.0s  (dyn)
+  cb_telecom_crc32                    2425/2425 ok   2052.0s  (dyn)
+  cb_telecom_adpcm_c                  2425/2425 ok   1443.9s  (dyn)
+  ts_misc_pi                          2425/2425 ok   1079.7s  (dyn)
+  cb_automotive_susan_s               2425/2425 ok   3688.7s  (dyn)
+  cb_telecom_adpcm_d                  2425/2425 ok   2390.9s  (dyn)
+  cb_network_dijkstra                 2425/2425 ok   3312.3s  (dyn)
+  cb_bzip2d                           2425/2425 ok   4209.2s  (dyn)
+  cb_automotive_qsort1                2425/2425 ok   4553.2s  (dyn)
+  pb_floyd_warshall                   2425/2425 ok   1445.7s  (dyn)
+  ts_benchmarkgame_n_body             2425/2425 ok   1825.2s  (dyn)
+  cb_automotive_susan_e               2425/2425 ok   3859.9s  (dyn)
+  ts_shootout_nestedloop              2425/2425 ok   1095.4s  (dyn)
+  ts_benchmarkgame_spectral_norm      2425/2425 ok   2372.6s  (dyn)
+  pb_deriche                          2425/2425 ok   1542.5s  (dyn)
+  pb_seidel_2d                        2425/2425 ok    981.8s  (dyn)
+  ts_misc_dt                          2425/2425 ok   1192.1s  (dyn)
+  pb_lu                               2425/2425 ok   1146.0s  (dyn)
+  ts_misc_evalloop                    2425/2425 ok   1801.7s  (dyn)
+  ts_misc_mandel                      2425/2425 ok   1879.4s  (dyn)
+  pb_mvt                              2425/2425 ok    557.1s  (dyn)
+  pb_cholesky                         2425/2425 ok    821.8s  (dyn)
+  pb_fdtd_2d                          2425/2425 ok    830.8s  (dyn)
+  pb_nussinov                         2425/2425 ok    807.4s  (dyn)
+  pb_ludcmp                           2425/2425 ok    602.3s  (dyn)
+  pb_doitgen                          2425/2425 ok    723.2s  (dyn)
+  ts_shootout_strcat                  2425/2425 ok    470.4s  (dyn)
+  pb_gesummv                          2425/2425 ok    399.9s  (dyn)
+  pb_gramschmidt                      2425/2425 ok    642.4s  (dyn)
+  ts_misc_revertbits                  2425/2425 ok    937.0s  (dyn)
+  pb_adi                              2425/2425 ok    638.4s  (dyn)
+  ts_mcgill_misr                      2425/2425 ok    871.5s  (dyn)
+  pb_3mm                              2425/2425 ok    486.0s  (dyn)
+  ts_benchmarkgame_partialsums        2425/2425 ok    881.5s  (dyn)
+  pb_jacobi_2d                        2425/2425 ok    548.8s  (dyn)
+  pb_2mm                              2425/2425 ok    472.0s  (dyn)
+  pb_heat_3d                          2425/2425 ok    648.8s  (dyn)
+  pb_trisolv                          2425/2425 ok    377.7s  (dyn)
+  pb_covariance                       2425/2425 ok    543.8s  (dyn)
+  pb_correlation                      2425/2425 ok    529.8s  (dyn)
+  ts_stanford_puzzle                  2425/2425 ok    691.3s  (dyn)
+  pb_syr2k                            2425/2425 ok    476.1s  (dyn)
+  pb_syrk                             2425/2425 ok    436.0s  (dyn)
+  pb_symm                             2425/2425 ok    447.2s  (dyn)
+  pb_trmm                             2425/2425 ok    418.0s  (dyn)
+  pb_gemm                             2425/2425 ok    422.9s  (dyn)
+  pb_gemver                           2425/2425 ok    333.0s  (dyn)
+  ts_stanford_treesort                2425/2425 ok    301.5s  (dyn)
+  pb_durbin                           2425/2425 ok    344.4s  (dyn)
+  pb_atax                             2425/2425 ok    293.4s  (dyn)
+  pb_bicg                             2425/2425 ok    284.6s  (dyn)
+  pb_jacobi_1d                        2425/2425 ok    258.0s  (dyn)
+  ts_stanford_bubblesort              2425/2425 ok    225.4s  (dyn)
+  ts_stanford_towers                  2425/2425 ok    273.7s  (dyn)
+  ts_stanford_perm                    2425/2425 ok    211.6s  (dyn)
+  ts_stanford_quicksort               2425/2425 ok    253.5s  (dyn)
+  ts_stanford_queens                  2425/2425 ok    234.1s  (dyn)
+  ts_shootout_ackermann               2425/2425 ok    123.4s  (dyn)
+  ts_stanford_realmm                  2425/2425 ok    187.2s  (dyn)
+  ts_stanford_oscar                   2425/2425 ok    314.7s  (dyn)
+  ts_stanford_intmm                   2425/2425 ok    196.7s  (dyn)
+  loop_02_nested                      2425/2425 ok    165.8s  (dyn)
+  mix_02_func_calls                   2425/2425 ok    199.1s  (dyn)
+  arith_01_polynomial                 2425/2425 ok    167.7s  (dyn)
+  cf_02_nested_cond                   2425/2425 ok    211.6s  (dyn)
+  mem_03_traversal                    2425/2425 ok    188.4s  (dyn)
+  mem_01_array_copy                   2425/2425 ok    175.8s  (dyn)
+  mix_01_matrix_mul                   2425/2425 ok    176.2s  (dyn)
+  ts_shootout_hello                   2425/2425 ok     59.4s  (dyn)
+  arith_02_redundant                  2425/2425 ok    180.0s  (dyn)
+  loop_01_array_sum                   2425/2425 ok    149.0s  (dyn)
+  mix_03_combined                     2425/2425 ok    183.2s  (dyn)
+  mix_05_prime_sieve                  2425/2425 ok    181.6s  (dyn)
+  arith_03_integer_mix                2425/2425 ok    179.0s  (dyn)
+  arith_04_float_series               2425/2425 ok    169.1s  (dyn)
+  arith_05_reassoc                    2425/2425 ok    180.1s  (dyn)
+  cf_01_if_else                       2425/2425 ok    175.4s  (dyn)
+  cf_04_const_branch                  2425/2425 ok    176.2s  (dyn)
+  loop_03_accumulate                  2425/2425 ok    162.7s  (dyn)
+  loop_04_invariant                   2425/2425 ok    205.8s  (dyn)
+  mem_02_array_init                   2425/2425 ok    186.5s  (dyn)
+  mem_04_struct_fields                2425/2425 ok    210.9s  (dyn)
+  mix_04_bubble_sort                  2425/2425 ok    223.3s  (dyn)
+  ts_mcgill_exptree                   2425/2425 ok    278.1s  (dyn)
+  cf_03_switch                        2425/2425 ok    179.8s  (dyn)
+  cf_05_early_exit                    2425/2425 ok    207.9s  (dyn)
+  loop_05_small_trip                  2425/2425 ok    173.7s  (dyn)
+
+experiments: 312825  success: 312825  failed: 0  (49376s)
+interaction rows: 2741508  -> /mnt/c/Users/arrav/Desktop/5th_Sem/OptGraph/data/v3_1
+=== M5: snapshot features [10:05:56 IST]
++ python scripts/v3_features.py
+  hand       645 rows x 30 features
+  funcprops  645 rows x 44 features
+  opcodes    645 rows x 50 features
+  ir2vec     645 rows x 75 features
+=== Claims 1-3 [10:06:37 IST]
++ python scripts/v3_1_claims.py

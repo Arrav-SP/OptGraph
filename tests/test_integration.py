@@ -19,9 +19,9 @@ from src.interaction import compute_interactions
 from src.measure import measure_variant
 from src.ordering import greedy
 from src.suites import load_manifest
-from src.utils import DATA_DIR, load_config, load_passes, load_v3_config
+from src.utils import version, DATA_DIR, load_config, load_passes, load_v3_config
 
-MANIFEST = DATA_DIR / "v3" / "benchmarks.csv"
+MANIFEST = DATA_DIR / version() / "benchmarks.csv"
 pytestmark = pytest.mark.skipif(not (shutil.which("opt") and shutil.which("valgrind") and MANIFEST.exists()),
                                 reason="needs LLVM, valgrind and data/v3/benchmarks.csv")
 
@@ -33,7 +33,8 @@ def test_tiny_pipeline(tmp_path):
     tc = lp.Toolchain().require()
     benches = load_manifest(MANIFEST, q["programs"])
     passes = load_passes(cfg, q["passes"], v3=True)
-    contexts = {c: v3["contexts"][c] for c in q["contexts"]}
+    all_ctx = lp.o2_prefix_pipelines(tc, v3["snapshots"]) if "snapshots" in v3 else v3["contexts"]
+    contexts = {c: all_ctx[c] for c in q["contexts"][:1]}
     m = pd.read_csv(MANIFEST, keep_default_na=False)
     expected = dict(zip(m["program_id"], m["output_sha256"]))
     dyn = {"arith_02_redundant", "ts_stanford_treesort"}      # gemm: static only, to stay fast
@@ -55,7 +56,7 @@ def test_tiny_pipeline(tmp_path):
     assert time.perf_counter() - t < 2 and len(again) == per
 
     ds = compute_interactions(recs.astype({x: float for x in V3_METRICS}), 0.005, V3_METRICS)
-    assert set(ds["context"]) == {"C0"}
+    assert set(ds["context"]) == set(contexts)
     assert set(ds[ds.metric == "dyn_instructions"]["program_id"]) == dyn
     # identity on measured data: I(A,B) - I(B,A) = (m(BA) - m(AB)) / m(P)
     d = ds[(ds.metric == "text_size")].set_index(["program_id", "pass_a", "pass_b"])
@@ -79,12 +80,12 @@ def test_tiny_pipeline(tmp_path):
     seq, gain = greedy(names, dict(zip(s.pass_b, s.delta_b_alone)), inter, 4)
     assert 0 < len(seq) <= 4
     ll = tmp_path / "seq0.ll"
-    shutil.copy(tmp_path / pid / "C0" / "baseline.ll", ll)
+    shutil.copy(tmp_path / pid / next(iter(contexts)) / "baseline.ll", ll)
     specs = {p.name: p for p in passes}
     for i, name in enumerate(seq, 1):
         nxt = tmp_path / f"seq{i}.ll"
         assert lp.run_pass(tc, ll, nxt, specs[name]).ok
         ll = nxt
-    res = measure_variant(tc, ll, b.support, expected[pid], {}, False)
+    res = measure_variant(tc, ll, b, expected[pid], {}, False)
     assert res["output_matches"] and res["text_size"] > 0
     assert time.perf_counter() - start < 60

@@ -1,0 +1,778 @@
+{
+  "generated": "2026-10-22T11:24:59+00:00",
+  "quick": false,
+  "objective": "IR instruction count / -Oz",
+  "primary": {
+    "H1": {
+      "programs": 5,
+      "geomean_ratio": 0.9913393606463186,
+      "ci95": [
+        0.9618661584261874,
+        1.0206278990601072
+      ],
+      "wins": 2,
+      "ties": 1,
+      "losses": 2,
+      "p_one_sided": 0.4375,
+      "claim": "Claim 1 headroom: oracle graph vs static graph, E = 10",
+      "p_holm": 1.0,
+      "supported": false
+    },
+    "H2": {
+      "programs": 5,
+      "median_rho": 0.2605688240397615,
+      "ci_median": [
+        0.04630723457723831,
+        0.4023943195836219
+      ],
+      "p_one_sided": 0.03125,
+      "test": "Wilcoxon signed-rank of rho - 0.5, alternative less",
+      "claim": "Claim 2 drift: rho(S0, S2) < 0.5",
+      "p_holm": 0.125,
+      "supported": false
+    },
+    "H3": {
+      "programs": 5,
+      "mae_model": 0.00907514709618141,
+      "mae_static": 0.008306622373168152,
+      "residual_r2": -0.07262773884027207,
+      "gap_closed": -0.09251952099035199,
+      "programs_better": 3,
+      "programs_worse": 2,
+      "ci_mean_mae_diff": [
+        -0.0014479986032285609,
+        0.0037630175112020685
+      ],
+      "p_one_sided": 0.6875,
+      "test": "Wilcoxon signed-rank of per-program MAE(model) - MAE(static), alternative less",
+      "params": [
+        {
+          "learning_rate": 0.1,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 31
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 63
+        }
+      ],
+      "claim": "Claim 3: LOPO model MAE < static-graph MAE",
+      "p_holm": 1.0,
+      "supported": false
+    },
+    "H4": {
+      "programs": 5,
+      "geomean_ratio": 1.0723026444568227,
+      "ci95": [
+        0.9447008573690456,
+        1.2266613673672058
+      ],
+      "wins": 2,
+      "ties": 0,
+      "losses": 3,
+      "p_one_sided": 0.78125,
+      "strongest_other": "pan_style",
+      "pool_geomean_ratio_vs_Oz_at_E10": {
+        "predict_once": 1.0405961116618059,
+        "static_graph": 1.0656751744694901,
+        "graph_guided": 1.1045492212850754,
+        "pan_style": 1.012041512947002,
+        "dco_style": 1.022530290353583,
+        "opentuner": 1.0453136316857765,
+        "ga": 1.023091212978463,
+        "random": 1.023091212978463
+      },
+      "claim": "Claim 4: re-prediction vs strongest other method, E = 10",
+      "p_holm": 1.0,
+      "supported": false
+    }
+  },
+  "levels_vs_Oz": {
+    "O0": 2.181432818606766,
+    "O1": 1.1264217837312442,
+    "O2": 1.312955792376867,
+    "O3": 1.3190934206728429,
+    "Os": 1.1248820287117716,
+    "Oz": 1.0
+  },
+  "measured": [
+    {
+      "method": "O0",
+      "checkpoint": 0,
+      "programs": 5,
+      "text_size_vs_O2": 1.0694322203025934,
+      "text_size_aarch64_vs_O2": 1.0054240295056966,
+      "dyn_instructions_vs_O2": 1.688752120392485
+    },
+    {
+      "method": "O1",
+      "checkpoint": 0,
+      "programs": 5,
+      "text_size_vs_O2": 0.7416986211266304,
+      "text_size_aarch64_vs_O2": 0.7582443305135477,
+      "dyn_instructions_vs_O2": 1.1446753971326904
+    },
+    {
+      "method": "O2",
+      "checkpoint": 0,
+      "programs": 5,
+      "text_size_vs_O2": 0.9999999999999999,
+      "text_size_aarch64_vs_O2": 0.9999999999999998,
+      "dyn_instructions_vs_O2": 0.9999999999999999
+    },
+    {
+      "method": "O3",
+      "checkpoint": 0,
+      "programs": 5,
+      "text_size_vs_O2": 1.005442238292823,
+      "text_size_aarch64_vs_O2": 1.0040005879128318,
+      "dyn_instructions_vs_O2": 1.0030735081952888
+    },
+    {
+      "method": "Os",
+      "checkpoint": 0,
+      "programs": 5,
+      "text_size_vs_O2": 0.8002357298617467,
+      "text_size_aarch64_vs_O2": 0.8648011117169426,
+      "dyn_instructions_vs_O2": 1.0549488963029874
+    },
+    {
+      "method": "Oz",
+      "checkpoint": 0,
+      "programs": 5,
+      "text_size_vs_O2": 0.6209264662551465,
+      "text_size_aarch64_vs_O2": 0.7110945025842733,
+      "dyn_instructions_vs_O2": 1.2200695892254565
+    },
+    {
+      "method": "dco_style",
+      "checkpoint": 10,
+      "programs": 5,
+      "text_size_vs_O2": 0.7282029236954554,
+      "text_size_aarch64_vs_O2": 0.7428279476418492,
+      "dyn_instructions_vs_O2": 1.1588555239795757
+    },
+    {
+      "method": "dco_style",
+      "checkpoint": 25,
+      "programs": 5,
+      "text_size_vs_O2": 0.7194979805467856,
+      "text_size_aarch64_vs_O2": 0.728461300488361,
+      "dyn_instructions_vs_O2": 1.1642265844894488
+    },
+    {
+      "method": "dco_style",
+      "checkpoint": 200,
+      "programs": 5,
+      "text_size_vs_O2": 0.7072308930208306,
+      "text_size_aarch64_vs_O2": 0.719419744362757,
+      "dyn_instructions_vs_O2": 1.1554724409908739
+    },
+    {
+      "method": "ga",
+      "checkpoint": 10,
+      "programs": 5,
+      "text_size_vs_O2": 0.7261250492563649,
+      "text_size_aarch64_vs_O2": 0.7455522475213003,
+      "dyn_instructions_vs_O2": 1.1497442878492379
+    },
+    {
+      "method": "ga",
+      "checkpoint": 25,
+      "programs": 5,
+      "text_size_vs_O2": 0.7194864420734134,
+      "text_size_aarch64_vs_O2": 0.7279923108105599,
+      "dyn_instructions_vs_O2": 1.139254533803362
+    },
+    {
+      "method": "ga",
+      "checkpoint": 200,
+      "programs": 5,
+      "text_size_vs_O2": 0.7081521011965479,
+      "text_size_aarch64_vs_O2": 0.7163579193864847,
+      "dyn_instructions_vs_O2": 1.1638806410268148
+    },
+    {
+      "method": "graph_guided",
+      "checkpoint": 10,
+      "programs": 5,
+      "text_size_vs_O2": 0.7430731625734149,
+      "text_size_aarch64_vs_O2": 0.8237000833534667,
+      "dyn_instructions_vs_O2": 1.1555505653083147
+    },
+    {
+      "method": "graph_guided",
+      "checkpoint": 25,
+      "programs": 5,
+      "text_size_vs_O2": 0.7578946382870696,
+      "text_size_aarch64_vs_O2": 0.8012972077913306,
+      "dyn_instructions_vs_O2": 1.154675576873739
+    },
+    {
+      "method": "graph_guided",
+      "checkpoint": 200,
+      "programs": 5,
+      "text_size_vs_O2": 0.7578946382870696,
+      "text_size_aarch64_vs_O2": 0.8012972077913306,
+      "dyn_instructions_vs_O2": 1.154675576873739
+    },
+    {
+      "method": "measured_greedy",
+      "checkpoint": 10,
+      "programs": 5,
+      "text_size_vs_O2": 0.7554542091724514,
+      "text_size_aarch64_vs_O2": 0.8287696476622123,
+      "dyn_instructions_vs_O2": 1.173031512950931
+    },
+    {
+      "method": "measured_greedy",
+      "checkpoint": 25,
+      "programs": 5,
+      "text_size_vs_O2": 0.7638796983499738,
+      "text_size_aarch64_vs_O2": 0.8291579369499278,
+      "dyn_instructions_vs_O2": 1.1711329184308044
+    },
+    {
+      "method": "measured_greedy",
+      "checkpoint": 200,
+      "programs": 5,
+      "text_size_vs_O2": 0.7138812621686241,
+      "text_size_aarch64_vs_O2": 0.7089788939978754,
+      "dyn_instructions_vs_O2": 1.1520169936482396
+    },
+    {
+      "method": "opentuner",
+      "checkpoint": 10,
+      "programs": 5,
+      "text_size_vs_O2": 0.7316794152328723,
+      "text_size_aarch64_vs_O2": 0.7486199565995183,
+      "dyn_instructions_vs_O2": 1.1484646628215138
+    },
+    {
+      "method": "opentuner",
+      "checkpoint": 25,
+      "programs": 5,
+      "text_size_vs_O2": 0.7169027136155016,
+      "text_size_aarch64_vs_O2": 0.7222699107004972,
+      "dyn_instructions_vs_O2": 1.0976201435841542
+    },
+    {
+      "method": "opentuner",
+      "checkpoint": 200,
+      "programs": 5,
+      "text_size_vs_O2": 0.7059804088798377,
+      "text_size_aarch64_vs_O2": 0.7158524877281779,
+      "dyn_instructions_vs_O2": 1.133374969070517
+    },
+    {
+      "method": "oracle_graph",
+      "checkpoint": 10,
+      "programs": 5,
+      "text_size_vs_O2": 0.7582239302409327,
+      "text_size_aarch64_vs_O2": 0.7948941472169592,
+      "dyn_instructions_vs_O2": 1.1469368609963022
+    },
+    {
+      "method": "oracle_graph",
+      "checkpoint": 25,
+      "programs": 5,
+      "text_size_vs_O2": 0.7582239302409327,
+      "text_size_aarch64_vs_O2": 0.7948807421417851,
+      "dyn_instructions_vs_O2": 1.1469368609963022
+    },
+    {
+      "method": "oracle_graph",
+      "checkpoint": 200,
+      "programs": 5,
+      "text_size_vs_O2": 0.7340015743174159,
+      "text_size_aarch64_vs_O2": 0.7508507301832024,
+      "dyn_instructions_vs_O2": 1.1492516280258414
+    },
+    {
+      "method": "pan_style",
+      "checkpoint": 10,
+      "programs": 5,
+      "text_size_vs_O2": 0.7396492270538126,
+      "text_size_aarch64_vs_O2": 0.7462898810726472,
+      "dyn_instructions_vs_O2": 1.165781604172697
+    },
+    {
+      "method": "pan_style",
+      "checkpoint": 25,
+      "programs": 5,
+      "text_size_vs_O2": 0.7236268084629462,
+      "text_size_aarch64_vs_O2": 0.7337898416827666,
+      "dyn_instructions_vs_O2": 1.1555176147904425
+    },
+    {
+      "method": "pan_style",
+      "checkpoint": 200,
+      "programs": 5,
+      "text_size_vs_O2": 0.7101718967830478,
+      "text_size_aarch64_vs_O2": 0.7152526004443948,
+      "dyn_instructions_vs_O2": 1.1670243358166166
+    },
+    {
+      "method": "predict_once",
+      "checkpoint": 10,
+      "programs": 5,
+      "text_size_vs_O2": 0.7511014322050866,
+      "text_size_aarch64_vs_O2": 0.7614681435052607,
+      "dyn_instructions_vs_O2": 1.2075383939242073
+    },
+    {
+      "method": "predict_once",
+      "checkpoint": 25,
+      "programs": 5,
+      "text_size_vs_O2": 0.7511014322050866,
+      "text_size_aarch64_vs_O2": 0.7614681435052607,
+      "dyn_instructions_vs_O2": 1.2075383939242073
+    },
+    {
+      "method": "predict_once",
+      "checkpoint": 200,
+      "programs": 5,
+      "text_size_vs_O2": 0.7491841093376401,
+      "text_size_aarch64_vs_O2": 0.7561794263779946,
+      "dyn_instructions_vs_O2": 1.2075383939242073
+    },
+    {
+      "method": "random",
+      "checkpoint": 10,
+      "programs": 5,
+      "text_size_vs_O2": 0.7261250492563649,
+      "text_size_aarch64_vs_O2": 0.7455522475213003,
+      "dyn_instructions_vs_O2": 1.1497442878492379
+    },
+    {
+      "method": "random",
+      "checkpoint": 25,
+      "programs": 5,
+      "text_size_vs_O2": 0.7123541695674405,
+      "text_size_aarch64_vs_O2": 0.7255942436887446,
+      "dyn_instructions_vs_O2": 1.1088964572590698
+    },
+    {
+      "method": "random",
+      "checkpoint": 200,
+      "programs": 5,
+      "text_size_vs_O2": 0.7067541634283641,
+      "text_size_aarch64_vs_O2": 0.7283323775270264,
+      "dyn_instructions_vs_O2": 1.1046720222570112
+    },
+    {
+      "method": "repredict",
+      "checkpoint": 10,
+      "programs": 5,
+      "text_size_vs_O2": 0.7419429946153099,
+      "text_size_aarch64_vs_O2": 0.8175419667541116,
+      "dyn_instructions_vs_O2": 1.145266552523799
+    },
+    {
+      "method": "repredict",
+      "checkpoint": 25,
+      "programs": 5,
+      "text_size_vs_O2": 0.7419429946153099,
+      "text_size_aarch64_vs_O2": 0.8175419667541116,
+      "dyn_instructions_vs_O2": 1.145266552523799
+    },
+    {
+      "method": "repredict",
+      "checkpoint": 200,
+      "programs": 5,
+      "text_size_vs_O2": 0.7419429946153099,
+      "text_size_aarch64_vs_O2": 0.8175419667541116,
+      "dyn_instructions_vs_O2": 1.145266552523799
+    },
+    {
+      "method": "static_graph",
+      "checkpoint": 10,
+      "programs": 5,
+      "text_size_vs_O2": 0.784180324156831,
+      "text_size_aarch64_vs_O2": 0.8198391943300958,
+      "dyn_instructions_vs_O2": 1.17840332900984
+    },
+    {
+      "method": "static_graph",
+      "checkpoint": 25,
+      "programs": 5,
+      "text_size_vs_O2": 0.784180324156831,
+      "text_size_aarch64_vs_O2": 0.8198391943300958,
+      "dyn_instructions_vs_O2": 1.17840332900984
+    },
+    {
+      "method": "static_graph",
+      "checkpoint": 200,
+      "programs": 5,
+      "text_size_vs_O2": 0.7718893032954789,
+      "text_size_aarch64_vs_O2": 0.8157483263314993,
+      "dyn_instructions_vs_O2": 1.1838209395828594
+    }
+  ],
+  "output_failures": 0,
+  "claims_exploratory": {
+    "drift_decay": [
+      {
+        "snapshot": "S0",
+        "median_rho_vs_S0": 1.0,
+        "programs": 5,
+        "share_pairs_near_zero": 0.8121212121212121
+      },
+      {
+        "snapshot": "S1",
+        "median_rho_vs_S0": 0.29092664403791124,
+        "programs": 5,
+        "share_pairs_near_zero": 0.8653679653679653
+      },
+      {
+        "snapshot": "S2",
+        "median_rho_vs_S0": 0.2605688240397615,
+        "programs": 5,
+        "share_pairs_near_zero": 0.893073593073593
+      },
+      {
+        "snapshot": "S3",
+        "median_rho_vs_S0": 0.2605688240397615,
+        "programs": 5,
+        "share_pairs_near_zero": 0.893073593073593
+      },
+      {
+        "snapshot": "S4",
+        "median_rho_vs_S0": 0.33205264611302254,
+        "programs": 4,
+        "share_pairs_near_zero": 0.8978354978354979
+      }
+    ],
+    "static_graph_error": [
+      {
+        "graph": "cross_suite",
+        "context": "S0",
+        "sign_flip_rate": 0.06593406593406594,
+        "class_error_rate": 0.08008658008658008,
+        "spearman": 0.6108715609073501,
+        "top_k_overlap": 0.6,
+        "mae": 0.006824473129382372
+      },
+      {
+        "graph": "cross_suite",
+        "context": "S1",
+        "sign_flip_rate": 0.029411764705882353,
+        "class_error_rate": 0.05411255411255411,
+        "spearman": 0.595734580289895,
+        "top_k_overlap": 0.3,
+        "mae": 0.005300470064073984
+      },
+      {
+        "graph": "cross_suite",
+        "context": "S2",
+        "sign_flip_rate": 0.04838709677419355,
+        "class_error_rate": 0.021645021645021644,
+        "spearman": 0.6624196064023448,
+        "top_k_overlap": 0.7,
+        "mae": 0.005768212933295767
+      },
+      {
+        "graph": "cross_suite",
+        "context": "S3",
+        "sign_flip_rate": 0.04838709677419355,
+        "class_error_rate": 0.021645021645021644,
+        "spearman": 0.6786093215991758,
+        "top_k_overlap": 0.7,
+        "mae": 0.005725541462407319
+      },
+      {
+        "graph": "cross_suite",
+        "context": "S4",
+        "sign_flip_rate": 0.0,
+        "class_error_rate": 0.012987012987012988,
+        "spearman": 0.7492444079208822,
+        "top_k_overlap": 0.8,
+        "mae": 0.0018189738943416606
+      },
+      {
+        "graph": "lopo",
+        "context": "S0",
+        "sign_flip_rate": 0.06593406593406594,
+        "class_error_rate": 0.08008658008658008,
+        "spearman": 0.5976001392020056,
+        "top_k_overlap": 0.6,
+        "mae": 0.0073505481640817405
+      },
+      {
+        "graph": "lopo",
+        "context": "S1",
+        "sign_flip_rate": 0.03333333333333333,
+        "class_error_rate": 0.05411255411255411,
+        "spearman": 0.5936782199967483,
+        "top_k_overlap": 0.3,
+        "mae": 0.004787448737465459
+      },
+      {
+        "graph": "lopo",
+        "context": "S2",
+        "sign_flip_rate": 0.05970149253731343,
+        "class_error_rate": 0.021645021645021644,
+        "spearman": 0.6624196064023448,
+        "top_k_overlap": 0.6,
+        "mae": 0.005040790434497318
+      },
+      {
+        "graph": "lopo",
+        "context": "S3",
+        "sign_flip_rate": 0.05970149253731343,
+        "class_error_rate": 0.021645021645021644,
+        "spearman": 0.6786093215991758,
+        "top_k_overlap": 0.6,
+        "mae": 0.005055757595228105
+      },
+      {
+        "graph": "lopo",
+        "context": "S4",
+        "sign_flip_rate": 0.0,
+        "class_error_rate": 0.012987012987012988,
+        "spearman": 0.7492444079208822,
+        "top_k_overlap": 0.8,
+        "mae": 0.0019186128911367782
+      }
+    ],
+    "H3_by_snapshot": [
+      {
+        "context": "S0",
+        "em": 0.009457711354679887,
+        "es": 0.0139341157684424
+      },
+      {
+        "context": "S1",
+        "em": 0.008415998148959783,
+        "es": 0.006526753744241174
+      },
+      {
+        "context": "S2",
+        "em": 0.009828938372139667,
+        "es": 0.007723964074235251
+      },
+      {
+        "context": "S3",
+        "em": 0.009823492753733336,
+        "es": 0.007732274855812069
+      },
+      {
+        "context": "S4",
+        "em": 0.007849594851394385,
+        "es": 0.005616003423109869
+      }
+    ],
+    "single_pass_lopo": {
+      "gap_closed": -0.053889143388402116,
+      "models": "/home/arav/optgraph_work/v3_1_pilot/full/models/single_lopo",
+      "feature_columns": [
+        "f_instruction_count",
+        "f_basic_blocks",
+        "f_functions",
+        "f_branches",
+        "f_conditional_branches",
+        "f_loads",
+        "f_stores",
+        "f_calls",
+        "f_phis",
+        "f_integer_ops",
+        "f_floating_ops",
+        "f_arithmetic_ops",
+        "f_memory_ops",
+        "f_returns",
+        "f_cfg_edges",
+        "f_loop_count",
+        "f_loop_depth",
+        "f_allocas",
+        "f_geps",
+        "f_compares",
+        "f_casts",
+        "f_load_frac",
+        "f_store_frac",
+        "f_branch_frac",
+        "f_call_frac",
+        "f_arith_frac",
+        "f_memory_frac",
+        "f_float_frac",
+        "f_avg_block_size",
+        "f_cyclomatic",
+        "fp_BasicBlockCount",
+        "fp_BlocksReachedFromConditionalInstruction",
+        "fp_Uses",
+        "fp_DirectCallsToDefinedFunctions",
+        "fp_LoadInstCount",
+        "fp_StoreInstCount",
+        "fp_MaxLoopDepth",
+        "fp_TopLevelLoopCount",
+        "fp_TotalInstructionCount",
+        "fp_BasicBlocksWithSingleSuccessor",
+        "fp_BasicBlocksWithTwoSuccessors",
+        "fp_BasicBlocksWithMoreThanTwoSuccessors",
+        "fp_BasicBlocksWithSinglePredecessor",
+        "fp_BasicBlocksWithTwoPredecessors",
+        "fp_BasicBlocksWithMoreThanTwoPredecessors",
+        "fp_BigBasicBlocks",
+        "fp_MediumBasicBlocks",
+        "fp_SmallBasicBlocks",
+        "fp_CastInstructionCount",
+        "fp_FloatingPointInstructionCount",
+        "fp_IntegerInstructionCount",
+        "fp_ConstantIntOperandCount",
+        "fp_ConstantFPOperandCount",
+        "fp_ConstantOperandCount",
+        "fp_InstructionOperandCount",
+        "fp_BasicBlockOperandCount",
+        "fp_GlobalValueOperandCount",
+        "fp_InlineAsmOperandCount",
+        "fp_ArgumentOperandCount",
+        "fp_UnknownOperandCount",
+        "fp_CriticalEdgeCount",
+        "fp_ControlFlowEdgeCount",
+        "fp_UnconditionalBranchCount",
+        "fp_IntrinsicCount",
+        "fp_DirectCallCount",
+        "fp_IndirectCallCount",
+        "fp_CallReturnsIntegerCount",
+        "fp_CallReturnsFloatCount",
+        "fp_CallReturnsPointerCount",
+        "fp_CallReturnsVectorIntCount",
+        "fp_CallReturnsVectorFloatCount",
+        "fp_CallReturnsVectorPointerCount",
+        "fp_CallWithManyArgumentsCount",
+        "fp_CallWithPointerArgumentCount",
+        "op_add",
+        "op_alloca",
+        "op_br",
+        "op_call",
+        "op_getelementptr",
+        "op_icmp",
+        "op_load",
+        "op_mul",
+        "op_ret",
+        "op_sext",
+        "op_store",
+        "op_phi",
+        "op_zext",
+        "op_trunc",
+        "op_insertelement",
+        "op_or",
+        "op_shufflevector",
+        "op_fdiv",
+        "op_fmul",
+        "op_sitofp",
+        "op_srem",
+        "op_uitofp",
+        "op_urem",
+        "op_and",
+        "op_fpext",
+        "op_sub",
+        "op_ashr",
+        "op_fcmp",
+        "op_shl",
+        "op_fsub",
+        "op_lshr",
+        "op_ptrtoint",
+        "op_sdiv",
+        "op_select",
+        "op_switch",
+        "op_udiv",
+        "op_unreachable",
+        "op_xor",
+        "op_freeze",
+        "op_extractelement",
+        "iv_00",
+        "iv_01",
+        "iv_02",
+        "iv_03",
+        "iv_04",
+        "iv_05",
+        "iv_06",
+        "iv_07",
+        "iv_08",
+        "iv_09",
+        "iv_10",
+        "iv_11",
+        "iv_12",
+        "iv_13",
+        "iv_14",
+        "iv_15",
+        "iv_16",
+        "iv_17",
+        "iv_18",
+        "iv_19",
+        "iv_20",
+        "iv_21",
+        "iv_22",
+        "iv_23",
+        "iv_24",
+        "iv_25",
+        "iv_26",
+        "iv_27",
+        "iv_28",
+        "iv_29",
+        "iv_30",
+        "iv_31",
+        "iv_32",
+        "iv_33",
+        "iv_34",
+        "iv_35",
+        "iv_36",
+        "iv_37",
+        "iv_38",
+        "iv_39",
+        "iv_40",
+        "iv_41",
+        "iv_42",
+        "iv_43",
+        "iv_44",
+        "iv_45",
+        "iv_46",
+        "iv_47",
+        "iv_48",
+        "iv_49",
+        "iv_50",
+        "iv_51",
+        "iv_52",
+        "iv_53",
+        "iv_54",
+        "iv_55",
+        "iv_56",
+        "iv_57",
+        "iv_58",
+        "iv_59",
+        "iv_60",
+        "iv_61",
+        "iv_62",
+        "iv_63",
+        "iv_64",
+        "iv_65",
+        "iv_66",
+        "iv_67",
+        "iv_68",
+        "iv_69",
+        "iv_70",
+        "iv_71",
+        "iv_72",
+        "iv_73",
+        "iv_74"
+      ]
+    },
+    "representations": [
+      "hand",
+      "funcprops",
+      "opcodes",
+      "ir2vec"
+    ]
+  }
+}

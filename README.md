@@ -139,3 +139,14 @@ outputs/                    graphs/, plots/, models/, reports/, *.md summaries
 - `outputs/research_summary.md` – full method, results, limitations
 - `outputs/viva_questions.md` – 40 questions with short answers
 - `outputs/reports/` – every number quoted in the documents, as CSV/JSON
+
+## v3.1 (pre-registered experiments)
+
+Run: `OPTGRAPH_CONFIG=config/v3_1.yaml bash scripts/run_v3_1.sh`, then `bash scripts/run_v3_1.sh --runtime` (alone, serial), then `python scripts/v3_1_report.py`. Hypotheses: `outputs/v3_1/PREREGISTRATION.md` (frozen, sha256 in PROGRESS.md). Results: `outputs/v3_1/report/index.html`, `outputs/v3_1/RESULTS.md`, `outputs/v3_1/results_v3_1.json`. 129 programs (test-suite, PolyBench, cBench, v2 set).
+
+| Claim | Result | Holm p | Supported |
+|---|---|---|---|
+| 1 Program-specific headroom (oracle vs static graph, E = 10) | IR count ratio 0.949 | 2.6e-9 | yes |
+| 2 Drift (Spearman rho S0 vs S2) | median 0.29 | 8e-21 | yes |
+| 3 Predictable (LOPO model vs static graph) | residual R² 0.50 | 4.1e-21 | yes |
+| 4 Re-prediction vs strongest other method (GA), E = 10 | ratio 1.107 (worse) | 1.0 | no |

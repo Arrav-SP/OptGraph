@@ -1,0 +1,5 @@
+hypothesis,claim,programs,effect,p_one_sided,p_holm,supported
+H1,"Claim 1 headroom: oracle graph vs static graph, E = 10",3,1.0,1.0,1.0,False
+H2,"Claim 2 drift: rho(S0, S2) < 0.5",1,0.4288629675969663,,1.0,False
+H3,Claim 3: LOPO model MAE < static-graph MAE,3,-0.12076308021005544,1.0,1.0,False
+H4,"Claim 4: re-prediction vs strongest other method, E = 10",3,1.0020920563070077,1.0,1.0,False

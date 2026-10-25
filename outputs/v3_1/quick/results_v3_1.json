@@ -1,0 +1,671 @@
+{
+  "generated": "2026-10-22T09:20:47+00:00",
+  "quick": true,
+  "objective": "IR instruction count / -Oz",
+  "primary": {
+    "H1": {
+      "programs": 3,
+      "geomean_ratio": 1.0,
+      "ci95": [
+        1.0,
+        1.0
+      ],
+      "wins": 0,
+      "ties": 3,
+      "losses": 0,
+      "p_one_sided": 1.0,
+      "claim": "Claim 1 headroom: oracle graph vs static graph, E = 10",
+      "p_holm": 1.0,
+      "supported": false
+    },
+    "H2": {
+      "programs": 1,
+      "median_rho": 0.4288629675969663,
+      "ci_median": [
+        0.4288629675969663,
+        0.4288629675969663
+      ],
+      "p_one_sided": null,
+      "test": "Wilcoxon signed-rank of rho - 0.5, alternative less",
+      "claim": "Claim 2 drift: rho(S0, S2) < 0.5",
+      "p_holm": 1.0,
+      "supported": false
+    },
+    "H3": {
+      "programs": 3,
+      "mae_model": 0.06418702846235097,
+      "mae_static": 0.06059011777402019,
+      "residual_r2": -0.12076308021005544,
+      "gap_closed": -0.0593646426261456,
+      "programs_better": 0,
+      "programs_worse": 3,
+      "ci_mean_mae_diff": [
+        0.00030276931006916613,
+        0.005887595118821226
+      ],
+      "p_one_sided": 1.0,
+      "test": "Wilcoxon signed-rank of per-program MAE(model) - MAE(static), alternative less",
+      "params": [
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 31
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 31
+        },
+        {
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 31
+        }
+      ],
+      "claim": "Claim 3: LOPO model MAE < static-graph MAE",
+      "p_holm": 1.0,
+      "supported": false
+    },
+    "H4": {
+      "programs": 3,
+      "geomean_ratio": 1.0020920563070077,
+      "ci95": [
+        1.0,
+        1.0062893081761002
+      ],
+      "wins": 0,
+      "ties": 2,
+      "losses": 1,
+      "p_one_sided": 1.0,
+      "strongest_other": "predict_once",
+      "pool_geomean_ratio_vs_Oz_at_E10": {
+        "predict_once": 2.3306147580610834,
+        "static_graph": 2.3306147580610834,
+        "graph_guided": 2.3354905353648903,
+        "pan_style": 2.3306147580610834,
+        "dco_style": 2.3306147580610834,
+        "opentuner": 2.3390305738631905,
+        "ga": 2.3306147580610834,
+        "random": 2.3306147580610834
+      },
+      "claim": "Claim 4: re-prediction vs strongest other method, E = 10",
+      "p_holm": 1.0,
+      "supported": false
+    }
+  },
+  "levels_vs_Oz": {
+    "O0": 6.248845129754354,
+    "O1": 1.0559420337482885,
+    "O2": 1.2430000898632516,
+    "O3": 1.2430000898632516,
+    "Os": 1.0277898127244036,
+    "Oz": 1.0
+  },
+  "measured": [
+    {
+      "method": "O0",
+      "checkpoint": 0,
+      "programs": 3,
+      "text_size_vs_O2": 2.027591279512162,
+      "text_size_aarch64_vs_O2": 1.6983093848350306,
+      "dyn_instructions_vs_O2": 1.493565077571715
+    },
+    {
+      "method": "O1",
+      "checkpoint": 0,
+      "programs": 3,
+      "text_size_vs_O2": 0.7860628619400867,
+      "text_size_aarch64_vs_O2": 0.7941958923326925,
+      "dyn_instructions_vs_O2": 1.0999218679113762
+    },
+    {
+      "method": "O2",
+      "checkpoint": 0,
+      "programs": 3,
+      "text_size_vs_O2": 1.0,
+      "text_size_aarch64_vs_O2": 0.9999999999999998,
+      "dyn_instructions_vs_O2": 1.0000000000000002
+    },
+    {
+      "method": "O3",
+      "checkpoint": 0,
+      "programs": 3,
+      "text_size_vs_O2": 1.0,
+      "text_size_aarch64_vs_O2": 0.9999999999999998,
+      "dyn_instructions_vs_O2": 1.0000000000000002
+    },
+    {
+      "method": "Os",
+      "checkpoint": 0,
+      "programs": 3,
+      "text_size_vs_O2": 0.780916491429805,
+      "text_size_aarch64_vs_O2": 0.8187477255744029,
+      "dyn_instructions_vs_O2": 1.1015611501406295
+    },
+    {
+      "method": "Oz",
+      "checkpoint": 0,
+      "programs": 3,
+      "text_size_vs_O2": 0.7245916900691227,
+      "text_size_aarch64_vs_O2": 0.8023683580612169,
+      "dyn_instructions_vs_O2": 1.1310865450910188
+    },
+    {
+      "method": "dco_style",
+      "checkpoint": 10,
+      "programs": 3,
+      "text_size_vs_O2": 1.414650847887406,
+      "text_size_aarch64_vs_O2": 1.3763795920910957,
+      "dyn_instructions_vs_O2": 1.1773762655680586
+    },
+    {
+      "method": "dco_style",
+      "checkpoint": 25,
+      "programs": 3,
+      "text_size_vs_O2": 1.414650847887406,
+      "text_size_aarch64_vs_O2": 1.3763795920910957,
+      "dyn_instructions_vs_O2": 1.1773762655680586
+    },
+    {
+      "method": "dco_style",
+      "checkpoint": 200,
+      "programs": 3,
+      "text_size_vs_O2": 1.414650847887406,
+      "text_size_aarch64_vs_O2": 1.3763795920910957,
+      "dyn_instructions_vs_O2": 1.1773762655680586
+    },
+    {
+      "method": "ga",
+      "checkpoint": 10,
+      "programs": 3,
+      "text_size_vs_O2": 1.414650847887406,
+      "text_size_aarch64_vs_O2": 1.3763795920910957,
+      "dyn_instructions_vs_O2": 1.1773762655680586
+    },
+    {
+      "method": "ga",
+      "checkpoint": 25,
+      "programs": 3,
+      "text_size_vs_O2": 1.414650847887406,
+      "text_size_aarch64_vs_O2": 1.3763795920910957,
+      "dyn_instructions_vs_O2": 1.1765670422230288
+    },
+    {
+      "method": "ga",
+      "checkpoint": 200,
+      "programs": 3,
+      "text_size_vs_O2": 1.414650847887406,
+      "text_size_aarch64_vs_O2": 1.3763795920910957,
+      "dyn_instructions_vs_O2": 1.1765670422230288
+    },
+    {
+      "method": "graph_guided",
+      "checkpoint": 10,
+      "programs": 3,
+      "text_size_vs_O2": 1.4146508478874067,
+      "text_size_aarch64_vs_O2": 1.3827444437394822,
+      "dyn_instructions_vs_O2": 1.17646533310327
+    },
+    {
+      "method": "graph_guided",
+      "checkpoint": 25,
+      "programs": 3,
+      "text_size_vs_O2": 1.4146508478874067,
+      "text_size_aarch64_vs_O2": 1.3827444437394822,
+      "dyn_instructions_vs_O2": 1.17646533310327
+    },
+    {
+      "method": "graph_guided",
+      "checkpoint": 200,
+      "programs": 3,
+      "text_size_vs_O2": 1.4146508478874067,
+      "text_size_aarch64_vs_O2": 1.3827444437394822,
+      "dyn_instructions_vs_O2": 1.17646533310327
+    },
+    {
+      "method": "measured_greedy",
+      "checkpoint": 10,
+      "programs": 3,
+      "text_size_vs_O2": 1.4146508478874067,
+      "text_size_aarch64_vs_O2": 1.3827444437394822,
+      "dyn_instructions_vs_O2": 1.17646533310327
+    },
+    {
+      "method": "measured_greedy",
+      "checkpoint": 25,
+      "programs": 3,
+      "text_size_vs_O2": 1.4146508478874067,
+      "text_size_aarch64_vs_O2": 1.3827444437394822,
+      "dyn_instructions_vs_O2": 1.17646533310327
+    },
+    {
+      "method": "measured_greedy",
+      "checkpoint": 200,
+      "programs": 3,
+      "text_size_vs_O2": 1.4146508478874067,
+      "text_size_aarch64_vs_O2": 1.3827444437394822,
+      "dyn_instructions_vs_O2": 1.17646533310327
+    },
+    {
+      "method": "opentuner",
+      "checkpoint": 10,
+      "programs": 3,
+      "text_size_vs_O2": 1.414650847887406,
+      "text_size_aarch64_vs_O2": 1.3763795920910957,
+      "dyn_instructions_vs_O2": 1.1781860454835165
+    },
+    {
+      "method": "opentuner",
+      "checkpoint": 25,
+      "programs": 3,
+      "text_size_vs_O2": 1.414650847887406,
+      "text_size_aarch64_vs_O2": 1.3763795920910957,
+      "dyn_instructions_vs_O2": 1.1773762655680586
+    },
+    {
+      "method": "opentuner",
+      "checkpoint": 200,
+      "programs": 3,
+      "text_size_vs_O2": 1.414650847887406,
+      "text_size_aarch64_vs_O2": 1.3763795920910957,
+      "dyn_instructions_vs_O2": 1.1781860454835165
+    },
+    {
+      "method": "oracle_graph",
+      "checkpoint": 10,
+      "programs": 3,
+      "text_size_vs_O2": 1.4146508478874067,
+      "text_size_aarch64_vs_O2": 1.3763795920910957,
+      "dyn_instructions_vs_O2": 1.1765670422230288
+    },
+    {
+      "method": "oracle_graph",
+      "checkpoint": 25,
+      "programs": 3,
+      "text_size_vs_O2": 1.4146508478874067,
+      "text_size_aarch64_vs_O2": 1.3763795920910957,
+      "dyn_instructions_vs_O2": 1.1765670422230288
+    },
+    {
+      "method": "oracle_graph",
+      "checkpoint": 200,
+      "programs": 3,
+      "text_size_vs_O2": 1.4146508478874067,
+      "text_size_aarch64_vs_O2": 1.3763795920910957,
+      "dyn_instructions_vs_O2": 1.1765670422230288
+    },
+    {
+      "method": "pan_style",
+      "checkpoint": 10,
+      "programs": 3,
+      "text_size_vs_O2": 1.414650847887406,
+      "text_size_aarch64_vs_O2": 1.3763795920910957,
+      "dyn_instructions_vs_O2": 1.1773762655680586
+    },
+    {
+      "method": "pan_style",
+      "checkpoint": 25,
+      "programs": 3,
+      "text_size_vs_O2": 1.414650847887406,
+      "text_size_aarch64_vs_O2": 1.3763795920910957,
+      "dyn_instructions_vs_O2": 1.1773762655680586
+    },
+    {
+      "method": "pan_style",
+      "checkpoint": 200,
+      "programs": 3,
+      "text_size_vs_O2": 1.414650847887406,
+      "text_size_aarch64_vs_O2": 1.3763795920910957,
+      "dyn_instructions_vs_O2": 1.1765670422230288
+    },
+    {
+      "method": "predict_once",
+      "checkpoint": 10,
+      "programs": 3,
+      "text_size_vs_O2": 1.4146508478874067,
+      "text_size_aarch64_vs_O2": 1.3763795920910957,
+      "dyn_instructions_vs_O2": 1.1765670422230288
+    },
+    {
+      "method": "predict_once",
+      "checkpoint": 25,
+      "programs": 3,
+      "text_size_vs_O2": 1.4146508478874067,
+      "text_size_aarch64_vs_O2": 1.3763795920910957,
+      "dyn_instructions_vs_O2": 1.1765670422230288
+    },
+    {
+      "method": "predict_once",
+      "checkpoint": 200,
+      "programs": 3,
+      "text_size_vs_O2": 1.4146508478874067,
+      "text_size_aarch64_vs_O2": 1.3763795920910957,
+      "dyn_instructions_vs_O2": 1.1765670422230288
+    },
+    {
+      "method": "random",
+      "checkpoint": 10,
+      "programs": 3,
+      "text_size_vs_O2": 1.414650847887406,
+      "text_size_aarch64_vs_O2": 1.3763795920910957,
+      "dyn_instructions_vs_O2": 1.1773762655680586
+    },
+    {
+      "method": "random",
+      "checkpoint": 25,
+      "programs": 3,
+      "text_size_vs_O2": 1.414650847887406,
+      "text_size_aarch64_vs_O2": 1.3763795920910957,
+      "dyn_instructions_vs_O2": 1.1773762655680586
+    },
+    {
+      "method": "random",
+      "checkpoint": 200,
+      "programs": 3,
+      "text_size_vs_O2": 1.414650847887406,
+      "text_size_aarch64_vs_O2": 1.3763795920910957,
+      "dyn_instructions_vs_O2": 1.1773762655680586
+    },
+    {
+      "method": "repredict",
+      "checkpoint": 10,
+      "programs": 3,
+      "text_size_vs_O2": 1.4146508478874067,
+      "text_size_aarch64_vs_O2": 1.3827444437394822,
+      "dyn_instructions_vs_O2": 1.17646533310327
+    },
+    {
+      "method": "repredict",
+      "checkpoint": 25,
+      "programs": 3,
+      "text_size_vs_O2": 1.4146508478874067,
+      "text_size_aarch64_vs_O2": 1.3827444437394822,
+      "dyn_instructions_vs_O2": 1.17646533310327
+    },
+    {
+      "method": "repredict",
+      "checkpoint": 200,
+      "programs": 3,
+      "text_size_vs_O2": 1.4146508478874067,
+      "text_size_aarch64_vs_O2": 1.3827444437394822,
+      "dyn_instructions_vs_O2": 1.17646533310327
+    },
+    {
+      "method": "static_graph",
+      "checkpoint": 10,
+      "programs": 3,
+      "text_size_vs_O2": 1.4146508478874067,
+      "text_size_aarch64_vs_O2": 1.3763795920910957,
+      "dyn_instructions_vs_O2": 1.1765670422230288
+    },
+    {
+      "method": "static_graph",
+      "checkpoint": 25,
+      "programs": 3,
+      "text_size_vs_O2": 1.4146508478874067,
+      "text_size_aarch64_vs_O2": 1.3763795920910957,
+      "dyn_instructions_vs_O2": 1.1765670422230288
+    },
+    {
+      "method": "static_graph",
+      "checkpoint": 200,
+      "programs": 3,
+      "text_size_vs_O2": 1.4146508478874067,
+      "text_size_aarch64_vs_O2": 1.3763795920910957,
+      "dyn_instructions_vs_O2": 1.1765670422230288
+    }
+  ],
+  "output_failures": 0,
+  "claims_exploratory": {
+    "drift_decay": [
+      {
+        "snapshot": "S0",
+        "median_rho_vs_S0": 1.0,
+        "programs": 3,
+        "share_pairs_near_zero": 0.05555555555555555
+      },
+      {
+        "snapshot": "S2",
+        "median_rho_vs_S0": 0.4288629675969663,
+        "programs": 1,
+        "share_pairs_near_zero": 0.9166666666666666
+      }
+    ],
+    "static_graph_error": [
+      {
+        "graph": "cross_suite",
+        "context": "S0",
+        "sign_flip_rate": 0.16666666666666666,
+        "class_error_rate": 0.25,
+        "spearman": 0.701758705822504,
+        "top_k_overlap": 0.8,
+        "mae": 0.08143672334160731
+      },
+      {
+        "graph": "cross_suite",
+        "context": "S2",
+        "sign_flip_rate": 0.0,
+        "class_error_rate": 0.25,
+        "spearman": NaN,
+        "top_k_overlap": 0.8,
+        "mae": 0.0029313232830820747
+      },
+      {
+        "graph": "lopo",
+        "context": "S0",
+        "sign_flip_rate": 0.16666666666666666,
+        "class_error_rate": 0.25,
+        "spearman": 0.701758705822504,
+        "top_k_overlap": 0.8,
+        "mae": 0.08143672334160731
+      },
+      {
+        "graph": "lopo",
+        "context": "S2",
+        "sign_flip_rate": 0.0,
+        "class_error_rate": 0.25,
+        "spearman": NaN,
+        "top_k_overlap": 0.8,
+        "mae": 0.0029313232830820747
+      }
+    ],
+    "H3_by_snapshot": [
+      {
+        "context": "S0",
+        "em": 0.0801053702285239,
+        "es": 0.07082644707264145
+      },
+      {
+        "context": "S2",
+        "em": 0.04826868669617802,
+        "es": 0.05035378847539895
+      }
+    ],
+    "single_pass_lopo": {
+      "gap_closed": 0.0,
+      "models": "/home/arav/optgraph_work/v3_1/quick/models/single_lopo",
+      "feature_columns": [
+        "f_instruction_count",
+        "f_basic_blocks",
+        "f_functions",
+        "f_branches",
+        "f_conditional_branches",
+        "f_loads",
+        "f_stores",
+        "f_calls",
+        "f_phis",
+        "f_integer_ops",
+        "f_floating_ops",
+        "f_arithmetic_ops",
+        "f_memory_ops",
+        "f_returns",
+        "f_cfg_edges",
+        "f_loop_count",
+        "f_loop_depth",
+        "f_allocas",
+        "f_geps",
+        "f_compares",
+        "f_casts",
+        "f_load_frac",
+        "f_store_frac",
+        "f_branch_frac",
+        "f_call_frac",
+        "f_arith_frac",
+        "f_memory_frac",
+        "f_float_frac",
+        "f_avg_block_size",
+        "f_cyclomatic",
+        "fp_BasicBlockCount",
+        "fp_BlocksReachedFromConditionalInstruction",
+        "fp_Uses",
+        "fp_DirectCallsToDefinedFunctions",
+        "fp_LoadInstCount",
+        "fp_StoreInstCount",
+        "fp_MaxLoopDepth",
+        "fp_TopLevelLoopCount",
+        "fp_TotalInstructionCount",
+        "fp_BasicBlocksWithSingleSuccessor",
+        "fp_BasicBlocksWithTwoSuccessors",
+        "fp_BasicBlocksWithMoreThanTwoSuccessors",
+        "fp_BasicBlocksWithSinglePredecessor",
+        "fp_BasicBlocksWithTwoPredecessors",
+        "fp_BasicBlocksWithMoreThanTwoPredecessors",
+        "fp_BigBasicBlocks",
+        "fp_MediumBasicBlocks",
+        "fp_SmallBasicBlocks",
+        "fp_CastInstructionCount",
+        "fp_FloatingPointInstructionCount",
+        "fp_IntegerInstructionCount",
+        "fp_ConstantIntOperandCount",
+        "fp_ConstantFPOperandCount",
+        "fp_ConstantOperandCount",
+        "fp_InstructionOperandCount",
+        "fp_BasicBlockOperandCount",
+        "fp_GlobalValueOperandCount",
+        "fp_InlineAsmOperandCount",
+        "fp_ArgumentOperandCount",
+        "fp_UnknownOperandCount",
+        "fp_CriticalEdgeCount",
+        "fp_ControlFlowEdgeCount",
+        "fp_UnconditionalBranchCount",
+        "fp_IntrinsicCount",
+        "fp_DirectCallCount",
+        "fp_IndirectCallCount",
+        "fp_CallReturnsIntegerCount",
+        "fp_CallReturnsFloatCount",
+        "fp_CallReturnsPointerCount",
+        "fp_CallReturnsVectorIntCount",
+        "fp_CallReturnsVectorFloatCount",
+        "fp_CallReturnsVectorPointerCount",
+        "fp_CallWithManyArgumentsCount",
+        "fp_CallWithPointerArgumentCount",
+        "op_add",
+        "op_alloca",
+        "op_br",
+        "op_call",
+        "op_icmp",
+        "op_load",
+        "op_mul",
+        "op_or",
+        "op_ret",
+        "op_shl",
+        "op_store",
+        "op_sub",
+        "op_udiv",
+        "op_xor",
+        "op_fdiv",
+        "op_fmul",
+        "op_getelementptr",
+        "op_sext",
+        "op_sitofp",
+        "op_srem",
+        "op_phi",
+        "op_trunc",
+        "op_uitofp",
+        "op_urem",
+        "op_and",
+        "op_sdiv",
+        "op_zext",
+        "op_select",
+        "iv_00",
+        "iv_01",
+        "iv_02",
+        "iv_03",
+        "iv_04",
+        "iv_05",
+        "iv_06",
+        "iv_07",
+        "iv_08",
+        "iv_09",
+        "iv_10",
+        "iv_11",
+        "iv_12",
+        "iv_13",
+        "iv_14",
+        "iv_15",
+        "iv_16",
+        "iv_17",
+        "iv_18",
+        "iv_19",
+        "iv_20",
+        "iv_21",
+        "iv_22",
+        "iv_23",
+        "iv_24",
+        "iv_25",
+        "iv_26",
+        "iv_27",
+        "iv_28",
+        "iv_29",
+        "iv_30",
+        "iv_31",
+        "iv_32",
+        "iv_33",
+        "iv_34",
+        "iv_35",
+        "iv_36",
+        "iv_37",
+        "iv_38",
+        "iv_39",
+        "iv_40",
+        "iv_41",
+        "iv_42",
+        "iv_43",
+        "iv_44",
+        "iv_45",
+        "iv_46",
+        "iv_47",
+        "iv_48",
+        "iv_49",
+        "iv_50",
+        "iv_51",
+        "iv_52",
+        "iv_53",
+        "iv_54",
+        "iv_55",
+        "iv_56",
+        "iv_57",
+        "iv_58",
+        "iv_59",
+        "iv_60",
+        "iv_61",
+        "iv_62",
+        "iv_63",
+        "iv_64",
+        "iv_65",
+        "iv_66",
+        "iv_67",
+        "iv_68",
+        "iv_69",
+        "iv_70",
+        "iv_71",
+        "iv_72",
+        "iv_73",
+        "iv_74"
+      ]
+    },
+    "representations": [
+      "hand",
+      "funcprops",
+      "opcodes",
+      "ir2vec"
+    ]
+  }
+}
