@@ -1,0 +1,3 @@
+# Keep GitHub's language bar about the code, not the generated reports and paper.
+outputs/** linguist-generated
+paper/** linguist-documentation

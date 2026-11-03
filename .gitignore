@@ -14,3 +14,6 @@ graphify-out/
 data/v3/quick/
 outputs/v3/quick/
 .claude/
+# Windows folder settings and the OpenTuner run log (run_*.log experiment logs stay tracked):
+desktop.ini
+opentuner.log

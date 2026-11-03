@@ -80,6 +80,7 @@ def test_graph_guided_and_measured_greedy():
 
 
 def test_opentuner_runs_within_budget():
+    pytest.importorskip("opentuner")
     ev = se.Evaluator(objective, budget=15)
     se.opentuner_search(ev, [()] + [(p,) for p in PASSES], slots=4, seed=3)
     assert ev.E == 15 and ev.best is not None
